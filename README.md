@@ -73,17 +73,17 @@ The heart of the lib is `JEEFACETRANSFERAPI`. It is implemented by `/dist/jeeliz
 
 The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PDF file, [/doc/jeefacetransferAPI.pdf](/doc/jeefacetransferAPI.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API :
 
-* 0:  smileRight -> closed mouth smile right
-* 1:  smileLeft  -> closed mouth smile left
-* 2:  eyeBrowLeftDown -> eyebrow left frowned
-* 3:  eyeBrowRightDown -> eyebrow right frowned
-* 4:  eyeBrowLeftUp -> eyebrow left up (surprised)
-* 5:  eyeBrowRightUp -> eyebrow right up (surprised)
-* 6:  mouthOpen -> mouth open
-* 7:  mouthRound -> mouth round
-* 8:  eyeRightClose -> close right eye
-* 9:  eyeLeftClose  -> close left eye
-* 10: mouthNasty   -> mouth nasty (upper lip raised)
+* 0:  smileRight &rarr; closed mouth smile right
+* 1:  smileLeft  &rarr; closed mouth smile left
+* 2:  eyeBrowLeftDown &rarr; eyebrow left frowned
+* 3:  eyeBrowRightDown &rarr; eyebrow right frowned
+* 4:  eyeBrowLeftUp &rarr; eyebrow left up (surprised)
+* 5:  eyeBrowRightUp &rarr; eyebrow right up (surprised)
+* 6:  mouthOpen &rarr; mouth open
+* 7:  mouthRound &rarr; mouth round
+* 8:  eyeRightClose &rarr; close right eye
+* 9:  eyeLeftClose  &rarr; close left eye
+* 10: mouthNasty   &rarr; mouth nasty (upper lip raised)
 
 
 
