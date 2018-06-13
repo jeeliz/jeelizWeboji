@@ -42,15 +42,15 @@ function main(){
             mouthNasty   -> mouth nasty (upper lip raised)
           */
           svgMouthRound: function(ks){
-             return ks.mouthRound-0.1*ks.mouthOpen;
+             return 0.8*ks.mouthRound-0.1*ks.mouthOpen;
           },
 
           svgMouthOpen: function(ks){
-             return 0.8*ks.mouthOpen;
+             return 1.0*ks.mouthOpen;
           },
 
           svgMouthRest:function(ks){
-             return 0.3;
+             return 0.4;
           },
 
           svgMouthNasty: function(ks){
@@ -90,7 +90,7 @@ function main(){
 
         { //left eyebrow
           eyeBrowLeftRest: function(ks){
-            return 0.3;
+            return 0.4;
           },
           eyeBrowLeftUp: function(ks){
             return ks.eyeBrowLeftUp;
@@ -102,7 +102,7 @@ function main(){
 
         { //right eyebrow
           eyeBrowRightRest: function(ks){
-            return 0.3;
+            return 0.4;
           },
           eyeBrowRightUp: function(ks){
             return ks.eyeBrowRightUp;

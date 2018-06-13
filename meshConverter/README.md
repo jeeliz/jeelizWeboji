@@ -37,17 +37,17 @@ Of course you can improve this conversion script, or the `THREE.JS` helper in or
 
 Here is the morph numbering :
 
-* 0:  smileRight -> closed mouth smile right
-* 1:  smileLeft  -> closed mouth smile left
-* 2:  eyeBrowLeftDown -> eyebrow left frowned
-* 3:  eyeBrowRightDown -> eyebrow right frowned
-* 4:  eyeBrowLeftUp -> eyebrow left up (surprised)
-* 5:  eyeBrowRightUp -> eyebrow right up (surprised)
-* 6:  mouthOpen -> mouth open
-* 7:  mouthRound -> mouth round
-* 8:  eyeRightClose -> close right eye
-* 9:  eyeLeftClose  -> close left eye
-* 10: mouthNasty   -> mouth nasty (upper lip raised)
+* 0:  smileRight &rarr; closed mouth smile right
+* 1:  smileLeft  &rarr; closed mouth smile left
+* 2:  eyeBrowLeftDown &rarr; eyebrow left frowned
+* 3:  eyeBrowRightDown &rarr; eyebrow right frowned
+* 4:  eyeBrowLeftUp &rarr; eyebrow left up (surprised)
+* 5:  eyeBrowRightUp &rarr; eyebrow right up (surprised)
+* 6:  mouthOpen &rarr; mouth open
+* 7:  mouthRound &rarr; mouth round
+* 8:  eyeRightClose &rarr; close right eye
+* 9:  eyeLeftClose  &rarr; close left eye
+* 10: mouthNasty   &rarr; mouth nasty (upper lip raised)
 
 This side (left or right) is the side from the weboji point of view. For example *the right eye* is the right eye of the fox.
 
