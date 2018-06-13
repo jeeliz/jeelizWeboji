@@ -3,6 +3,9 @@
 
 With this library, you can build your own animoji embedded in Javascript/WebGL applications. You do not need any specific device except a standard webcam.
 
+By default a webcam feedback image is displayed with the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of expression can be noisy if the lighting is too directional, too weak or if there is an important backlight. So the webcam feedback image is useful to see the quality of the input video feed.
+
+The computing power of the GPU is also important. If it is powerful, it will process many evaluations per second and the result will be smooth. If you try it on a low end device, even if it works, it may be slow.
 
 
 ## Table of contents
