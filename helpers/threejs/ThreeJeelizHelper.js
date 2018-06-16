@@ -66,7 +66,7 @@ THREE.JeelizHelper=(function(){
   //PRIVATE FUNCTIONS :
   //render loop :
   function animate(t) {
-    if (_state===_states.idle){
+    if (_state!==_states.animate){
       return;
     }
     var dt=Math.min(Math.max(t-_prevT, 5), 30); //in ms
@@ -100,6 +100,18 @@ THREE.JeelizHelper=(function(){
     _prevT=t;
     _animationHandler=requestAnimationFrame( animate );
   }; //end animate()
+
+  function start_animate(){
+    if (_state!==_states.animate){
+      return false;
+    }
+    if (_animationHandler){
+      window.cancelAnimationFrame(_animationHandler);
+      _animationHandler=false;
+    }
+    animate(0);
+    return true;
+  } //else start_animate()
 
   //init the THREE.JS scene !
   function init_three(canvasThreeId) {
@@ -216,6 +228,7 @@ THREE.JeelizHelper=(function(){
         _ThreeScene.add(_ThreeMorphAnimMesh);
 
         _state=_loading.restoreState;
+        start_animate();
         _loading.callback(mesh);
       } //end successCallback
     }); //end ThreeMorphAnimGeomBuilder call
@@ -352,7 +365,7 @@ THREE.JeelizHelper=(function(){
           || (_state===_states.loading && _loading.state===_state.idle)){
           _state=_states.animate;
           JEEFACETRANSFERAPI.switch_sleep(false);
-          animate(0);
+          start_animate();
         }
       },
 
