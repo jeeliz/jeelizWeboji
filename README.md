@@ -1,7 +1,11 @@
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-With this library, you can build your own animoji with Javascript/WebGL.
+With this library, you can build your own animoji embedded in Javascript/WebGL applications. You do not need any specific device except a standard webcam.
+
+By default a webcam feedback image is displayed with the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of expression can be noisy if the lighting is too directional, too weak or if there is an important backlight. So the webcam feedback image is useful to see the quality of the input video feed.
+
+The computing power of the GPU is also important. If it is powerful, it will process many evaluations per second and the result will be smooth. If you try it on a low end device, even if it works, it may be slow.
 
 
 ## Table of contents
@@ -13,6 +17,7 @@ With this library, you can build your own animoji with Javascript/WebGL.
 * [About the tech](#about-the-tech)
   * [Under the hood](#under-the-hood)
   * [Compatibility](#compatibility)
+  * [Future improvements](#future-improvements)
 * [Documentation](#documentation)
 * [Need more ?](#need-more)
 * [License](#license)
@@ -46,20 +51,28 @@ With this library, you can build your own animoji with Javascript/WebGL.
 All the demos are included in this repository, in the `/demos` path. You can try them :
 
 * THREE.JS based demos :
-  * [Cartman](https://jeeliz.com/demos/weboji/demos/svg/)
+  
+  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
 
 * SVG based demos :
 
-  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
+  * [Cool Cartman](https://jeeliz.com/demos/weboji/demos/svg/)
+  
 
-If you have not bought a webcam yet, a screenshot video of some of these examples is available [on Youtube](https://youtu.be/jQkaJoMGinQ). You can also subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channel/UC3XmXH1T3d1XFyOhrRiiUeA) or to the [@StartupJeeliz Twitter account](https://twitter.com/StartupJeeliz) to be kept informed of our cutting edge developments.
+If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here :
+
+<p align="center">
+<a href='https://www.youtube.com/watch?v=WxaL_kXwtRE'><img src='https://img.youtube.com/vi/WxaL_kXwtRE/0.jpg'></a>
+</p>
+
+You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channel/UC3XmXH1T3d1XFyOhrRiiUeA) or to the [@StartupJeeliz Twitter account](https://twitter.com/StartupJeeliz) to be kept informed of our cutting edge developments.
 
 If you have made an application or a fun demonstration using this library, we would love to see it and insert a link here ! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
 
 
 ## Hosting
 
-This API requires the user's webcam feed through `MediaStream API`. So your application should be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
+This library requires the user's webcam feed through `MediaStream API`. So your application should be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 Be careful to enable gzip HTTP/HTTPS compression for JSON and JS files. Indeed, the neuron network JSON in, `/dist/` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
@@ -103,6 +116,13 @@ If a compatibility error is triggered, please post an issue on this repository. 
 This library works quite everywhere, and it works very well with a high end device like an Iphone X. But if your device is too cheap or too old, it will perform too few evaluations per second and the application will be slow.
 
 
+### Future improvements
+We are currently working hard on this project. New neural networks are training and we confident about improving this library. Here are our ways to improve :
+* Better emotion detection with a better neural network (improving the structure, the face generator, ...),
+* Better tracking stabilization,
+* Add a calibration estimation to better take into account the variations of the coefficients between different faces.
+
+
 
 ## Documentation
  ### Documentation
@@ -135,7 +155,7 @@ We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-c
 
 
 ## See also
-Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API](https://github.com/jeeliz/jeelizFaceFilter). It handles multi-face detection, and for each tracked face it provides the rotation angles and the mouth opening factor. It is perfect to build your own Snapchat/MSQRD like face filters running in the browser.
+Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API](https://github.com/jeeliz/jeelizFaceFilter). It handles multi-face detection, and for each tracked face it provides the rotation angles and the mouth opening factor. It is perfect to build your own Snapchat/MSQRD like face filters running in the browser. It comes with dozen of integration demo, including a face swap.
 
 If you want to detect if the user is looking at the screen or not, [Jeeliz Glance Tracker](https://github.com/jeeliz/jeelizGlanceTracker) is what you are looking for. It can be useful to play a video only if the user is watching it (and to pause it otherwise). This library needs fewer resources and the neural network file is much lighter.
 
