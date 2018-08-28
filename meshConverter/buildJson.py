@@ -8,7 +8,7 @@ import pdb
 
 # SETTINGS
 TMPPATH='./tmp/'
-OUTPUTPATH='../../assets/3D/meshes/'
+OUTPUTPATH='../assets/3D/meshes/'
 
 # get command line arguments
 if len(sys.argv)==1:
