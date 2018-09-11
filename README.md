@@ -48,7 +48,10 @@ The computing power of the GPU is also important. If it is powerful, it will pro
 
 
 ## Demonstrations
-All the demos are included in this repository, in the `/demos` path. You can try them :
+
+We have built a demo application based on this library, available on [webojis.com](http://webojis.com). We have add recording capabilities using [RecordRTC](https://recordrtc.org) JavaScript library to save separately video from the `<canvas>` and audio from the microphone. Then we send them to the server and we encode the video using [FFMPEG](https://www.ffmpeg.org).
+
+All the following demos are included in this repository, in the `/demos` path. You can try them :
 
 * THREE.JS based demos :
   
