@@ -38,7 +38,7 @@ The computing power of the GPU is also important. If it is powerful, it will pro
 
 * `/assets/`: assets, both for 3D and 2D demonstrations (3D meshes, images),
 * `/demos/`: the most interesting: the demos !,
-* `/dist/`: heart of the library :
+* `/dist/`: heart of the library:
   * `jeelizFaceTransfer.js`: main minified script. It gets the webcam video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
   * `jeelizFaceTransferNNC.json`: neural network model loaded by the main script,
 * `/doc/`: some additionnal documentation,
@@ -51,18 +51,18 @@ The computing power of the GPU is also important. If it is powerful, it will pro
 
 We have built a demo application based on this library, available on [webojis.com](http://webojis.com). We have add recording capabilities using [RecordRTC](https://recordrtc.org) JavaScript library to save separately video from the `<canvas>` and audio from the microphone. Then we send them to the server and we encode the video using [FFMPEG](https://www.ffmpeg.org).
 
-All the following demos are included in this repository, in the `/demos` path. You can try them :
+All the following demos are included in this repository, in the `/demos` path. You can try them:
 
-* THREE.JS based demos :
+* THREE.JS based demos:
   
   * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
 
-* SVG based demos :
+* SVG based demos:
 
   * [Cool Cartman](https://jeeliz.com/demos/weboji/demos/svg/)
   
 
-If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here :
+If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here:
 
 <p align="center">
 <a href='https://www.youtube.com/watch?v=WxaL_kXwtRE'><img src='https://img.youtube.com/vi/WxaL_kXwtRE/0.jpg'></a>
@@ -87,7 +87,7 @@ The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the 
 ### Under the hood
 The heart of the lib is `JEEFACETRANSFERAPI`. It is implemented by `/dist/jeelizFaceTransfer.js` script. It relies on Jeeliz WebGL Deep Learning technology to detect and track the user's face using a deep learning network, and to simultaneously evaluate the expression factors. The accuracy is adaptative: the best is the hardware, the more detections are processed per second. All is done client-side.
 
-The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PDF file, [/doc/jeefacetransferAPI.pdf](/doc/jeefacetransferAPI.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API :
+The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PDF file, [/doc/jeefacetransferAPI.pdf](/doc/jeefacetransferAPI.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API:
 
 * 0:  smileRight &rarr; closed mouth smile right
 * 1:  smileLeft  &rarr; closed mouth smile left
@@ -110,7 +110,7 @@ The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PD
 
 In all cases, you need to have WebRTC implemented in the web browser, otherwise this library will not be able to get the webcam video feed. The compatibility tables are on, [caniuse.com](https://caniuse.com/): [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
 
-If a compatibility error is triggered, please post an issue on this repository. If this is a camera access error, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include :
+If a compatibility error is triggered, please post an issue on this repository. If this is a camera access error, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include:
 * a screenshot of [webglreport.com - WebGL1](http://webglreport.com/?v=1) (about your `WebGL1` implementation),
 * a screenshot of [webglreport.com - WebGL2](http://webglreport.com/?v=2) (about your `WebGL2` implementation),
 * the log from the web console,
@@ -120,7 +120,7 @@ This library works quite everywhere, and it works very well with a high end devi
 
 
 ### Future improvements
-We are currently working hard on this project. New neural networks are training and we confident about improving this library. Here are our ways to improve :
+We are currently working hard on this project. New neural networks are training and we confident about improving this library. Here are our ways to improve:
 * Better emotion detection with a better neural network (improving the structure, the face generator, ...),
 * Better tracking stabilization,
 * Add a calibration estimation to better take into account the variations of the coefficients between different faces.
