@@ -280,7 +280,7 @@ THREE.JeelizHelper=(function(){
 
           if (typeof(spec.model)==='undefined'){//mainly for debug
             load_model(spec.meshURL, false,
-            	function(){ //load_model success callback
+                function(){ //load_model success callback
                   that.set_materialParameters(spec.matParameters);
                   start();
                 }
