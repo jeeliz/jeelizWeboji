@@ -134,6 +134,8 @@ We are currently working hard on this project. New neural networks are training 
 
  * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Fox demo
 
+ * [Tutorial on jeeliz.com: create your own animoji for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
+
  ### Articles and tutorials 
  We will list articles and tutorials about using this library in concrete cases here.
 
