@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="en-EN" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>WEBOJI THREEJS TUTORIAL</title>
+        
+        <!-- FACETRANSFER LIB : DETECT FACIAL EXPRESSIONS : -->
+        <script type="text/javascript" src="../../../dist/jeelizFaceTransfer.js"></script>
+        
+        <!-- THREE.JS : -->
+        <script type="text/javascript" src="../../../libs/threejs/v93/three.min.js"></script>
+
+        <!-- CUSTOM SMALL LIBS : -->
+        <script type="text/javascript" src="../../../libs/custom/lib_ajax.js"></script>
+        <script type="text/javascript" src="../../../libs/custom/lib_array.js"></script>
+        
+        <!-- THREE.JS WEBOJI HELPER : -->
+        <!-- main helper : -->
+        <script type="text/javascript" src="../../../helpers/threejs/ThreeJeelizHelper.js"></script> 
+        <!-- required to import the 3D model : -->
+        <script type="text/javascript" src="../../../helpers/threejs/ThreeMorphAnimGeomBuilder.js"></script>
+        <!-- required to add a material both flexible and with many morphs : -->
+        <script type="text/javascript" src="../../../helpers/threejs/ThreeMorphFlexibleMaterialBuilder.js"></script>
+        
+        <!-- MAIN DEMO SCRIPT WITH main() FUNC : -->
+        <script type="text/javascript" src="main.js"></script>
+
+        <style type='text/css'>
+            body {overflow: auto; overflow-y: auto; background-color: white; margin: 0px;}
+            .jeefacetransferCanvas {
+                z-index: 20;
+                position: absolute; 
+                bottom: 0px; left: 0px;
+                max-height: 25vh;
+            }
+
+            .webojiCanvas {
+                z-index: 10;
+                position: absolute; 
+                max-height: 100%; max-width: 100%; left: 50%; top: 50%;
+                width: 100vmin;
+                transform: translate(-50%, -50%);
+            }
+
+        </style>
+    </head>
+    <body onload="main()">
+        <!-- CANVAS WITH THE USER FACE : -->
+        <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
+        <!-- CANVAS WITH THE WEBOJI : -->
+        <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
+    </body>
+</html>
+
