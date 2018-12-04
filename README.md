@@ -52,7 +52,7 @@ All the demos are included in this repository, in the `/demos` path. You can try
 
 * THREE.JS based demos :
   
-  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
+  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
 
 * SVG based demos :
 
