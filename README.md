@@ -55,7 +55,7 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
 * THREE.JS based demos:
   
-  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
+  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
 
 * SVG based demos:
 
