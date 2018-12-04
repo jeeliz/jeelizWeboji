@@ -17,8 +17,8 @@ function main(){
   _SVGpupilRight=document.getElementById('svgPupilRight');
   _SVGhead=document.getElementById('svgHead');
 
-	JeelizSVGHelper.init({
-		 canvasId: 'jeefacetransferCanvas',
+    JeelizSVGHelper.init({
+         canvasId: 'jeefacetransferCanvas',
      NNCpath: '../../dist/',
      hysteresis: 0.1, //bonus score for already selected expression. Against flickering
      isMirror: true,
@@ -125,5 +125,5 @@ function main(){
         rotate_headZ(-rz*150);    
      }
 
-	});
+    });
 } //end main()

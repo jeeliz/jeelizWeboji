@@ -1,11 +1,11 @@
 "use strict";
 var lib_array={
     create: function(a, n){
-    	var r=new Array(n), i;
-    	for (i=0; i<n; ++i) {
-    	  r[i]=a;
-    	}
-    	return r;
+        var r=new Array(n), i;
+        for (i=0; i<n; ++i) {
+          r[i]=a;
+        }
+        return r;
     },
     
     copy: function(from, to){
