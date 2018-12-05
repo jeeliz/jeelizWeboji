@@ -1,11 +1,11 @@
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-With this library, you can build your own animoji embedded in Javascript/WebGL applications. You do not need any specific device except a standard webcam.
+You can build your own animoji embedded in web applications with this library. The video is only processes client-side. You do not need any specific device except a standard webcam.
 
-By default a webcam feedback image is displayed with the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of expression can be noisy if the lighting is too directional, too weak or if there is an important backlight. So the webcam feedback image is useful to see the quality of the input video feed.
+By default a webcam feedback image is displayed overlaid by the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of the expressions can be noisy if the lighting is too directional, too weak or if there is an important backlight. The webcam feedback image is useful to see the quality of the input video feed.
 
-The computing power of the GPU is also important. If it is powerful, it will process many evaluations per second and the result will be smooth. If you try it on a low end device, even if it works, it may be slow.
+The computing power of the GPU is also important. If it is powerful, many detections per second will be processed and the result will be smooth and accurate. On an old or low end mobile device it may be a bit slow. But it should work well on medium or high end mobile devices.
 
 
 ## Table of contents
@@ -55,11 +55,12 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
 * THREE.JS based demos:
   
-  * [Cute fox](https://jeeliz.com/demos/weboji/demos/threejs/)
+  * Cute fox: [source code](/demos/threejs/fox/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
+  * Cute fox from a MP4 video: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
 
 * SVG based demos:
 
-  * [Cool Cartman](https://jeeliz.com/demos/weboji/demos/svg/)
+  * Cool Cartman: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
   
 
 If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here:
@@ -75,7 +76,7 @@ If you have made an application or a fun demonstration using this library, we wo
 
 ## Hosting
 
-This library requires the user's webcam feed through `MediaStream API`. So your application should be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
+This library requires the user's webcam feed through `MediaStream API`. Your application should then be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 Be careful to enable gzip HTTP/HTTPS compression for JSON and JS files. Indeed, the neuron network JSON in, `/dist/` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
@@ -131,13 +132,15 @@ We are currently working hard on this project. New neural networks are training 
  ### Documentation
 
  * `JEEFACETRANSFERAPI`: All the helpers rely on this API to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeefacetransferAPI.pdf),
-
  * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Fox demo
 
- * [Tutorial on jeeliz.com: create your own animoji for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
 
  ### Articles and tutorials 
- We will list articles and tutorials about using this library in concrete cases here.
+ We list articles and tutorials about using this library:
+
+ * [Create your own animoji for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
+ * [Integrate the animoji on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
+
 
 
 ## Need more ?

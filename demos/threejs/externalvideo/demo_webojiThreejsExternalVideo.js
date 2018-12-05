@@ -2,6 +2,17 @@
 
 //entry point :
 function main(){
+   const videoElement=document.getElementById('myVideo');
+
+   if (videoElement['currentTime'] && videoElement['videoWidth'] && videoElement['videoHeight']){
+        start(videoElement);
+   } else {
+        setTimeout(main, 100);
+        videoElement['play']();
+   }
+}
+
+function start(videoElement){
     THREE.JeelizHelper.init({
         canvasThreeId: 'webojiCanvas',
         canvasId: 'jeefacetransferCanvas',
@@ -17,19 +28,10 @@ function main(){
           flexMapURL: 'textures/Fox_flex.png'
         }, //*/
 
-      //KOALA :
-      /*meshURL: 'meshes/koala.json', //mesh loaded by default - custom face
-      matParameters: {
-            diffuseMapURL: 'textures/diffuse_koala.jpg'
-          }, //*/
-
-      //HUMAN CREEPY FACE :
-      /*meshURL: 'meshes/faceCustom11_v0.json',
-        matParameters: {
-            diffuseMapURL: 'textures/skin.jpg'
-        },  //*/
-
-      position: [0,-80,0],
-      scale: 1.2
+        position: [0,-80,0],
+        scale: 1.2,
+        videoSettings: {
+          videoElement: videoElement
+        }
     });
 } //end main()

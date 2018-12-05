@@ -243,7 +243,7 @@ THREE.JeelizHelper=(function(){
 
 
   //PUBLIC METHODS :
-  var that={
+  const that={
     'ready': false,
 
     'init': function(spec){
@@ -254,6 +254,7 @@ THREE.JeelizHelper=(function(){
       JEEFACETRANSFERAPI.init({
         canvasId: spec.canvasId,
         NNCpath: (spec.NNCpath)?spec.NNCpath:'./',
+        videoSettings: (spec.videoSettings)?spec.videoSettings:null,
         callbackReady: function(errCode){
           if (errCode){
             console.log('ERROR - cannot init JEEFACETRANSFERAPI. errCode =', errCode);
