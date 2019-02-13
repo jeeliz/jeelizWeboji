@@ -54,14 +54,23 @@ We have built a demo application based on this library, available on [webojis.co
 All the following demos are included in this repository, in the `/demos` path. You can try them:
 
 * THREE.JS based demos:
-  
+
   * Cute fox: [source code](/demos/threejs/fox/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
   * Cute fox from a MP4 video: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
 
 * SVG based demos:
 
   * Cool Cartman: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
-  
+
+#### Run locally
+
+1. Run docker-compose
+
+```
+docker-compose up
+```
+
+2. Open a browser and go to `localhost:8888`
 
 If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here:
 
@@ -135,7 +144,7 @@ We are currently working hard on this project. New neural networks are training 
  * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Fox demo
 
 
- ### Articles and tutorials 
+ ### Articles and tutorials
  We list articles and tutorials about using this library:
 
  * [Create your own animoji for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
