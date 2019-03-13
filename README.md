@@ -13,6 +13,8 @@ The computing power of the GPU is also important. If it is powerful, many detect
 * [Features](#features)
 * [Architecture](#architecture)
 * [Demonstrations](#demonstrations)
+  * [Run locally](#run-locally)
+  * [Using the ES6 module](#using-the-es6-module)
 * [Hosting](#hosting)
 * [About the tech](#about-the-tech)
   * [Under the hood](#under-the-hood)
@@ -62,6 +64,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * Cool Cartman: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
 
+
+
 #### Run locally
 
 1. Run docker-compose
@@ -83,6 +87,26 @@ You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channe
 If you have made an application or a fun demonstration using this library, we would love to see it and insert a link here ! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
 
 
+
+
+#### Using the ES6 module
+`/dist/jeelizFaceTransferES6.js` is exactly the same than `/dist/jeelizFaceTransfer.js` except that it works with ES6, so you can import it directly using:
+
+```javascript
+import 'dist/jeelizFaceTransferES6.js'
+```
+
+or using `require`:
+
+```javascript
+const faceTransfer =require('./lib/jeelizFaceTransferES6.js')
+//...
+```
+
+The demos have not been ported to ES6 yet. You are welcome to submit a pull request :).
+
+
+
 ## Hosting
 
 This library requires the user's webcam feed through `MediaStream API`. Your application should then be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
@@ -90,6 +114,7 @@ This library requires the user's webcam feed through `MediaStream API`. Your app
 Be careful to enable gzip HTTP/HTTPS compression for JSON and JS files. Indeed, the neuron network JSON in, `/dist/` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
 The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the user has accepted to share its camera. We proceed this way to avoid to load this quite heavy file if the user refuses to share its webcam or if there is no webcam available. The loading will be faster if you systematically preload the JSON file using a service worker or a simple raw `XMLHttpRequest` just after the loading of the HTML page. Then the file will be in the browser cache and will be fast to request.
+
 
 
 
@@ -152,7 +177,7 @@ We are currently working hard on this project. New neural networks are training 
 
 
 
-## Need more ?
+## Need more?
 @Jeeliz we have fully developed this library so we can still improve it or fit it to your needs. In particular:
 
 * adapt it to your own 3D/2D engine,
