@@ -64,6 +64,10 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * Cool Cartman: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
 
+* Third party demos:
+  
+  * Amazing demo by [Oz Ramos](https://twitter.com/LabOfOz) improving the web accessibility for disabled people: control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://browsehandsfree.com/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657)
+
 
 
 #### Run locally
