@@ -57,18 +57,20 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
 * THREE.JS based demos:
 
-  * Cute fox: [source code](/demos/threejs/fox/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
-  * Cute fox from a MP4 video: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
+  * **Cute fox**: [source code](/demos/threejs/fox/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
+  * **Cute fox from a MP4 video**: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
 
 * SVG based demos:
 
-  * Cool Cartman: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
+  * **Cool Cartman**: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
 
 * Third party demos:
-  
-  * Amazing demo by [Oz Ramos](https://twitter.com/LabOfOz) improving the web accessibility for disabled people: control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://browsehandsfree.com/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657)
 
+  * **Piano Genie**: play the piano with your face expressions! This is pretty addictive ;). [live demo - ace-piano-genie.glitch.me](https://face-piano-genie.glitch.me/), [code and further details](https://glitch.com/edit/#!/piano-genie)
 
+  * **Browse Hands Free**, by [Oz Ramos](https://twitter.com/LabOfOz): The demo improves web accessibility for disabled people. You can control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://browsehandsfree.com/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657)
+
+  * **Vauta**, by [Nono](https://twitter.com/ke4563): You can anime a .VRM 3D character avatar in the browser. This web application is only in Japanese. [live demo - vauta.netlify.com](https://vauta.netlify.com/), [tweet and video](https://twitter.com/ke4563/status/1099673171777617922)
 
 #### Run locally
 
