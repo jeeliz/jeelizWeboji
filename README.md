@@ -1,7 +1,15 @@
+
+**NOTICE: After a lawsuit filed by Apple(c) the 21th of August 2019, we have removed our main demo, [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a racoon.**
+
+**Indead, Apple(c) owns the intellectual property over all 3D animated foxes (but not on racoons yet). Thank you for your understanding.**
+
+Get hurry to eat apples, it is good for your health and it is still authorized by Apple lawyers :) . But who knows for how long?
+
+
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-You can build your own animoji embedded in web applications with this library. The video is only processes client-side. You do not need any specific device except a standard webcam.
+You can build your own animated emoticon embedded in web applications with this library. The video is only processes client-side. You do not need any specific device except a standard webcam.
 
 By default a webcam feedback image is displayed overlaid by the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of the expressions can be noisy if the lighting is too directional, too weak or if there is an important backlight. The webcam feedback image is useful to see the quality of the input video feed.
 
@@ -178,8 +186,8 @@ We are currently working hard on this project. New neural networks are training 
  ### Articles and tutorials
  We list articles and tutorials about using this library:
 
- * [Create your own animoji for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
- * [Integrate the animoji on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
+ * [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
+ * [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
 
 
 
