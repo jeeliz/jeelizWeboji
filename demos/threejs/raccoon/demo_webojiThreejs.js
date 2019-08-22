@@ -17,12 +17,6 @@ function main(){
           flexMapURL: 'textures/Fox_flex.png'
         }, //*/
 
-      //KOALA :
-      /*meshURL: 'meshes/koala.json', //mesh loaded by default - custom face
-      matParameters: {
-            diffuseMapURL: 'textures/diffuse_koala.jpg'
-          }, //*/
-
       //HUMAN CREEPY FACE :
       /*meshURL: 'meshes/faceCustom11_v0.json',
         matParameters: {

@@ -1,7 +1,7 @@
 
-**NOTICE: After a lawsuit filed by Apple(c) the 21th of August 2019, we have removed our main demo, [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a racoon.**
+**NOTICE: After a lawsuit filed by Apple(c) the 21th of August 2019, we have removed our main demo, [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
 
-**Indead, Apple(c) owns the intellectual property over all 3D animated foxes (but not on racoons yet). Thank you for your understanding.**
+**Indead, Apple(c) owns the intellectual property over all 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
 
 Get hurry to eat apples, it is good for your health and it is still authorized by Apple lawyers :) . But who knows for how long?
 
@@ -65,8 +65,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
 * THREE.JS based demos:
 
-  * **Cute fox**: [source code](/demos/threejs/fox/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/fox/)
-  * **Cute fox from a MP4 video**: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
+  * **Cute raccoon**: [source code](/demos/threejs/raccoon/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/raccoon/)
+  * **Cute raccoon from a MP4 video**: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
 
 * SVG based demos:
 
@@ -180,7 +180,7 @@ We are currently working hard on this project. New neural networks are training 
  ### Documentation
 
  * `JEEFACETRANSFERAPI`: All the helpers rely on this API to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeefacetransferAPI.pdf),
- * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Fox demo
+ * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Raccoon demo
 
 
  ### Articles and tutorials
