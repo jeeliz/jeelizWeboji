@@ -1,9 +1,9 @@
 
-**NOTICE: After a lawsuit filed by Apple(c) the 21th of August 2019, we have removed our main demo, [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
+**NOTICE: After a lawsuit filed by Apple<sup>&copy;</sup> the 21th of August 2019, we have removed our main demo [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
 
-**Indead, Apple(c) owns the intellectual property over all 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
+**Indead, Apple<sup>&copy;</sup> owns the intellectual property of 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
 
-Get hurry to eat apples, it is good for your health and it is still authorized by Apple lawyers :) . But who knows for how long?
+Get hurry to eat apples, it is good for your health and it is still authorized by Apple<sup>&copy;</sup> lawyers :) . But who knows for how long?
 
 
 # JavaScript/WebGL library to detect and reproduce facial expressions
