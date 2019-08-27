@@ -1,9 +1,8 @@
 
-**NOTICE: After a lawsuit filed by Apple<sup>&copy;</sup> the 21th of August 2019, we have removed our main demo [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
+**NOTICE: Apple<sup>&copy;</sup>'s lawyers threatened us to file a complain on the 21th of August 2019 for infringing their intellectual property. So we have removed our main demo [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
 
 **Indead, Apple<sup>&copy;</sup> owns the intellectual property of 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
 
-Get hurry to eat apples, it is good for your health and it is still authorized by Apple<sup>&copy;</sup> lawyers :) . But who knows for how long?
 
 
 # JavaScript/WebGL library to detect and reproduce facial expressions
@@ -79,6 +78,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
   * **Browse Hands Free**, by [Oz Ramos](https://twitter.com/LabOfOz): The demo improves web accessibility for disabled people. You can control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://browsehandsfree.com/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657)
 
   * **Vauta**, by [Nono](https://twitter.com/ke4563): You can anime a .VRM 3D character avatar in the browser. This web application is only in Japanese. [live demo - vauta.netlify.com](https://vauta.netlify.com/), [tweet and video](https://twitter.com/ke4563/status/1099673171777617922)
+
+  * **Drowsiness detection**, by [Dinodroid](https://github.com/abhilash26): Be sure to don't fall asleep when driving thanks to this webapp! You can try it here: [dont-drive-drowsy.glitch.me](https://dont-drive-drowsy.glitch.me/)
 
 #### Run locally
 
