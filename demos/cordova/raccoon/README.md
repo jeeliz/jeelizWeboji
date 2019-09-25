@@ -1,8 +1,10 @@
 To build:
 
-> ionic cordova platform add ios@4.5.5
-> ionic cordova build ios
-> open platforms/ios/MyApp.xcodeproj
+```
+ionic cordova platform add ios@4.5.5
+ionic cordova build ios
+open platforms/ios/MyApp.xcodeproj
+```
 
 In Xcode:
 
