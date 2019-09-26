@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready blob:; style-src * 'unsafe-inline'; connect-src * gap: wss://* blob:; script-src * 'unsafe-inline' 'unsafe-eval';img-src * data: blob:">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>WebRTC Test</title>
+  <style>
+    video::-webkit-media-controls-panel {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-play-button {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-current-time-display {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-time-remaining-display {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-timeline {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-mute-button {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-volume-slider {
+      display: none !important;
+    }
+
+    video::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+    }
+
+    video::-internal-media-controls-download-button {
+      display: none !important;
+    }
+
+    .buttonBar {
+      z-index: 5;
+      position: absolute;
+      bottom: 15%;
+      left: 0;
+      background-color: transparent;
+      background-image: none;
+      width: 100%;
+      height: 15%;
+    }
+
+    #localVideo {
+      z-index: -1;
+      background-color: transparent;
+      background-image: none;
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 75%;
+      height: 75%;
+    }
+
+    .jeefacetransferCanvas {
+      z-index: 20;
+      position: absolute; 
+      bottom: 0px; left: 0px;
+      max-height: 25vh;
+    }
+  </style>
+</head>
+
+<body style="background-color: transparent;background-image: none;">
+
+  <script src="cordova.js"></script>
+  <script src="js/index.js"></script>
+  
+  <script src="js/dist/jeelizFaceTransfer.js"></script>
+  <script src="js/libs/custom/lib_ajax.js"></script>
+  <script src="js/libs/custom/lib_array.js"></script>
+  <script src="js/libs/threejs/v93/three.min.js"></script>
+  <script src="js/helpers/threejs/ThreeJeelizHelper.js"></script> 
+  <script src="js/helpers/threejs/ThreeMorphAnimGeomBuilder.js"></script>
+  <script src="js/helpers/threejs/ThreeMorphFlexibleMaterialBuilder.js"></script>
+        
+
+  <canvas id="canvas" style="display: none;"></canvas>
+  <canvas id="canvasWebgl"></canvas>
+  <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
+  
+
+  <div class="buttonBar">
+    <button id="getUserMedia640">Get User Media 640x480</button>
+    <button id="getUserMedia1280">Get User Media 1280x720</button>
+  </div>
+<a href="https://webglreport.com/">hello</a>
+</body>
+
+</html>
