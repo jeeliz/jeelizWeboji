@@ -75,6 +75,22 @@
       bottom: 0px; left: 0px;
       max-height: 25vh;
     }
+
+            .jeefacetransferCanvas {
+                z-index: 20;
+                position: absolute; 
+                bottom: 0px; left: 0px;
+                max-height: 25vh;
+                border:1px dotted red;
+            }
+            .webojiCanvas {
+                z-index: 10;
+                position: absolute; 
+                max-height: 100%; max-width: 100%; left: 50%; top: 50%;
+                width: 100vmin;
+                transform: translate(-50%, -50%); 
+                border:1px dashed blue;
+            }
   </style>
 </head>
 
@@ -92,16 +108,16 @@
   <script src="js/helpers/threejs/ThreeMorphFlexibleMaterialBuilder.js"></script>
         
 
-  <canvas id="canvas" style="display: none;"></canvas>
-  <canvas id="canvasWebgl"></canvas>
-  <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
+  <canvas id="canvas" class="localVideo" x-style="display: none;"></canvas><!-- this is where canvas camera renders-->
+  <canvas id='jeefacetransferCanvas' class='jeefacetransferCanvas'></canvas><!-- ? -->
+  <canvas id="canvasWebgl" class="webojiCanvas" width='600' height='600'></canvas><!-- webgl is used for three.js rendering -->
   
 
-  <div class="buttonBar">
+    <!--  <div class="buttonBar">
     <button id="getUserMedia640">Get User Media 640x480</button>
     <button id="getUserMedia1280">Get User Media 1280x720</button>
-  </div>
-<a href="https://webglreport.com/">hello</a>
+  </div> 
+    <a href="https://webglreport.com/">hello</a> -->
 </body>
 
 </html>
