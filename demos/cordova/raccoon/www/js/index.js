@@ -49,7 +49,7 @@ function onDeviceReady() {
 }
 
 function initWeboji(){
-  alert("initialising jeeliz");  
+  alert("initialising jeeliz 2");  
   console.log("using source image of ",canvas);
 
   /*THREE.JeelizHelper.onLoad = function(){
@@ -57,7 +57,7 @@ function initWeboji(){
   console.log("jeelize canvas is: ",THREE.JeelizHelper.get_cv() );
   };*/
   try (){
-  THREE.JeelizHelper.init({
+    THREE.JeelizHelper.init({
       canvasThreeId: 'canvasWebgl',
       canvasId: 'jeefacetransferCanvas',
 
@@ -80,10 +80,10 @@ function initWeboji(){
       },
       errorCallback: function(errCode){
         alert('error: ' + errCode);
-      }
+      },
       position: [0,-80, 0],
       scale: 1.2
-  });
+    });
   } catch(e) {
     alert('JS ERROR: ' + e.message);
   } 
