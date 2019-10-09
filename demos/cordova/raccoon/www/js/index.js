@@ -17,10 +17,9 @@ function onDeviceReady() {
   canvas = document.getElementById('canvas');
   canvasWeb = document.getElementById('canvasWebgl');
   jeefacetransferCanvas = document.getElementById('jeefacetransferCanvas');
-  //gl = canvasWeb.getContext("webgl"); jeefacetransferCanvas
-  //gl = canvasWeb.getContext("jeefacetransferCanvas");
-
+  
   CanvasCamera.initialize(canvas);
+  let isFirstTime = true;
 
   var options = {
     cameraFacing: 'front',
@@ -36,57 +35,44 @@ function onDeviceReady() {
       height: 352
     },
     onAfterDraw: function(frame) {
-      //var dest;
-      //dest = canvasWeb.getContext('2d');
-      //dest.drawImage(canvas,0,0);
+      if (isFirstTime) {
+        isFirstTime = false;
+        // We init Weboji here otherwise the size of the video canvas is wrong.
+        initWeboji();
+      }
     }
   };
   CanvasCamera.start(options);
-
-  console.log("canv",canvas);
-
-  initWeboji();
 }
 
 function initWeboji(){
-  alert("initialising jeeliz 2");  
-  console.log("using source image of ",canvas);
+  THREE.JeelizHelper.init({
+    canvasThreeId: 'canvasWebgl',
+    canvasId: 'jeefacetransferCanvas',
 
-  /*THREE.JeelizHelper.onLoad = function(){
-  alert('JeelizHelper.onLoad called')
-  console.log("jeelize canvas is: ",THREE.JeelizHelper.get_cv() );
-  };*/
-  try (){
-    THREE.JeelizHelper.init({
-      canvasThreeId: 'canvasWebgl',
-      canvasId: 'jeefacetransferCanvas',
+    assetsParentPath: './assets/3D/',
+    NNCpath: './js/dist/',
 
-      assetsParentPath: './assets/3D/',
-      NNCpath: './js/dist/',
+    videoSettings: {
+      videoElement: canvas
+    },
 
-      videoSettings: {
-        videoElement: canvas
-      },
-
-      //FOX :
-      meshURL: 'meshes/fox11_v0.json',
-      matParameters: {
-        diffuseMapURL: 'textures/Fox_albedo.png',
-        specularMapURL: 'textures/Fox_specular.png',
-        flexMapURL: 'textures/Fox_flex.png'
-      },
-      successCallback: function(){
-        alert('successCallback');
-      },
-      errorCallback: function(errCode){
-        alert('error: ' + errCode);
-      },
-      position: [0,-80, 0],
-      scale: 1.2
-    });
-  } catch(e) {
-    alert('JS ERROR: ' + e.message);
-  } 
+    //FOX :
+    meshURL: 'meshes/fox11_v0.json',
+    matParameters: {
+      diffuseMapURL: 'textures/Fox_albedo.png',
+      specularMapURL: 'textures/Fox_specular.png',
+      flexMapURL: 'textures/Fox_flex.png'
+    },
+    successCallback: function(){
+      console.log('INFO in index.js: successCallback() called');
+    },
+    errorCallback: function(errCode){
+      console.log('ERROR in index.js: ', errCode);
+    },
+    position: [0,-80, 0],
+    scale: 1.2
+  });
 } //end main()
 
 app.initialize();

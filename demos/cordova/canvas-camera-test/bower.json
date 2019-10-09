@@ -1,7 +1,0 @@
-{
-  "name": "HelloIonic",
-  "private": "true",
-  "devDependencies": {
-    "ionic": "ionic-team/ionic-bower#1.3.4"
-  }
-}

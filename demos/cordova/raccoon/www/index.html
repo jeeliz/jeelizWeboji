@@ -58,15 +58,16 @@
       height: 15%;
     }
 
-    #localVideo {
-      z-index: -1;
+    .localVideo {
+      /*z-index: -1;
       background-color: transparent;
       background-image: none;
       position: absolute;
       top: 100px;
       left: 0;
       width: 75%;
-      height: 75%;
+      height: 75%;*/
+      display: none;
     }
 
     .jeefacetransferCanvas {
@@ -74,23 +75,17 @@
       position: absolute; 
       bottom: 0px; left: 0px;
       max-height: 25vh;
+      border:1px dotted red;
     }
 
-            .jeefacetransferCanvas {
-                z-index: 20;
-                position: absolute; 
-                bottom: 0px; left: 0px;
-                max-height: 25vh;
-                border:1px dotted red;
-            }
-            .webojiCanvas {
-                z-index: 10;
-                position: absolute; 
-                max-height: 100%; max-width: 100%; left: 50%; top: 50%;
-                width: 100vmin;
-                transform: translate(-50%, -50%); 
-                border:1px dashed blue;
-            }
+    .webojiCanvas {
+      z-index: 10;
+      position: absolute; 
+      max-height: 100%; max-width: 100%; left: 50%; top: 50%;
+      width: 100vmin;
+      transform: translate(-50%, -50%); 
+      border:1px dashed blue;
+    }
   </style>
 </head>
 
@@ -110,14 +105,8 @@
 
   <canvas id="canvas" class="localVideo" x-style="display: none;"></canvas><!-- this is where canvas camera renders-->
   <canvas id='jeefacetransferCanvas' class='jeefacetransferCanvas'></canvas><!-- ? -->
-  <canvas id="canvasWebgl" class="webojiCanvas" width='600' height='600'></canvas><!-- webgl is used for three.js rendering -->
+  <canvas id="canvasWebgl" class="webojiCanvas" width='300' height='300'></canvas><!-- webgl is used for three.js rendering -->
   
-
-    <!--  <div class="buttonBar">
-    <button id="getUserMedia640">Get User Media 640x480</button>
-    <button id="getUserMedia1280">Get User Media 1280x720</button>
-  </div> 
-    <a href="https://webglreport.com/">hello</a> -->
 </body>
 
 </html>
