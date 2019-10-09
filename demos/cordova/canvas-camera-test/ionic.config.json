@@ -1,9 +1,0 @@
-{
-  "name": "little_list",
-  "app_id": "",
-  "type": "ionic1",
-  "integrations": {
-    "cordova": {},
-    "gulp": {}
-  }
-}
