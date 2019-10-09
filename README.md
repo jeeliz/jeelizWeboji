@@ -71,6 +71,11 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * **Cool Cartman**: [source code](/demos/svg), [live demo](https://jeeliz.com/demos/weboji/demos/svg/)
 
+* Native demos:
+
+  * **Cute raccoon**: [source code and instruction to build and run it](/demos/cordova/raccoon) This demo works as a native application using Apache Cordova. It has been tested successfully on iOS. The base code is the same than the THREE.js raccoon demo.
+
+
 * Third party demos:
 
   * **Piano Genie**: play the piano with your face expressions! This is pretty addictive ;). [live demo - ace-piano-genie.glitch.me](https://face-piano-genie.glitch.me/), [code and further details](https://glitch.com/edit/#!/piano-genie)
@@ -84,7 +89,13 @@ All the following demos are included in this repository, in the `/demos` path. Y
   * **Expressions reader**, by [Abhilash26](https://github.com/abhilash26) aka [Dinodroid](https://ko-fi.com/dinodroid): detects 5 high level expressions (happiness, fear, anger, surprise, sadness) from the morph coefficients given by this lib, and display them as smileys. You can try it here: [emotion-reader.glitch.me](https://emotion-reader.glitch.me/) or [browse the source code](https://github.com/abhilash26/emotion-reader)
 
 
+If you have made an application or a fun demonstration using this library, we would love to check it out and add a link here ! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
+
+
 #### Run locally
+
+You just have to serve the content of this directory using a HTTPS server. Webcam access can be not authorized depending on the web browser the application is hosted by an unsecured HTTP server. You can use *Docker* for example to run a HTTPS server:
+
 
 1. Run docker-compose
 
@@ -94,16 +105,12 @@ docker-compose up
 
 2. Open a browser and go to `localhost:8888`
 
+
 If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here:
 
 <p align="center">
 <a href='https://www.youtube.com/watch?v=WxaL_kXwtRE'><img src='https://img.youtube.com/vi/WxaL_kXwtRE/0.jpg'></a>
 </p>
-
-You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channel/UC3XmXH1T3d1XFyOhrRiiUeA) or to the [@StartupJeeliz Twitter account](https://twitter.com/StartupJeeliz) to be kept informed of our cutting edge developments.
-
-If you have made an application or a fun demonstration using this library, we would love to see it and insert a link here ! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
-
 
 
 
@@ -173,11 +180,13 @@ This library works quite everywhere, and it works very well with a high end devi
 
 
 ### Future improvements
-We are currently working hard on this project. New neural networks are training and we confident about improving this library. Here are our ways to improve:
+We are currently working hard on this project. New neural networks are training and we are confident about improving this library. Here are our ways to improve:
+
 * Better emotion detection with a better neural network (improving the structure, the face generator, ...),
 * Better tracking stabilization,
-* Add a calibration estimation to better take into account the variations of the coefficients between different faces.
+* Add a calibration estimation to take into account the variations of the coefficients between different faces.
 
+You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channel/UC3XmXH1T3d1XFyOhrRiiUeA) or to the [@StartupJeeliz Twitter account](https://twitter.com/StartupJeeliz) to be kept informed of our cutting edge developments.
 
 
 ## Documentation
@@ -219,7 +228,7 @@ Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API
 
 If you want to detect if the user is looking at the screen or not, [Jeeliz Glance Tracker](https://github.com/jeeliz/jeelizGlanceTracker) is what you are looking for. It can be useful to play a video only if the user is watching it (and to pause it otherwise). This library needs fewer resources and the neural network file is much lighter.
 
-If are interested by glasses virtual try-on (sunglasses, spectacles, ski masks), you can take a look at [Jeeliz VTO widget](https://github.com/jeeliz/jeelizGlassesVTOWidget). It includes a high quality and lightweight 3D engine which implements the following features: deferred shading, PBR, raytraced shadows, normal mapping, ... It also reconstructs the lighting environment around the user (ambient and directional lighting). But the glasses comes from a database hosted in our servers. If you want to add some models, please contact-us.
+If are interested by glasses virtual try-on (sunglasses, spectacles, ski masks), you can take a look at [Jeeliz VTO widget](https://github.com/jeeliz/jeelizGlassesVTOWidget). It includes a high quality and lightweight 3D engine which implements the following features: deferred shading, PBR, raytraced shadows, normal mapping, ... It also reconstructs the lighting environment around the user (ambient and directional lighting). The glasses are hosted in a database on our servers. If you want to add some models, please contact-us.
 
 
 ## References
