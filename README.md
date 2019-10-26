@@ -1,5 +1,5 @@
 
-**NOTICE: Apple<sup>&copy;</sup>'s lawyers threatened us to file a complain on the 21th of August 2019 for infringing their intellectual property. So we have removed our main demo [webojis.com](https://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
+**NOTICE: Apple<sup>&copy;</sup>'s lawyers threatened us to file a complain on the 21th of August 2019 for infringing their intellectual property. So we have removed our main demo [webojis.com](http://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
 
 **Indead, Apple<sup>&copy;</sup> owns the intellectual property of 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
 
