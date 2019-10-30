@@ -39,9 +39,9 @@ THREE.JeelizHelper = (function(){
   }; //end _settings
 
   //PRIVATE VARS :
-  var _nMorphs = JEEFACETRANSFERAPI.get_nMorphs();
-  var _ThreeRenderer, _DOMcanvas, _ThreeScene, _ThreeCamera, _ThreeMorphAnimMesh = false, _ThreeAmbientLight, _ThreeDirLight;
-  var _assetsParentPath, _isFaceDetected = false;
+  const _nMorphs = JEEFACETRANSFERAPI.get_nMorphs();
+  let _ThreeRenderer = null, _ThreeScene = null, _ThreeCamera = null, _ThreeMorphAnimMesh = false, _ThreeAmbientLight = null, _ThreeDirLight = null;
+  let _DOMcanvas = null, _assetsParentPath = '', _isFaceDetected = false;
 
   const _states = { //all possibles states (ENUM like)
     notLoaded:-10,
@@ -334,7 +334,7 @@ THREE.JeelizHelper = (function(){
 
       'set_materialParameters': function(params){
         //change_material(new THREE.MeshBasicMaterial({map: load_texture(params.diffuseMapURL)})); return;
-        var matParameters=Object.assign({
+        const matParameters = Object.assign({
           'shininess': 30,
 
           'color': 0xffffff, //default parameters
