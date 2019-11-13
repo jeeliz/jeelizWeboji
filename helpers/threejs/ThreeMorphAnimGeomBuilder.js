@@ -30,7 +30,6 @@ function ThreeMorphAnimGeomBuilder(spec){
       } else if (uviByVertexIndex[vi] === vti){
         return vi;
       } else { //we should duplicate the vertex
-        //return vi; //KILL
         const duplicateVertexIndex = uviByVertexIndex.length;
         uviByVertexIndex.push(vti);
         vertices.push(vertices[vi]);

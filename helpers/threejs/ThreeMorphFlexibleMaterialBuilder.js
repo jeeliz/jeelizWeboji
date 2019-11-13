@@ -13,7 +13,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   let fragmentShaderSource = threeMat.fragmentShader;
 
   const _rotMatrixDelayed = new THREE.Matrix4();
-  const _eulerDelayed = new THREE.Euler(0,0,0,rotationOrder);
+  const _eulerDelayed = new THREE.Euler(0, 0, 0, rotationOrder);
 
   const uniforms = Object.assign({
     'modelMatrixDelayed': {
@@ -48,11 +48,11 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     const iA = 2 * iMorph;
     const iB = 2 * iMorph + 1;
     glslMorphJeelizCode +=
-    'vec3 morphTargetJeeliz'+iA+' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*floor(morphJeeliz'+iMorph+')/morphJeelizPrecision);\n'
-    +'vec3 morphTargetJeeliz'+iB+' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*fract(morphJeeliz'+iMorph+'));\n'
-    +'transformed += morphTargetJeeliz'+iA+' * morphJeelizInfluences['+iA+'];\n'
-    +'transformed += morphTargetJeeliz'+iB+' * morphJeelizInfluences['+iB+'];\n';
-    morphAttribs.push('morphJeeliz'+iMorph);
+    'vec3 morphTargetJeeliz' + iA + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*floor(morphJeeliz' + iMorph + ')/morphJeelizPrecision);\n'
+    +'vec3 morphTargetJeeliz' + iB + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*fract(morphJeeliz' + iMorph + '));\n'
+    +'transformed += morphTargetJeeliz' + iA + ' * morphJeelizInfluences[' + iA + '];\n'
+    +'transformed += morphTargetJeeliz' + iB + ' * morphJeelizInfluences[' + iB + '];\n';
+    morphAttribs.push('morphJeeliz' + iMorph);
   }
 
   vertexShaderSource = tweak_shaderAdd(vertexShaderSource, '#include <common>',
@@ -68,7 +68,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     "vec4 worldPosition = modelMatrix * vec4( transformed, 1.0 );\n\
     vec4 worldPositionDelayed = modelMatrixDelayed * vec4( transformed, 1.0 );\n\
     worldPosition = mix(worldPosition, worldPositionDelayed, texture2D(flexMap, uv).r);\n\
-    vec4 mvPosition = viewMatrix* worldPosition;\n\
+    vec4 mvPosition = viewMatrix * worldPosition;\n\
     gl_Position = projectionMatrix * mvPosition;"
     );
   vertexShaderSource = tweak_shaderRepl(vertexShaderSource, '#include <morphtarget_vertex>',
@@ -100,11 +100,13 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     'fragmentShader': fragmentShaderSource,
     'uniforms': uniforms,
     'morphTargets': false,
-    'lights': true
+    'lights': true,
+    'precision': 'highp'
   });
+
   for (let key in matParameters){
-      if (['map', 'specularMap', 'envMap', 'aoMap', 'alphaMap', 'lightMap', 'emissiveMap'].indexOf(key) === -1) continue;
-      mat[key] = matParameters[key];
+    if (['map', 'specularMap', 'envMap', 'aoMap', 'alphaMap', 'lightMap', 'emissiveMap'].indexOf(key) === -1) continue;
+    mat[key] = matParameters[key];
   }
   
   mat.set_rotationAmortized = function(position, scale, rotationAmortized){

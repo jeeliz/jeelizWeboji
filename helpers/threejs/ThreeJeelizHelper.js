@@ -59,7 +59,7 @@ THREE.JeelizHelper = (function(){
     callback: false,
     restoreState: _states.idle
   };
-  const _rotationAmortized=[0,0,0], _rotationSpeed=[0,0,0];
+  const _rotationAmortized = [0,0,0], _rotationSpeed = [0,0,0];
   let _prevT = 0;
 
 
