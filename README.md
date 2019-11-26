@@ -8,11 +8,11 @@
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-You can build your own animated emoticon embedded in web applications with this library. The video is only processes client-side. You do not need any specific device except a standard webcam.
+Build your own animated emoticon embedded in web applications with this library. The video is processed client-side only. No devices are needed except a standard webcam.
 
-By default a webcam feedback image is displayed overlaid by the face detection frame. The face detection is quite robust to all lighting conditions, but the evaluation of the expressions can be noisy if the lighting is too directional, too weak or if there is an important backlight. The webcam feedback image is useful to see the quality of the input video feed.
+By default a webcam feedback image is overlaid by the face detection frame. The face detection will adapt to all lighting conditions, but the evaluation of expressions can be noisy if the lighting is too high, too weak, or if there is backlighting. The webcam feedback image is useful to see the quality of the input video feed.
 
-The computing power of the GPU is also important. If it is powerful, many detections per second will be processed and the result will be smooth and accurate. On an old or low end mobile device it may be a bit slow. But it should work well on medium or high end mobile devices.
+The computing power of your GPU is important. If your GPU is powerful, many detections per second will be processed and the result will be smooth and accurate. An old or low quality mobile device it may be slower. But it should work well on medium or high end mobile devices.
 
 
 ## Table of contents
