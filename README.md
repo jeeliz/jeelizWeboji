@@ -80,7 +80,7 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * **Piano Genie**: play the piano with your face expressions! This is pretty addictive ;). [live demo - ace-piano-genie.glitch.me](https://face-piano-genie.glitch.me/), [code and further details](https://glitch.com/edit/#!/piano-genie)
 
-  * **Browse Hands Free**, by [Oz Ramos](https://twitter.com/LabOfOz): The demo improves web accessibility for disabled people. You can control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://browsehandsfree.com/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657)
+  * **Browse Hands Free**, by [Oz Ramos](https://twitter.com/LabOfOz): The demo improves web accessibility for disabled people. You can control the mouse cursor with your head (turn your head to move the cursor, smile to click). [live demo - browsehandsfree.com - click on the camera icon to start](https://handsfree.js.org/#/), [further details](https://github.com/jeeliz/jeelizWeboji/issues/13#issuecomment-473500657). The code is available on github here: [handsfreejs/handsfree](https://github.com/handsfreejs/handsfree).
 
   * **Vauta**, by [Nono](https://twitter.com/ke4563): You can anime a .VRM 3D character avatar in the browser. This web application is only in Japanese. [live demo - vauta.netlify.com](https://vauta.netlify.com/), [tweet and video](https://twitter.com/ke4563/status/1099673171777617922)
 
