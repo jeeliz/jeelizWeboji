@@ -77,7 +77,7 @@ function ThreeMorphAnimGeomBuilder(spec){
     // Construct uvs:
     const uv32 = new Float32Array(vertices.length*2);
     uviByVertexIndex.forEach(function(uvi, vi){
-      const uv = dataObj.base.vts[uvi];
+      let uv = dataObj.base.vts[uvi];
       if (typeof(uv)==='undefined') {
         uv = [0,0];
       }

@@ -22,6 +22,10 @@ The computing power of your GPU is important. If your GPU is powerful, many dete
 * [Demonstrations](#demonstrations)
   * [Run locally](#run-locally)
   * [Using the ES6 module](#using-the-es6-module)
+* [Integration](#integration)
+  * [With a bundler](#with-a-bundler)
+  * [With JavaScript frontend frameworks](#with-javascript-frontend-frameworks)
+  * [Native](#native)
 * [Hosting](#hosting)
 * [About the tech](#about-the-tech)
   * [Under the hood](#under-the-hood)
@@ -129,6 +133,62 @@ const faceTransfer =require('./lib/jeelizFaceTransferES6.js')
 ```
 
 The demos have not been ported to ES6 yet. You are welcome to submit a pull request :).
+
+
+
+## Integration
+
+### With a bundler
+If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [ES6 version](#using-the-es6-module).
+
+Then, with the standard library, we load the neural network model (specified by `NNCpath` provided as initialization parameter) using AJAX for the following reasons:
+* If the user does not accept to share its webcam, or if WebGL is not enabled, we don't have to load the neural network model,
+* We suppose that the library is deployed using a static HTTPS server.
+
+With a bundler, it is a bit more complicated. It is easier to load the neural network model using a classical `import` or `require` call and to provide it using the `NNC` init parameter:
+
+```javascript
+const faceTransferAPI = require('./lib/jeelizFaceTransferES6.js')
+const neuralNetworkModel = require('./dist/jeelizFaceTransferNNC.json')
+
+faceTransferAPI.init({
+  NNC:  neuralNetworkModel, //instead of NNCpath
+  //... other init parameters
+});
+```
+
+### With JavaScript frontend frameworks
+We don't cover here the integration with mainstream JavaScript frontend frameworks (*React*, *Vue*, *Angular*).
+If you submit Pull Request adding the boilerplate or a demo integrated with specific frameworks, you are welcome and they will be accepted of course.
+We can provide this kind of integration as a specific development service ( please contact us [here](https://jeeliz.com/contact-us/) ). But it is not so hard to do it by yourself. Here is a bunch of submitted issues dealing with *React* integration. Most of them are for [Jeeliz FaceFilter](https://github.com/jeeliz/jeelizFaceFilter), but the problem is similar:
+
+* Angular integration: [Jeff Winder](https://www.linkedin.com/in/jeffwinder/) has integrated this library with Angular / Electron. His amazing work is published on Github here: [JeffWinder/jeelizWeboji-angular-electron-example](https://github.com/JeffWinder/jeelizWeboji-angular-electron-example),
+* React integration: [#74](https://github.com/jeeliz/jeelizFaceFilter/issues/74#issuecomment-455624092) and [#122](https://github.com/jeeliz/jeelizFaceFilter/issues/122#issuecomment-533185928)
+* [is it possible to use this library in react native project](https://github.com/jeeliz/jeelizFaceFilter/issues/21)
+* [Having difficulty using JeelizThreejsHelper in ReactApp](https://github.com/jeeliz/jeelizFaceFilter/issues/137)
+
+You can also take a look at these Github code repositories:
+* [ikebastuz/jeelizTest](https://github.com/ikebastuz/jeelizTest): React demo of a CSS3D FaceFilter. It is based on [Create React App](https://github.com/facebook/create-react-app)
+* [CloffWrangler/facevoice](https://github.com/CloffWrangler/facevoice): Another demo based on [Create React App]
+* [nickydev100/FFMpeg-Angular-Face-Filter](https://github.com/nickydev100/FFMpeg-Angular-Face-Filter): Angular boilerplate
+
+
+### Native
+It is possible to execute a JavaScript application using this library into a *Webview* for a native app integration.
+But with IOS the camera access is disabled inside webviews. You have to implement a hack to stream the camera video into the webview using websockets.
+
+His hack has been implemented into this repository:
+
+* [Apache Cordova IOS demo (it should also work on Android)](/tree/master/demos/cordova)
+* [Youtube video of the demo](https://youtu.be/yx9uA1g6-rA)
+* [Github submitted issue](/issues/27)
+* [Linkedin post detailing pros and cons](https://www.linkedin.com/feed/update/urn:li:activity:6587781973287198720)
+
+But it is still a dirty hack introducing a bottleneck. It still run pretty well on a high end device (tested on Iphone XR), but it is better to stick on a full web environment.
+
+
+
+
 
 
 
