@@ -21,7 +21,7 @@ The computing power of your GPU is important. If your GPU is powerful, many dete
 * [Architecture](#architecture)
 * [Demonstrations](#demonstrations)
   * [Run locally](#run-locally)
-  * [Using the ES6 module](#using-the-es6-module)
+  * [Using module](#using-module)
 * [Integration](#integration)
   * [With a bundler](#with-a-bundler)
   * [With JavaScript frontend frameworks](#with-javascript-frontend-frameworks)
@@ -118,28 +118,28 @@ If you have not bought a webcam yet, a screenshot video of the Cartman Demo is a
 
 
 
-#### Using the ES6 module
-`/dist/jeelizFaceTransferES6.js` is exactly the same than `/dist/jeelizFaceTransfer.js` except that it works with ES6, so you can import it directly using:
+#### Using module
+`/dist/jeelizFaceTransfer.module.js` is exactly the same as `/dist/jeelizFaceTransfer.js` except that it works as JavaScript module, so you can import it directly using:
 
 ```javascript
-import 'dist/jeelizFaceTransferES6.js'
+import 'dist/jeelizFaceTransfer.module.js'
 ```
 
 or using `require`:
 
 ```javascript
-const faceTransfer =require('./lib/jeelizFaceTransferES6.js')
+const faceTransfer =require('./lib/jeelizFaceTransfer.module.js')
 //...
 ```
 
-The demos have not been ported to ES6 yet. You are welcome to submit a pull request :).
+There is no demo using the module version yet. You are welcome to submit a pull request :).
 
 
 
 ## Integration
 
 ### With a bundler
-If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [ES6 version](#using-the-es6-module).
+If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [module version](#using-module).
 
 Then, with the standard library, we load the neural network model (specified by `NNCpath` provided as initialization parameter) using AJAX for the following reasons:
 * If the user does not accept to share its webcam, or if WebGL is not enabled, we don't have to load the neural network model,
@@ -148,7 +148,7 @@ Then, with the standard library, we load the neural network model (specified by 
 With a bundler, it is a bit more complicated. It is easier to load the neural network model using a classical `import` or `require` call and to provide it using the `NNC` init parameter:
 
 ```javascript
-const faceTransferAPI = require('./lib/jeelizFaceTransferES6.js')
+const faceTransferAPI = require('./lib/jeelizFaceTransfer.module.js')
 const neuralNetworkModel = require('./dist/jeelizFaceTransferNNC.json')
 
 faceTransferAPI.init({
