@@ -1,10 +1,10 @@
 /*
-  spec :
+  spec:
     - url: url of the weboji mesh
-    - successCallback : success callback
-    - mat : three material
-    - morphPrecision : should be POT, precision of morphing
-    - nMorphs : number of morphs
+    - successCallback: success callback
+    - mat: three material
+    - morphPrecision: should be POT, precision of morphing
+    - nMorphs: number of morphs
 
 */
 "use strict";
@@ -29,7 +29,7 @@ function ThreeMorphAnimGeomBuilder(spec){
         return vi;
       } else if (uviByVertexIndex[vi] === vti){
         return vi;
-      } else { //we should duplicate the vertex
+      } else { // we should duplicate the vertex
         const duplicateVertexIndex = uviByVertexIndex.length;
         uviByVertexIndex.push(vti);
         vertices.push(vertices[vi]);
@@ -53,7 +53,7 @@ function ThreeMorphAnimGeomBuilder(spec){
       
       facesIndices.push(via, vic, vib);
 
-      if (f.length > 3){ //quad face
+      if (f.length > 3){ // quad face
         let vid = f[3][0];
         const vtid = f[3][1];
         vid = duplicate_ifNecessary(vid, vtid);
@@ -88,16 +88,16 @@ function ThreeMorphAnimGeomBuilder(spec){
 
 
     // Construct morphs:
-    console.log('INFO in ThreeMorphAnimMeshBuilder : ', dataObj.morphs.length, 'morphs found');
+    console.log('INFO in ThreeMorphAnimMeshBuilder: ', dataObj.morphs.length, 'morphs found');
 
     const morphs = [];
-    const nVertices = nVertices0+verticesDuplicatedIndices.length;
+    const nVertices = nVertices0 + verticesDuplicatedIndices.length;
     dataObj.morphs.forEach(function(morph, morphIndex){
       const morphPositions=new Float32Array(nVertices*3);
       morph.forEach(function(v, vi){
-        morphPositions[3*vi]=v[0];
-        morphPositions[3*vi+1]=v[1];
-        morphPositions[3*vi+2]=v[2];
+        morphPositions[3*vi] = v[0];
+        morphPositions[3*vi+1] = v[1];
+        morphPositions[3*vi+2] = v[2];
       });
 
       verticesDuplicatedIndices.forEach(function(vi, i){
@@ -118,19 +118,18 @@ function ThreeMorphAnimGeomBuilder(spec){
     geom.computeBoundingSphere();
     const morphRadius = geom.boundingSphere.radius * 0.5;
     
-    for (let iMorphMultiplexed=0; iMorphMultiplexed<(_nMorphs/2); ++iMorphMultiplexed){
+    for (let iMorphMultiplexed=0; iMorphMultiplexed < (_nMorphs/2); ++iMorphMultiplexed){
       
       const morphMultiplexed = new Float32Array(nVertices*3);
       const morphA = morphs[2*iMorphMultiplexed];
       const morphB = morphs[2*iMorphMultiplexed+1];
 
       for (let i=0; i<nVertices*3; ++i){
-        const a = Math.round(spec.morphPrecision*(1+morphA[i]/morphRadius)/2); //between 0 (-morphRadius) and 1 (maxRadius)
-        const b = Math.round(spec.morphPrecision*(1+morphB[i]/morphRadius)/2); //between 0 (-morphRadius) and 1 (maxRadius)
+        const a = Math.round(spec.morphPrecision * (1+morphA[i]/morphRadius) / 2); // between 0 (-morphRadius) and 1 (maxRadius)
+        const b = Math.round(spec.morphPrecision * (1+morphB[i]/morphRadius) / 2); // between 0 (-morphRadius) and 1 (maxRadius)
         morphMultiplexed[i] = a + b / spec.morphPrecision;
-        //morphMultiplexed[i]=morphA[i]; //KILL
       }
-      geom.addAttribute('morphJeeliz' + iMorphMultiplexed, new THREE.BufferAttribute(morphMultiplexed, 3, false));
+      geom.addAttribute('morphJeeliz' + iMorphMultiplexed.toString(), new THREE.BufferAttribute(morphMultiplexed, 3, false));
     }
 
     geom.computeVertexNormals();

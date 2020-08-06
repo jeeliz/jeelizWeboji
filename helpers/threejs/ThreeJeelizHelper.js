@@ -5,45 +5,53 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
 "use strict";
 
 /*
-  spec of THREE.JeelizHekper.init :
-    - <string> canvasThreeId : id of the canvas with the THREE.js 3D Weboji rendering
-    - <string> canvasId : id of the JEEFACETRANSFER canvas
+  spec of THREE.JeelizHekper.init:
+    - <string> canvasThreeId: id of the canvas with the THREE.js 3D Weboji rendering
+    - <string> canvasId: id of the JEEFACETRANSFER canvas
 
-    - <function> successCallback : launched when all is ready
-    - <function> errorCallback : launched if an error happens
+    - <function> successCallback: launched when all is ready
+    - <function> errorCallback: launched if an error happens
 
-    - <string> assetsParentPath : string, path where assets are
-    - <string> NNCpath : string, where to find the dist/jeelizFaceTransferNNC.json
+    - <string> assetsParentPath: string, path where assets are
+    - <string> NNCpath: string, where to find the dist/jeelizFaceTransferNNC.json
 
-    - <string> meshURL : url of the mesh
-    - <dict> matParams : parameters of the material
+    - <string> meshURL: url of the mesh
+    - <dict> matParams: parameters of the material
     
-    - <array3> position : position of the mesh (default: [0,0,0])
-    - <float> scale : scale of the mesh (default : 1)
+    - <array3> position: position of the mesh (default: [0,0,0])
+    - <float> scale: scale of the mesh (default: 1)
 */
 
 THREE.JeelizHelper = (function(){
-  //INTERNAL SETTINGS :  
+  // INTERNAL SETTINGS:  
   const _settings = {
-    //THREE LIGHTS
+    // THREE LIGHTS:
     ambientLightIntensity: 1.0,
-    dirLightIntensity: 0.8, //fox : 1.2
+    dirLightIntensity: 0.8, // fox: 1.2
     dirLightDirection: [0,0.5,1],
 
-    //ROTATION :
+    // ROTATION:
     rotationOrder: 'XZY',
     rotationSpringCoeff: 0.0002,
-    rotationAmortizationCoeff: 0.9, //1-> no amortization, 0-> big amortization
+    rotationAmortizationCoeff: 0.9, // 1-> no amortization, 0-> big amortization
     
     morphPrecision: 2048
   }; //end _settings
 
-  //PRIVATE VARS :
+  // PRIVATE VARS:
   const _nMorphs = JEEFACETRANSFERAPI.get_nMorphs();
-  let _ThreeRenderer = null, _ThreeScene = null, _ThreeCamera = null, _ThreeMorphAnimMesh = false, _ThreeAmbientLight = null, _ThreeDirLight = null;
   let _DOMcanvas = null, _assetsParentPath = '', _isFaceDetected = false;
 
-  const _states = { //all possibles states (ENUM like)
+  const _three = { // gather THREE.js instances
+    renderer: null,
+    scene: null,
+    camera: null,
+    morphAnimMesh: null,
+    ambientLight: null,
+    dirLight: null
+  };
+
+  const _states = { // all possibles states (ENUM like)
     notLoaded:-10,
     jeefacetransferInitialized: -9,
     threeInitialized: -8,
@@ -51,8 +59,8 @@ THREE.JeelizHelper = (function(){
     idle: 0,
     animate: 1
   };
-  let _state = _states.notLoaded; //initial state
-  let _animationHandler = false;
+  let _state = _states.notLoaded; // initial state
+  let _animationHandler = null;
   const _loading = {
     modelURL: false,
     threeMat: false,
@@ -63,17 +71,17 @@ THREE.JeelizHelper = (function(){
   let _prevT = 0;
 
 
-  //PRIVATE FUNCTIONS :
-  //render loop :
+  // PRIVATE FUNCTIONS:
+  // render loop:
   function animate(t) {
     if (_state !== _states.animate){
       return;
     }
-    const dt = Math.min(Math.max(t-_prevT, 5), 30); //in ms
+    const dt = Math.min(Math.max(t-_prevT, 5), 30); // in ms
     const rotation = JEEFACETRANSFERAPI.get_rotationStabilized();
-    _ThreeMorphAnimMesh.rotation.fromArray(rotation);
+    _three.morphAnimMesh.rotation.fromArray(rotation);
     
-    //apply these kinematic formulas :
+    //apply these kinematic formulas:
     //accl=(rotAmortized - rot) = dv/dt
     //dv=dt(rotAmortized - rot)
     //dp=dt*v
@@ -91,10 +99,10 @@ THREE.JeelizHelper = (function(){
     _rotationAmortized[1] += dt * _rotationSpeed[1];
     _rotationAmortized[2] += dt * _rotationSpeed[2];
 
-    if (_ThreeMorphAnimMesh.material.type === 'ShaderMaterial'){
-      _ThreeMorphAnimMesh.material.set_rotationAmortized(_ThreeMorphAnimMesh.position, _ThreeMorphAnimMesh.scale, _rotationAmortized);
+    if (_three.morphAnimMesh.material.type === 'ShaderMaterial'){
+      _three.morphAnimMesh.material.set_rotationAmortized(_three.morphAnimMesh.position, _three.morphAnimMesh.scale, _rotationAmortized);
     }
-    _ThreeRenderer.render(  _ThreeScene, _ThreeCamera ); //trigger the THREE.JS scene rendering
+    _three.renderer.render(  _three.scene, _three.camera ); // trigger the THREE.JS scene rendering
 
     _prevT = t;
     _animationHandler = requestAnimationFrame( animate );
@@ -116,36 +124,36 @@ THREE.JeelizHelper = (function(){
   function init_three(canvasThreeId) {
      
     _DOMcanvas = document.getElementById(canvasThreeId);
-    _ThreeRenderer = new THREE.WebGLRenderer({
-       'antialias'  : true,
-       'canvas' : _DOMcanvas,
+    _three.renderer = new THREE.WebGLRenderer({
+       'antialias': true,
+       'canvas': _DOMcanvas,
        'preserveDrawingBuffer': true,
        'alpha': true
     });
-    _ThreeRenderer.setClearAlpha(0);
+    _three.renderer.setClearAlpha(0);
 
-      //create the scene
-    _ThreeScene = new THREE.Scene();
+    // create the scene:
+    _three.scene = new THREE.Scene();
     
-    //add some lights
-    _ThreeAmbientLight = new THREE.AmbientLight(0xffffff);
-    _ThreeAmbientLight.intensity = _settings.ambientLightIntensity;
-    _ThreeScene.add(_ThreeAmbientLight);
+    // add some lights:
+    _three.ambientLight = new THREE.AmbientLight(0xffffff);
+    _three.ambientLight.intensity = _settings.ambientLightIntensity;
+    _three.scene.add(_three.ambientLight);
 
-    _ThreeDirLight = new THREE.DirectionalLight(0xffffff);
-    _ThreeDirLight.position.fromArray(_settings.dirLightDirection);
-    _ThreeDirLight.intensity = _settings.dirLightIntensity;
-    _ThreeScene.add(_ThreeDirLight);
+    _three.dirLight = new THREE.DirectionalLight(0xffffff);
+    _three.dirLight.position.fromArray(_settings.dirLightDirection);
+    _three.dirLight.intensity = _settings.dirLightIntensity;
+    _three.scene.add(_three.dirLight);
 
-    //create the camera
-    _ThreeCamera = new THREE.PerspectiveCamera(35, _DOMcanvas.width / _DOMcanvas.height, 10, 10000 );
-    _ThreeCamera.position.set(0,0,500);
-    _ThreeCamera.lookAt(new THREE.Vector3(0.,0.,0.));
+    // create the camera:
+    _three.camera = new THREE.PerspectiveCamera(35, _DOMcanvas.width / _DOMcanvas.height, 10, 10000 );
+    _three.camera.position.set(0,0,500);
+    _three.camera.lookAt(new THREE.Vector3(0.,0.,0.));
   } //end init_three()
 
-  //change the material of the weboji :
+  // change the material of the weboji:
   function change_material(mat){
-    if (!_ThreeMorphAnimMesh){
+    if (!_three.morphAnimMesh){
       return;
     }
     _loading.threeMat = mat;
@@ -154,21 +162,21 @@ THREE.JeelizHelper = (function(){
       const previousCallback = _loading.callback;
       _loading.callback = function(){
         previousCallback();
-        _ThreeMorphAnimMesh.material = mat;
+        _three.morphAnimMesh.material = mat;
       }
     } else {
-      _ThreeMorphAnimMesh.material = mat;
+      _three.morphAnimMesh.material = mat;
     }
-  } //end change_material()
+  }
 
-  //load a weboji mesh :
+  // load a weboji mesh:
   function load_model(url, mat, callback){
-    if (url===_loading.modelURL && mat===_loading.threeMat){ //called 2 times with same parameters
+    if (url===_loading.modelURL && mat===_loading.threeMat){ // called 2 times with same args
       return true;
     }
     
     if (_state === _states.loading){
-      console.log('WARNING in THREE.JeelizHelper - load_model() : currently loading a model');
+      console.log('WARNING in THREE.JeelizHelper - load_model(): currently loading a model');
       const previousCallback = _loading.callback;
       _loading.callback = function(){
         previousCallback();
@@ -177,11 +185,11 @@ THREE.JeelizHelper = (function(){
       return true;
 
     } else if (_state!==_states.idle && _state!==_states.animate){
-      console.log('WARNING in  THREE.JeelizHelper - load_model() : invalid state');
+      console.log('WARNING in  THREE.JeelizHelper - load_model(): invalid state');
       return false;
     }
 
-    if (url===_loading.url && _ThreeMorphAnimMesh){
+    if (url===_loading.url && _three.morphAnimMesh){
       change_material(mat);
       callback();
       return true;
@@ -194,9 +202,9 @@ THREE.JeelizHelper = (function(){
 
     _state = _states.loading;
 
-    if (_ThreeMorphAnimMesh){ //remove previously loaded emoji
-      _ThreeScene.remove(_ThreeMorphAnimMesh);
-      _ThreeMorphAnimMesh = false;
+    if (_three.morphAnimMesh){ // remove previously loaded emoji
+      _three.scene.remove(_three.morphAnimMesh);
+      _three.morphAnimMesh = false;
     }
 
     ThreeMorphAnimGeomBuilder({
@@ -205,26 +213,26 @@ THREE.JeelizHelper = (function(){
       nMorphs: _nMorphs,
       successCallback: function(geom){
         const mesh = new THREE.Mesh(geom, mat);
-        mesh.onAfterRender=function(){ //fix a bug with THREE.js r93
+        mesh.onAfterRender = function(){ // fix a bug with THREE.js r93
           if (mesh.material){
             mesh.material.side = THREE.DoubleSide;
             delete(mesh.onAfterRender);
-            mesh.material.needsUpdate = true; //another THREE bug workaround : otherwise wrong lighting direction
+            mesh.material.needsUpdate = true; // another THREE bug workaround: otherwise wrong lighting direction
           }
         }
     
-        mesh.rotation.order = _settings.rotationOrder; //default : XYZ
-        _ThreeMorphAnimMesh = mesh;
+        mesh.rotation.order = _settings.rotationOrder; // default: XYZ
+        _three.morphAnimMesh = mesh;
         const morphTargetInfluencesDst = JEEFACETRANSFERAPI.get_morphTargetInfluencesStabilized();
           
-        //_ThreeMorphAnimMesh.morphTargetInfluences=morphTargetInfluencesDst;
-        _ThreeMorphAnimMesh.userData.morphJeelizInfluences=morphTargetInfluencesDst;
+        //_three.morphAnimMesh.morphTargetInfluences=morphTargetInfluencesDst;
+        _three.morphAnimMesh.userData.morphJeelizInfluences=morphTargetInfluencesDst;
 
         JEEFACETRANSFERAPI.on_detect(function(isDetected){
           _isFaceDetected = isDetected;
         });
 
-        _ThreeScene.add(_ThreeMorphAnimMesh);
+        _three.scene.add(_three.morphAnimMesh);
 
         _state = _loading.restoreState;
         start_animate();
@@ -236,12 +244,12 @@ THREE.JeelizHelper = (function(){
   } //end load_model()
 
   function load_texture(imageURL){
-    return new THREE.TextureLoader().load(_assetsParentPath+imageURL);
+    return new THREE.TextureLoader().load(_assetsParentPath + imageURL);
   }
   
 
 
-  //PUBLIC METHODS :
+  // PUBLIC METHODS:
   const that = {
     'ready': false,
 
@@ -249,20 +257,20 @@ THREE.JeelizHelper = (function(){
       if (!spec) var spec = {};
       _assetsParentPath = (spec.assetsParentPath) ? spec.assetsParentPath : './';
       
-      //init JEEFACETRANSFERAPI
+      // init JEEFACETRANSFERAPI:
       JEEFACETRANSFERAPI.init({
         canvasId: spec.canvasId,
         NNCpath: (spec.NNCpath) ? spec.NNCpath : './',
         videoSettings: (spec.videoSettings) ? spec.videoSettings : null,
         callbackReady: function(errCode){
           if (errCode){
-            console.log('ERROR - cannot init JEEFACETRANSFERAPI. errCode =', errCode);
+            console.log('ERROR: cannot init JEEFACETRANSFERAPI. errCode =', errCode);
             if (spec.errorCallback){
               spec.errorCallback(errCode);
             }
             return;
           }
-          console.log('INFO : JEEFACETRANSFERAPI is ready !!!');
+          console.log('INFO: JEEFACETRANSFERAPI is ready !!!');
             
           _state = _states.jeefacetransferInitialized;
           init_three(spec.canvasThreeId);
@@ -297,19 +305,19 @@ THREE.JeelizHelper = (function(){
         });
       }, //end helper init()
 
-      'get_three': function(){ //get three object in order to be able to change them into the final app
+      'get_three': function(){ // get three object in order to be able to change them into the final app
         return {
           'three': THREE,
-          'threeRenderer': _ThreeRenderer,
-          'threeCamera': _ThreeCamera,
-          'threeAmbientLight': _ThreeAmbientLight,
-          'threeDirLight': _ThreeDirLight,
-          'threeScene': _ThreeScene
+          'threeRenderer': _three.renderer,
+          'threeCamera': _three.camera,
+          'threeAmbientLight': _three.ambientLight,
+          'threeDirLight': _three.dirLight,
+          'threeScene': _three.scene
         }
       },
 
       'get_threeEmoji': function(){
-        return _ThreeMorphAnimMesh;
+        return _three.morphAnimMesh;
       },
 
       'load_weboji': function(modelURL, matParams, callback){
@@ -325,28 +333,28 @@ THREE.JeelizHelper = (function(){
 
       'set_positionScale': function(vector3Array, scale){
         if (vector3Array){
-          _ThreeMorphAnimMesh.position.fromArray(vector3Array);
+          _three.morphAnimMesh.position.fromArray(vector3Array);
         }
         if (typeof(scale) !== 'undefined'){
-          _ThreeMorphAnimMesh.scale.set(-scale, scale, scale);
+          _three.morphAnimMesh.scale.set(-scale, scale, scale);
         }
       },
 
       'set_materialParameters': function(params){
-        //change_material(new THREE.MeshBasicMaterial({map: load_texture(params.diffuseMapURL)})); return;
+        // change_material(new THREE.MeshBasicMaterial({map: load_texture(params.diffuseMapURL)})); return;
         const matParameters = Object.assign({
           'shininess': 30,
 
-          'color': 0xffffff, //default parameters
+          'color': 0xffffff, // default parameters
           'diffuse': 0xffffff,
           'specular': 0xffffff,
 
-          //morphing
-          'morphTargets': false, //disable default THREE.JS morphing
+          // morphing:
+          'morphTargets': false, // disable default THREE.JS morphing
           morphPrecision: _settings.morphPrecision,
-          morphRadius: _ThreeMorphAnimMesh.geometry.morphRadius,
+          morphRadius: _three.morphAnimMesh.geometry.morphRadius,
           nMorphs: _nMorphs,
-          'morphJeelizInfluences': _ThreeMorphAnimMesh.userData.morphJeelizInfluences
+          'morphJeelizInfluences': _three.morphAnimMesh.userData.morphJeelizInfluences
         }, params);
         ['specularMap', 'flexMap', 'envMap', 'alphaMap', 'lightMap', 'emissiveMap'].forEach(function(keyMap){
           if (params[keyMap + 'URL']){
@@ -363,7 +371,7 @@ THREE.JeelizHelper = (function(){
       'animate': function(){
         if (  _state===_states.idle
           || (_state===_states.loading && _loading.state===_state.idle)){
-          _state=_states.animate;
+          _state = _states.animate;
           JEEFACETRANSFERAPI.switch_sleep(false);
           start_animate();
         }
@@ -373,7 +381,7 @@ THREE.JeelizHelper = (function(){
         JEEFACETRANSFERAPI.switch_sleep(true);
         if (_animationHandler){
           cancelAnimationFrame(_animationHandler);
-          _animationHandler = false;
+          _animationHandler = null;
         }
         if (_state === _states.loading){
           _loading.state = _states.idle;
@@ -382,12 +390,12 @@ THREE.JeelizHelper = (function(){
         }
       },
 
-      'resize': function(w, h){ //call this method if canvas resize
-        _ThreeRenderer.setSize(w,h);
+      'resize': function(w, h){ // call this method if canvas resize
+        _three.renderer.setSize(w,h);
         _DOMcanvas.style.width = null;
         _DOMcanvas.style.height = null;
-        _ThreeCamera.aspect = w / h;
-        _ThreeCamera.updateProjectionMatrix();
+        _three.camera.aspect = w / h;
+        _three.camera.updateProjectionMatrix();
       },
   } //end that
   return that;

@@ -1,14 +1,14 @@
 /*
     returns an instance of MeshLambertMaterial but with a second modelViewMatrix, modelViewMatrixDelayed
     the position is a linear interpolation of the 2 matrix, using a coefficient stored in a texture
-
 */
+
 //PRECOMPILER_BEGINNOGLSLX
 function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   let _nMorphs = matParameters.nMorphs;
   if (_nMorphs%2 !== 0) ++_nMorphs;
 
-  const threeMat = THREE.ShaderLib.phong; //also works with a standard material
+  const threeMat = THREE.ShaderLib.phong; // also works with a standard material
   let vertexShaderSource = threeMat.vertexShader;
   let fragmentShaderSource = threeMat.fragmentShader;
 
@@ -47,18 +47,21 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   for (let iMorph=0; iMorph<nMorphsAttribs; ++iMorph){
     const iA = 2 * iMorph;
     const iB = 2 * iMorph + 1;
+    const iAStr = iA.toString();
+    const iBStr = iB.toString();
+    const iMorphStr = iMorph.toString();
     glslMorphJeelizCode +=
-    'vec3 morphTargetJeeliz' + iA + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*floor(morphJeeliz' + iMorph + ')/morphJeelizPrecision);\n'
-    +'vec3 morphTargetJeeliz' + iB + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*fract(morphJeeliz' + iMorph + '));\n'
-    +'transformed += morphTargetJeeliz' + iA + ' * morphJeelizInfluences[' + iA + '];\n'
-    +'transformed += morphTargetJeeliz' + iB + ' * morphJeelizInfluences[' + iB + '];\n';
-    morphAttribs.push('morphJeeliz' + iMorph);
+    'vec3 morphTargetJeeliz' + iAStr + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*floor(morphJeeliz' + iMorphStr + ')/morphJeelizPrecision);\n'
+    +'vec3 morphTargetJeeliz' + iBStr + ' = morphJeelizRadius*(vec3(-1.,-1.,-1.) + 2.*fract(morphJeeliz' + iMorphStr + '));\n'
+    +'transformed += morphTargetJeeliz' + iAStr + ' * morphJeelizInfluences[' + iAStr + '];\n'
+    +'transformed += morphTargetJeeliz' + iBStr + ' * morphJeelizInfluences[' + iBStr + '];\n';
+    morphAttribs.push('morphJeeliz' + iMorphStr);
   }
 
   vertexShaderSource = tweak_shaderAdd(vertexShaderSource, '#include <common>',
     'uniform mat4 modelMatrixDelayed;\n'
     +'uniform sampler2D flexMap;\n'
-    +'uniform float morphJeelizInfluences[' + (2*nMorphsAttribs) + '];\n'
+    +'uniform float morphJeelizInfluences[' + (2*nMorphsAttribs).toString() + '];\n'
     +'uniform float morphJeelizPrecision, morphJeelizRadius;\n'
     +'attribute vec3 ' + morphAttribs.join(',') + ';'
   );
@@ -74,8 +77,6 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   vertexShaderSource = tweak_shaderRepl(vertexShaderSource, '#include <morphtarget_vertex>',
     glslMorphJeelizCode
   );
-
-  //debugger;
 
   for (let key in matParameters){
       let val = null;
