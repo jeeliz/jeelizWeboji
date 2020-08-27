@@ -93,7 +93,7 @@ function ThreeMorphAnimGeomBuilder(spec){
     const morphs = [];
     const nVertices = nVertices0 + verticesDuplicatedIndices.length;
     dataObj.morphs.forEach(function(morph, morphIndex){
-      const morphPositions=new Float32Array(nVertices*3);
+      const morphPositions = new Float32Array(nVertices*3);
       morph.forEach(function(v, vi){
         morphPositions[3*vi] = v[0];
         morphPositions[3*vi+1] = v[1];

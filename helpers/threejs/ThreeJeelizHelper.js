@@ -31,7 +31,7 @@ THREE.JeelizHelper = (function(){
     dirLightDirection: [0,0.5,1],
 
     // ROTATION:
-    rotationOrder: 'XZY',
+    rotationOrder: 'ZYX', //'XZY',
     rotationSpringCoeff: 0.0002,
     rotationAmortizationCoeff: 0.9, // 1-> no amortization, 0-> big amortization
     
