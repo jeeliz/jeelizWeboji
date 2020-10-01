@@ -26,9 +26,9 @@ var JeelizWebojiThreeHelper = (function(){
   // INTERNAL SETTINGS:  
   const _settings = {
     // THREE LIGHTS:
-    ambientLightIntensity: 1.0,
-    dirLightIntensity: 0.8, // fox: 1.2
-    dirLightDirection: [0,0.5,1],
+    ambientLightIntensity: 0.5,
+    dirLightIntensity: 0.5,
+    dirLightDirection: [0, 0.5, 1],
 
     // ROTATION:
     rotationOrder: 'ZYX', //'XZY',
@@ -81,10 +81,10 @@ var JeelizWebojiThreeHelper = (function(){
     const rotation = JEEFACETRANSFERAPI.get_rotationStabilized();
     _three.morphAnimMesh.rotation.fromArray(rotation);
 
-    //apply these kinematic formulas:
-    //accl=(rotAmortized - rot) = dv/dt
-    //dv=dt(rotAmortized - rot)
-    //dp=dt*v
+    // apply these kinematic formulas:
+    // accl = (rotAmortized - rot) = dv / dt
+    // dv = dt * (rotAmortized - rot)
+    // dp = dt * v
 
     const amortizationCoeff = Math.pow(_settings.rotationAmortizationCoeff, dt/16);
     _rotationSpeed[0] *= amortizationCoeff;
@@ -118,9 +118,9 @@ var JeelizWebojiThreeHelper = (function(){
     }
     animate(0);
     return true;
-  } //else start_animate()
+  }
 
-  //init the THREE.JS scene !
+  // init the THREE.JS scene:
   function init_three(canvasThreeId) {
      
     _DOMcanvas = document.getElementById(canvasThreeId);
@@ -130,11 +130,20 @@ var JeelizWebojiThreeHelper = (function(){
       'preserveDrawingBuffer': true,
       'alpha': true
     });
+
+    // improve WebGLRenderer settings:
+    _three.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    _three.renderer.outputEncoding = THREE.sRGBEncoding;
+
     _three.renderer.setClearAlpha(0);
 
     // create the scene:
     _three.scene = new THREE.Scene();
     
+    // debug: add a cube into the scene
+    /* const debugCube = new THREE.Mesh(new THREE.BoxGeometry(150,150,150), new THREE.MeshNormalMaterial({side: THREE.DoubleSide}));
+    _three.scene.add(debugCube); */
+
     // add some lights:
     _three.ambientLight = new THREE.AmbientLight(0xffffff);
     _three.ambientLight.intensity = _settings.ambientLightIntensity;
@@ -147,7 +156,7 @@ var JeelizWebojiThreeHelper = (function(){
 
     // create the camera:
     _three.camera = new THREE.PerspectiveCamera(35, _DOMcanvas.width / _DOMcanvas.height, 10, 10000 );
-    _three.camera.position.set(0,0,500);
+    _three.camera.position.set(0, 0, 500);
     _three.camera.lookAt(new THREE.Vector3(0.,0.,0.));
   } //end init_three()
 
@@ -213,20 +222,12 @@ var JeelizWebojiThreeHelper = (function(){
       nMorphs: _nMorphs,
       successCallback: function(geom){
         const mesh = new THREE.Mesh(geom, mat);
-        mesh.onAfterRender = function(){ // fix a bug with THREE.js r93
-          if (mesh.material){
-            mesh.material.side = THREE.DoubleSide;
-            delete(mesh.onAfterRender);
-            mesh.material.needsUpdate = true; // another THREE bug workaround: otherwise wrong lighting direction
-          }
-        }
-    
+       
         mesh.rotation.order = _settings.rotationOrder; // default: XYZ
         _three.morphAnimMesh = mesh;
         const morphTargetInfluencesDst = JEEFACETRANSFERAPI.get_morphTargetInfluencesStabilized();
           
-        //_three.morphAnimMesh.morphTargetInfluences=morphTargetInfluencesDst;
-        _three.morphAnimMesh.userData.morphJeelizInfluences=morphTargetInfluencesDst;
+        _three.morphAnimMesh.userData.morphJeelizInfluences = morphTargetInfluencesDst;
 
         JEEFACETRANSFERAPI.on_detect(function(isDetected){
           _isFaceDetected = isDetected;
@@ -237,6 +238,13 @@ var JeelizWebojiThreeHelper = (function(){
         _state = _loading.restoreState;
         start_animate();
         _loading.callback(mesh);
+
+        // fix a weird bug on IOS 14.0.1 / Iphone11
+        // The canvas is not visible because of a Safari DOM update problem.
+        // So we append a random <div> to the DOM to force DOM refresh
+        const uselessDiv = document.createElement('div');
+        document.body.appendChild(uselessDiv);
+        
       } //end successCallback
     }); //end ThreeMorphAnimGeomBuilder call
 
@@ -390,7 +398,7 @@ var JeelizWebojiThreeHelper = (function(){
       },
 
       'resize': function(w, h){ // call this method if canvas resize
-        _three.renderer.setSize(w,h);
+        _three.renderer.setSize(w, h);
         _DOMcanvas.style.width = null;
         _DOMcanvas.style.height = null;
         _three.camera.aspect = w / h;
@@ -398,4 +406,4 @@ var JeelizWebojiThreeHelper = (function(){
       },
   } //end that
   return that;
-})(); //end THREE.JeelizHelper
+})();

@@ -1,6 +1,6 @@
 /*
-    returns an instance of MeshLambertMaterial but with a second modelViewMatrix, modelViewMatrixDelayed
-    the position is a linear interpolation of the 2 matrix, using a coefficient stored in a texture
+  returns an instance of MeshLambertMaterial but with a second modelViewMatrix, modelViewMatrixDelayed
+  the position is a linear interpolation of the 2 matrix, using a coefficient stored in a texture
 */
 
 //PRECOMPILER_BEGINNOGLSLX
@@ -102,6 +102,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     'uniforms': uniforms,
     'morphTargets': false,
     'lights': true,
+    'side': THREE['DoubleSide'],
     'precision': 'highp'
   });
 
