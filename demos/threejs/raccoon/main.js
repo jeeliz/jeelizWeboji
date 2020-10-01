@@ -1,8 +1,8 @@
 "use strict";
 
-//entry point:
+// entry point:
 function main(){
-  THREE.JeelizHelper.init({
+  JeelizWebojiThreeHelper.init({
     canvasThreeId: 'webojiCanvas',
     canvasId: 'jeefacetransferCanvas',
 
@@ -23,7 +23,7 @@ function main(){
       diffuseMapURL: 'textures/skin.jpg'
     },  //*/
 
-    position: [0,-80, 0],
+    position: [0, -80, 0],
     scale: 1.2
   });
-} //end main()
+}

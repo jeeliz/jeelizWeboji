@@ -1,12 +1,12 @@
 "use strict";
-/* spec properties of JeelizSVGHelper.init method :
+/* spec properties of JeelizWebojiSVGHelper.init method :
    * <string> canvasId : id of the <canvas> element where the head search will be displayed
    * <string> NNCpath : where to find the neural net model
    * <array> Expression logic
 
 */
 
-var JeelizSVGHelper=(function(){
+var JeelizWebojiSVGHelper=(function(){
     //private variables
     var _morphFactorsArr, _morphFactorsDict={
         smileRight: 0,          //0
@@ -31,7 +31,7 @@ var JeelizSVGHelper=(function(){
     //private functions :
     function callbackReady(errCode){
         if (errCode){
-            console.log('ERROR in JeelizSVGHelper - CANNOT INITIALIZE JEEFACETRANSFERAPI : errCode =', errCode);
+            console.log('ERROR in JeelizWebojiSVGHelper - CANNOT INITIALIZE JEEFACETRANSFERAPI : errCode =', errCode);
             return;
         }
         console.log('INFO : JEEFACETRANSFERAPI is ready !!!');
@@ -117,7 +117,7 @@ var JeelizSVGHelper=(function(){
                 NNCpath: (spec.NNCpath)?spec.NNCpath:'./',
                 callbackReady: callbackReady
             });
-        }, //end JeelizSVGHelper.init()
+        }, //end JeelizWebojiSVGHelper.init()
 
         //SOME HANDY SVG MANIP FUNCZ :
         posX_SVGpath: function(path, x){

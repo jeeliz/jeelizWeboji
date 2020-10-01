@@ -22,7 +22,7 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
     - <float> scale: scale of the mesh (default: 1)
 */
 
-THREE.JeelizHelper = (function(){
+var JeelizWebojiThreeHelper = (function(){
   // INTERNAL SETTINGS:  
   const _settings = {
     // THREE LIGHTS:
@@ -33,7 +33,7 @@ THREE.JeelizHelper = (function(){
     // ROTATION:
     rotationOrder: 'ZYX', //'XZY',
     rotationSpringCoeff: 0.0002,
-    rotationAmortizationCoeff: 0.9, // 1-> no amortization, 0-> big amortization
+    rotationAmortizationCoeff: 0.9, // 1 -> no amortization, 0 -> big amortization
     
     morphPrecision: 2048
   }; //end _settings
@@ -80,7 +80,7 @@ THREE.JeelizHelper = (function(){
     const dt = Math.min(Math.max(t-_prevT, 5), 30); // in ms
     const rotation = JEEFACETRANSFERAPI.get_rotationStabilized();
     _three.morphAnimMesh.rotation.fromArray(rotation);
-    
+
     //apply these kinematic formulas:
     //accl=(rotAmortized - rot) = dv/dt
     //dv=dt(rotAmortized - rot)
@@ -125,10 +125,10 @@ THREE.JeelizHelper = (function(){
      
     _DOMcanvas = document.getElementById(canvasThreeId);
     _three.renderer = new THREE.WebGLRenderer({
-       'antialias': true,
-       'canvas': _DOMcanvas,
-       'preserveDrawingBuffer': true,
-       'alpha': true
+      'antialias': true,
+      'canvas': _DOMcanvas,
+      'preserveDrawingBuffer': true,
+      'alpha': true
     });
     _three.renderer.setClearAlpha(0);
 
@@ -245,8 +245,7 @@ THREE.JeelizHelper = (function(){
 
   function load_texture(imageURL){
     return new THREE.TextureLoader().load(_assetsParentPath + imageURL);
-  }
-  
+  }  
 
 
   // PUBLIC METHODS:
@@ -270,7 +269,7 @@ THREE.JeelizHelper = (function(){
             }
             return;
           }
-          console.log('INFO: JEEFACETRANSFERAPI is ready !!!');
+          console.log('INFO: JEEFACETRANSFERAPI is ready!');
             
           _state = _states.jeefacetransferInitialized;
           init_three(spec.canvasThreeId);
@@ -278,20 +277,20 @@ THREE.JeelizHelper = (function(){
           _state = _states.idle;
           that.ready = true;
 
-          function start(){
-            that.set_positionScale((spec.position)?spec.position:[0,0,0], (spec.scale)?spec.scale:1);
+          const start = function(){
+            that.set_positionScale((spec.position) ? spec.position : [0,0,0], (spec.scale) ? spec.scale : 1);
             if (spec.successCallback){
               spec.successCallback();
             }
             that.animate();
-          } //end start()
+          }
 
-          if (typeof(spec.model) === 'undefined'){//mainly for debug
+          if (typeof(spec.model) === 'undefined'){
             load_model(spec.meshURL, false,
-                function(){ //load_model success callback
-                  that.set_materialParameters(spec.matParameters);
-                  start();
-                }
+              function(){ // load_model success callback
+                that.set_materialParameters(spec.matParameters);
+                start();
+              }
             ); //end load_model() cb
           } else if (spec.model && spec.mat){
             load_model(spec.model, spec.mat, start);

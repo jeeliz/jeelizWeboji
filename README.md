@@ -8,11 +8,11 @@
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-Build your own animated emoticon embedded in web applications with this library. The video is processed client-side only. No devices are needed except a standard webcam.
+With this library, you can build your own animated emoticon embedded in your web applications. The video is processed on client-side only.
 
-By default a webcam feedback image is overlaid by the face detection frame. The face detection will adapt to all lighting conditions, but the evaluation of expressions can be noisy if the lighting is too high, too weak, or if there is backlighting. The webcam feedback image is useful to see the quality of the input video feed.
+By default the current camera video feed is overlaid by the face detection frame. The face detection will adapt to all lighting conditions, but the evaluation of expressions can be noisy if the lighting is too high, too weak, or if there is backlighting. The camera feedback image is useful to see the quality of the input video feed.
 
-The computing power of your GPU is important. If your GPU is powerful, many detections per second will be processed and the result will be smooth and accurate. An old or low quality mobile device it may be slower. But it should work well on medium or high end mobile devices.
+The computing power of your GPU is important. If your GPU is powerful, many detections per second will be processed and the result will be smooth and accurate. An old or low quality mobile device it may be slower.
 
 
 ## Table of contents
@@ -30,29 +30,26 @@ The computing power of your GPU is important. If your GPU is powerful, many dete
 * [About the tech](#about-the-tech)
   * [Under the hood](#under-the-hood)
   * [Compatibility](#compatibility)
-  * [Future improvements](#future-improvements)
 * [Documentation](#documentation)
-* [Need more ?](#need-more)
 * [License](#license)
-* [See also](#see-also)
 * [References](#references)
 
 
 ## Features
 
 * face detection and tracking,
-* recognize 11 facial expressions,
-* face rotation along the 3 axis,
-* robust for all lighting conditions,
+* detects 11 facial expressions,
+* face rotation around the 3 axis,
+* robust to lighting conditions,
 * mobile friendly,
-* example provided using SVG and THREE.js.
+* examples provided using SVG and THREE.js.
 
 ## Architecture
 
 * `/assets/`: assets, both for 3D and 2D demonstrations (3D meshes, images),
 * `/demos/`: the most interesting: the demos !,
 * `/dist/`: heart of the library:
-  * `jeelizFaceTransfer.js`: main minified script. It gets the webcam video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
+  * `jeelizFaceTransfer.js`: main minified script. It gets the camera video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
   * `jeelizFaceTransferNNC.json`: neural network model loaded by the main script,
 * `/doc/`: some additionnal documentation,
 * `/helpers/`: The outputs of the main script are very raw. It is convenient to use these helpers to animate a 3D model with the THREE.js helper or a SVG file with the SVG helper. All demos use these helpers,
@@ -98,7 +95,7 @@ If you have made an application or a fun demonstration using this library, we wo
 
 #### Run locally
 
-You just have to serve the content of this directory using a HTTPS server. Webcam access can be not authorized depending on the web browser the application is hosted by an unsecured HTTP server. You can use *Docker* for example to run a HTTPS server:
+You just have to serve the content of this directory using a HTTPS server. Camera access can be not authorized depending on the web browser the application is hosted by an unsecured HTTP server. You can use *Docker* for example to run a HTTPS server:
 
 
 1. Run docker-compose
@@ -110,7 +107,7 @@ docker-compose up
 2. Open a browser and go to `localhost:8888`
 
 
-If you have not bought a webcam yet, a screenshot video of the Cartman Demo is available here:
+If you have not bought a camera yet, a screenshot video of the Cartman Demo is available here:
 
 <p align="center">
 <a href='https://www.youtube.com/watch?v=WxaL_kXwtRE'><img src='https://img.youtube.com/vi/WxaL_kXwtRE/0.jpg'></a>
@@ -128,11 +125,11 @@ import 'dist/jeelizFaceTransfer.module.js'
 or using `require`:
 
 ```javascript
-const faceTransfer =require('./lib/jeelizFaceTransfer.module.js')
+const faceTransfer = require('./lib/jeelizFaceTransfer.module.js')
 //...
 ```
 
-There is no demo using the module version yet. You are welcome to submit a pull request :).
+There is no demo using the module version yet.
 
 
 
@@ -142,7 +139,7 @@ There is no demo using the module version yet. You are welcome to submit a pull 
 If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [module version](#using-module).
 
 Then, with the standard library, we load the neural network model (specified by `NNCpath` provided as initialization parameter) using AJAX for the following reasons:
-* If the user does not accept to share its webcam, or if WebGL is not enabled, we don't have to load the neural network model,
+* If the user does not accept to share its camera, or if WebGL is not enabled, we don't have to load the neural network model,
 * We suppose that the library is deployed using a static HTTPS server.
 
 With a bundler, it is a bit more complicated. It is easier to load the neural network model using a classical `import` or `require` call and to provide it using the `NNC` init parameter:
@@ -152,7 +149,7 @@ const faceTransferAPI = require('./lib/jeelizFaceTransfer.module.js')
 const neuralNetworkModel = require('./dist/jeelizFaceTransferNNC.json')
 
 faceTransferAPI.init({
-  NNC:  neuralNetworkModel, //instead of NNCpath
+  NNC: neuralNetworkModel, //instead of NNCpath
   //... other init parameters
 });
 ```
@@ -188,18 +185,13 @@ But it is still a dirty hack introducing a bottleneck. It still run pretty well 
 
 
 
-
-
-
-
 ## Hosting
 
-This library requires the user's webcam feed through `MediaStream API`. Your application should then be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
+This library requires the user's camera feed through `MediaStream API`. Your application should then be hosted with a HTTPS server (the certificate can be self-signed). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 Be careful to enable gzip HTTP/HTTPS compression for JSON and JS files. Indeed, the neuron network JSON in, `/dist/` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
-The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the user has accepted to share its camera. We proceed this way to avoid to load this quite heavy file if the user refuses to share its webcam or if there is no webcam available. The loading will be faster if you systematically preload the JSON file using a service worker or a simple raw `XMLHttpRequest` just after the loading of the HTML page. Then the file will be in the browser cache and will be fast to request.
-
+The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the user has accepted to share its camera. We proceed this way to avoid to load this quite heavy file if the user refuses to share its camera or if there is no camera available. The loading will be faster if you systematically preload the JSON file using a service worker or a simple raw `XMLHttpRequest` just after the loading of the HTML page. Then the file will be in the browser cache and will be fast to request.
 
 
 
@@ -211,15 +203,15 @@ The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PD
 
 * 0:  smileRight &rarr; closed mouth smile right
 * 1:  smileLeft  &rarr; closed mouth smile left
-* 2:  eyeBrowLeftDown &rarr; eyebrow left frowned
-* 3:  eyeBrowRightDown &rarr; eyebrow right frowned
-* 4:  eyeBrowLeftUp &rarr; eyebrow left up (surprised)
-* 5:  eyeBrowRightUp &rarr; eyebrow right up (surprised)
-* 6:  mouthOpen &rarr; mouth open
-* 7:  mouthRound &rarr; mouth round
+* 2:  eyeBrowLeftDown &rarr; left eyebrow frowned
+* 3:  eyeBrowRightDown &rarr; right eyebrow frowned
+* 4:  eyeBrowLeftUp &rarr; raise left eyebrow (surprise)
+* 5:  eyeBrowRightUp &rarr; raise right eyebrow (surprise)
+* 6:  mouthOpen &rarr; open mouth
+* 7:  mouthRound &rarr; o shaped mouth
 * 8:  eyeRightClose &rarr; close right eye
 * 9:  eyeLeftClose  &rarr; close left eye
-* 10: mouthNasty   &rarr; mouth nasty (upper lip raised)
+* 10: mouthNasty   &rarr; nasty mouth (show teeth)
 
 
 
@@ -228,7 +220,7 @@ The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PD
 * If `WebGL2` is not available but `WebGL1`, we require either `OES_TEXTURE_FLOAT` extension or `OES_TEXTURE_HALF_FLOAT` extension,
 * If `WebGL2` is not available, and if `WebGL1` is not available or neither `OES_TEXTURE_FLOAT` or `OES_HALF_TEXTURE_FLOAT` are implemented, the user is not compatible.
 
-In all cases, you need to have WebRTC implemented in the web browser, otherwise this library will not be able to get the webcam video feed. The compatibility tables are on, [caniuse.com](https://caniuse.com/): [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
+In all cases, you need to have WebRTC implemented in the web browser, otherwise this library will not be able to get the camera video feed. The compatibility tables are on, [caniuse.com](https://caniuse.com/): [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
 
 If a compatibility error is triggered, please post an issue on this repository. If this is a camera access error, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include:
 * a screenshot of [webglreport.com - WebGL1](http://webglreport.com/?v=1) (about your `WebGL1` implementation),
@@ -237,16 +229,6 @@ If a compatibility error is triggered, please post an issue on this repository. 
 * the steps to reproduce the bug, and screenshots.
 
 This library works quite everywhere, and it works very well with a high end device like an Iphone X. But if your device is too cheap or too old, it will perform too few evaluations per second and the application will be slow.
-
-
-### Future improvements
-We are currently working hard on this project. New neural networks are training and we are confident about improving this library. Here are our ways to improve:
-
-* Better emotion detection with a better neural network (improving the structure, the face generator, ...),
-* Better tracking stabilization,
-* Add a calibration estimation to take into account the variations of the coefficients between different faces.
-
-You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channel/UC3XmXH1T3d1XFyOhrRiiUeA) or to the [@StartupJeeliz Twitter account](https://twitter.com/StartupJeeliz) to be kept informed of our cutting edge developments.
 
 
 ## Documentation
@@ -263,32 +245,10 @@ You can subscribe to the [Jeeliz Youtube channel](https://www.youtube.com/channe
  * [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
 
 
-
-## Need more?
-@Jeeliz we have fully developed this library so we can still improve it or fit it to your needs. In particular:
-
-* adapt it to your own 3D/2D engine,
-* train a new neural network model adapted for a specific case (take account of new expressions for example),
-* use your specific mesh format,
-* integrate it better to your workflow,
-* manage the video/audio capture and encoding of the weboji.
-
-If you are interested, please [contact-us here](https://jeeliz.com/contact-us/).
-
-
-
 ## License
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
 We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
-
-
-## See also
-Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API](https://github.com/jeeliz/jeelizFaceFilter). It handles multi-face detection, and for each tracked face it provides the rotation angles and the mouth opening factor. It is perfect to build your own Snapchat/MSQRD like face filters running in the browser. It comes with dozen of integration demo, including a face swap.
-
-If you want to detect if the user is looking at the screen or not, [Jeeliz Glance Tracker](https://github.com/jeeliz/jeelizGlanceTracker) is what you are looking for. It can be useful to play a video only if the user is watching it (and to pause it otherwise). This library needs fewer resources and the neural network file is much lighter.
-
-If are interested by glasses virtual try-on (sunglasses, spectacles, ski masks), you can take a look at [Jeeliz VTO widget](https://github.com/jeeliz/jeelizGlassesVTOWidget). It includes a high quality and lightweight 3D engine which implements the following features: deferred shading, PBR, raytraced shadows, normal mapping, ... It also reconstructs the lighting environment around the user (ambient and directional lighting). The glasses are hosted in a database on our servers. If you want to add some models, please contact-us.
 
 
 ## References

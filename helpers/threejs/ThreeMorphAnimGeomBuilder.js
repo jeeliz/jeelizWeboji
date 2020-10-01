@@ -71,7 +71,7 @@ function ThreeMorphAnimGeomBuilder(spec){
       vertices32[3*vi+1] = v[1];
       vertices32[3*vi+2] = v[2];
     });
-    geom.addAttribute('position', new THREE.BufferAttribute(vertices32, 3, false));
+    geom.setAttribute('position', new THREE.BufferAttribute(vertices32, 3, false));
 
 
     // Construct uvs:
@@ -84,7 +84,7 @@ function ThreeMorphAnimGeomBuilder(spec){
       uv32[2*vi] = uv[0];
       uv32[2*vi+1] = uv[1];
     });
-    geom.addAttribute('uv', new THREE.BufferAttribute(uv32, 2, false));
+    geom.setAttribute('uv', new THREE.BufferAttribute(uv32, 2, false));
 
 
     // Construct morphs:
@@ -129,7 +129,7 @@ function ThreeMorphAnimGeomBuilder(spec){
         const b = Math.round(spec.morphPrecision * (1+morphB[i]/morphRadius) / 2); // between 0 (-morphRadius) and 1 (maxRadius)
         morphMultiplexed[i] = a + b / spec.morphPrecision;
       }
-      geom.addAttribute('morphJeeliz' + iMorphMultiplexed.toString(), new THREE.BufferAttribute(morphMultiplexed, 3, false));
+      geom.setAttribute('morphJeeliz' + iMorphMultiplexed.toString(), new THREE.BufferAttribute(morphMultiplexed, 3, false));
     }
 
     geom.computeVertexNormals();

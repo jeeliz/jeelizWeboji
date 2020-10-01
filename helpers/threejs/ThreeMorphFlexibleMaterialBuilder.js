@@ -30,7 +30,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     }
   }, threeMat.uniforms);
 
-  //tweak shaders
+  // tweak shaders:
   function tweak_shaderAdd(code, chunk, glslCode){
     return code.replace(chunk, chunk+"\n"+glslCode);
   }
