@@ -1,7 +1,7 @@
 "use strict";
 /* spec properties of JeelizWebojiSVGHelper.init method :
    * <string> canvasId : id of the <canvas> element where the head search will be displayed
-   * <string> NNCpath : where to find the neural net model
+   * <string> NNCPath : where to find the neural net model
    * <array> Expression logic
 
 */
@@ -114,7 +114,7 @@ var JeelizWebojiSVGHelper=(function(){
 
              JEEFACETRANSFERAPI.init({
                 canvasId: spec.canvasId,
-                NNCpath: (spec.NNCpath)?spec.NNCpath:'./',
+                NNCPath: (spec.NNCPath)?spec.NNCPath:'./',
                 callbackReady: callbackReady
             });
         }, //end JeelizWebojiSVGHelper.init()

@@ -138,7 +138,7 @@ There is no demo using the module version yet.
 ### With a bundler
 If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [module version](#using-module).
 
-Then, with the standard library, we load the neural network model (specified by `NNCpath` provided as initialization parameter) using AJAX for the following reasons:
+Then, with the standard library, we load the neural network model (specified by `NNCPath` provided as initialization parameter) using AJAX for the following reasons:
 * If the user does not accept to share its camera, or if WebGL is not enabled, we don't have to load the neural network model,
 * We suppose that the library is deployed using a static HTTPS server.
 
@@ -149,7 +149,7 @@ const faceTransferAPI = require('./lib/jeelizFaceTransfer.module.js')
 const neuralNetworkModel = require('./dist/jeelizFaceTransferNNC.json')
 
 faceTransferAPI.init({
-  NNC: neuralNetworkModel, //instead of NNCpath
+  NNC: neuralNetworkModel, //instead of NNCPath
   //... other init parameters
 });
 ```

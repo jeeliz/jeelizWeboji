@@ -51,7 +51,7 @@ function initWeboji(){
     canvasId: 'jeefacetransferCanvas',
 
     assetsParentPath: './assets/3D/',
-    NNCpath: './js/dist/',
+    NNCPath: './js/dist/',
 
     videoSettings: {
       videoElement: canvas

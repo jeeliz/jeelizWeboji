@@ -7,7 +7,7 @@ function main(){
     canvasId: 'jeefacetransferCanvas',
 
     assetsParentPath: '../../../assets/3D/',
-    NNCpath: '../../../dist/',
+    NNCPath: '../../../dist/',
 
     //FOX :
     meshURL: 'meshes/fox11_v0.json',

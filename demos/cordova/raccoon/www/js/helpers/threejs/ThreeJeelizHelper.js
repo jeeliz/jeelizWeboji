@@ -13,7 +13,7 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
     - <function> errorCallback : launched if an error happens
 
     - <string> assetsParentPath : string, path where assets are
-    - <string> NNCpath : string, where to find the dist/jeelizFaceTransferNNC.json
+    - <string> NNCPath : string, where to find the dist/jeelizFaceTransferNNC.json
 
     - <string> meshURL : url of the mesh
     - <dict> matParams : parameters of the material
@@ -252,7 +252,7 @@ THREE.JeelizHelper = (function(){
       //init JEEFACETRANSFERAPI
       JEEFACETRANSFERAPI.init({
         canvasId: spec.canvasId,
-        NNCpath: (spec.NNCpath) ? spec.NNCpath : './',
+        NNCPath: (spec.NNCPath) ? spec.NNCPath : './',
         videoSettings: (spec.videoSettings) ? spec.videoSettings : null,
         callbackReady: function(errCode){
           if (errCode){
