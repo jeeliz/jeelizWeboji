@@ -171,8 +171,9 @@ You can also take a look at these Github code repositories:
 
 
 ### Native
+
 It is possible to execute a JavaScript application using this library into a *Webview* for a native app integration.
-But with IOS the camera access is disabled inside webviews. You have to implement a hack to stream the camera video into the webview using websockets.
+But with IOS < 14.3 the camera access is disabled inside webviews. If you want to make your application run on devices with IOS versions older than 14.3, you have to implement a hack to stream the camera video into the `WKWebview` using websockets.
 
 His hack has been implemented into this repository:
 
