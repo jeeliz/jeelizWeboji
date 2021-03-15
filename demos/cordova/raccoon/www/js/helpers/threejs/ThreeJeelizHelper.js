@@ -39,7 +39,7 @@ THREE.JeelizHelper = (function(){
   }; //end _settings
 
   //PRIVATE VARS :
-  var _nMorphs = JEEFACETRANSFERAPI.get_nMorphs();
+  var _nMorphs = JEELIZFACEEXPRESSIONS.get_nMorphs();
   var _ThreeRenderer, _DOMcanvas, _ThreeScene, _ThreeCamera, _ThreeMorphAnimMesh = false, _ThreeAmbientLight, _ThreeDirLight;
   var _assetsParentPath, _isFaceDetected = false;
 
@@ -70,7 +70,7 @@ THREE.JeelizHelper = (function(){
       return;
     }
     const dt = Math.min(Math.max(t-_prevT, 5), 30); //in ms
-    const rotation = JEEFACETRANSFERAPI.get_rotationStabilized();
+    const rotation = JEELIZFACEEXPRESSIONS.get_rotationStabilized();
     _ThreeMorphAnimMesh.rotation.fromArray(rotation);
     
     //apply these kinematic formulas :
@@ -215,12 +215,12 @@ THREE.JeelizHelper = (function(){
     
         mesh.rotation.order = _settings.rotationOrder; //default : XYZ
         _ThreeMorphAnimMesh = mesh;
-        const morphTargetInfluencesDst = JEEFACETRANSFERAPI.get_morphTargetInfluencesStabilized();
+        const morphTargetInfluencesDst = JEELIZFACEEXPRESSIONS.get_morphTargetInfluencesStabilized();
           
         //_ThreeMorphAnimMesh.morphTargetInfluences=morphTargetInfluencesDst;
         _ThreeMorphAnimMesh.userData.morphJeelizInfluences=morphTargetInfluencesDst;
 
-        JEEFACETRANSFERAPI.on_detect(function(isDetected){
+        JEELIZFACEEXPRESSIONS.on_detect(function(isDetected){
           _isFaceDetected = isDetected;
         });
 
@@ -249,20 +249,20 @@ THREE.JeelizHelper = (function(){
       if (!spec) var spec = {};
       _assetsParentPath = (spec.assetsParentPath) ? spec.assetsParentPath : './';
       
-      //init JEEFACETRANSFERAPI
-      JEEFACETRANSFERAPI.init({
+      //init JEELIZFACEEXPRESSIONS
+      JEELIZFACEEXPRESSIONS.init({
         canvasId: spec.canvasId,
         NNCPath: (spec.NNCPath) ? spec.NNCPath : './',
         videoSettings: (spec.videoSettings) ? spec.videoSettings : null,
         callbackReady: function(errCode){
           if (errCode){
-            console.log('ERROR - cannot init JEEFACETRANSFERAPI. errCode =', errCode);
+            console.log('ERROR - cannot init JEELIZFACEEXPRESSIONS. errCode =', errCode);
             if (spec.errorCallback){
               spec.errorCallback(errCode);
             }
             return;
           }
-          console.log('INFO : JEEFACETRANSFERAPI is ready !!!');
+          console.log('INFO : JEELIZFACEEXPRESSIONS is ready !!!');
             
           _state = _states.jeefacetransferInitialized;
           init_three(spec.canvasThreeId);
@@ -364,13 +364,13 @@ THREE.JeelizHelper = (function(){
         if (  _state===_states.idle
           || (_state===_states.loading && _loading.state===_state.idle)){
           _state=_states.animate;
-          JEEFACETRANSFERAPI.switch_sleep(false);
+          JEELIZFACEEXPRESSIONS.switch_sleep(false);
           start_animate();
         }
       },
 
       'stop': function(){
-        JEEFACETRANSFERAPI.switch_sleep(true);
+        JEELIZFACEEXPRESSIONS.switch_sleep(true);
         if (_animationHandler){
           cancelAnimationFrame(_animationHandler);
           _animationHandler = false;

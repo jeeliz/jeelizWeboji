@@ -31,15 +31,15 @@ var JeelizWebojiSVGHelper=(function(){
     //private functions :
     function callbackReady(errCode){
         if (errCode){
-            console.log('ERROR in JeelizWebojiSVGHelper - CANNOT INITIALIZE JEEFACETRANSFERAPI : errCode =', errCode);
+            console.log('ERROR in JeelizWebojiSVGHelper - CANNOT INITIALIZE JEELIZFACEEXPRESSIONS : errCode =', errCode);
             return;
         }
-        console.log('INFO : JEEFACETRANSFERAPI is ready !!!');
-        _morphFactorsArr=JEEFACETRANSFERAPI.get_morphTargetInfluencesStabilized();
+        console.log('INFO : JEELIZFACEEXPRESSIONS is ready !!!');
+        _morphFactorsArr=JEELIZFACEEXPRESSIONS.get_morphTargetInfluencesStabilized();
         if (_rotationCallback){
-            _rotation=JEEFACETRANSFERAPI.get_rotation();
+            _rotation=JEELIZFACEEXPRESSIONS.get_rotation();
         }
-        JEEFACETRANSFERAPI.set_morphUpdateCallback(onMorphUpdate);
+        JEELIZFACEEXPRESSIONS.set_morphUpdateCallback(onMorphUpdate);
     }
 
     function onMorphUpdate(quality, benchmarkCoeff){
@@ -112,7 +112,7 @@ var JeelizWebojiSVGHelper=(function(){
                  permut(_morphIndexToName, 8,9);
              }
 
-             JEEFACETRANSFERAPI.init({
+             JEELIZFACEEXPRESSIONS.init({
                 canvasId: spec.canvasId,
                 NNCPath: (spec.NNCPath)?spec.NNCPath:'./',
                 callbackReady: callbackReady

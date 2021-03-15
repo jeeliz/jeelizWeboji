@@ -1,0 +1,212 @@
+body,
+input,
+button {
+    font-size: 1.6vw;
+    margin: 0;
+    font-family: Sans-Serif;
+}
+@media(max-width: 1024px) {
+    body,
+    input,
+    button {
+        font-size: 1em;
+    }
+}
+input:focus,
+button:focus {
+    outline:0;
+}
+input[type=text] {
+    border: none;
+    border-bottom: solid 2px #4c4c4f;
+    font-size: 1em;
+    background-color: transparent;
+    color: #fff;
+    padding: .4em 0;
+    margin: 2ex 0;
+    width: 100%;
+    max-width: 18em;
+    display: block;
+}
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.call-exit-button,
+.hangup-button,
+.audio-button-true,
+.audio-button-false,
+.video-button-true,
+.video-button-false,
+.fullscreen-button {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background: rgba(44, 44, 44, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    box-shadow: .2ex .2ex 1.5em #444;
+    transition: all .2s ease-out;
+    margin: 0 .4em;
+    cursor: pointer;
+}
+.call-exit-button:hover,
+.hangup-button:hover,
+.audio-button-true:hover,
+.audio-button-false:hover,
+.video-button-true:hover,
+.video-button-false:hover,
+.fullscreen-button:hover {
+    box-shadow: .4ex .4ex 3em #666;
+    background: rgba(64, 124, 247, 1)
+}
+.you-left,
+.remote-left,
+.hangup-button,
+.audio-button-true .on,
+.video-button-true .on,
+.video-button-false .off,
+.fullscreen-button .on,
+.room-occupied {
+	display: none;
+}
+:-webkit-full-screen .fullscreen-button .on {
+    display: block;
+}
+:-moz-full-screen .fullscreen-button .on {
+    display: block;
+}
+:-ms-fullscreen .fullscreen-button .on {
+    display: block;
+}
+:fullscreen .fullscreen-button .on { /* spec */
+    display: block;
+}
+:-webkit-full-screen .fullscreen-button .off {
+    display: none;
+}
+:-moz-full-screen .fullscreen-button .off {
+    display: none;
+}
+:-ms-fullscreen .fullscreen-button .off {
+    display: none;
+}
+:fullscreen .fullscreen-button .off { /* spec */
+    display: none;
+}
+/* deeper elements */
+:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+}
+.guest-hangup + .auth .you-left {
+    display: inline;
+}
+.full .room-occupied,
+.host-hangup + .auth .remote-left,
+.recent-room {
+	display: block;
+}
+.recent-room {
+    color: #4285F4;
+    margin: 1ex 1em;
+}
+.remote-video {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    /* JEELIZ: replace object-fit cover by contain */
+    object-fit: contain;
+}
+.local-video {
+    max-height: 100%;
+    max-width: 100%;
+    /* JEELIZ: replace object-fit cover by contain */
+    object-fit: contain;
+    transition: all .3s;
+}
+.established .local-video {
+	margin: 10px;
+    max-height: 17%;
+    max-width: 17%;
+    height: auto;
+    width: auto;
+}
+.media-bridge,
+.local-video,
+.remote-video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.auth {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+.primary-button {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #4285F4;
+    border: none;
+    color: white;
+    font-size: 0.8em;
+    margin: 0 5px 20px 5px;
+    width: 8em;
+    line-height: 3ex;
+    padding: 1ex 0.7em;
+    text-align: center;
+    -webkit-box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+    box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+}
+.media-controls {
+    display: flex;
+    margin: 2ex 0;
+    justify-content: center;
+    left: 0;
+    right: 0;
+}
+.svg {
+    width: 1.4em;
+}
+.room-occupied,
+.request-access,
+.waiting,
+.request-access,
+.grant-access,
+.waiting {
+    overflow: hidden;
+    padding: 0 1em;
+    box-sizing: border-box;
+    width: 100%;
+    background: rgba(0, 0, 0, .8);
+    /* Initially we don't want any height, and we want the contents to be hidden */
+    max-height: 0;
+    transition: max-height .3s ease;
+}
+.full + .auth .room-occupied,
+.guest-hangup + .auth .request-access,
+.join + .auth .request-access,
+.approve + .auth .grant-access {
+    transition-delay: .3s;
+    /* Set the max-height to something large. In this case there's an obvious limit. */
+    max-height: 20ex;
+}
+.host-hangup + .auth .waiting,
+.create + .auth .waiting {
+    /* Set the max-height to something large. In this case there's an obvious limit. */
+    max-height: 20ex;
+}
+.established + .auth .hangup-button {
+    display: flex;
+}

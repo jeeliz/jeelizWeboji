@@ -1,19 +1,30 @@
+/* eslint-disable */
+
 /*
 Helper for THREE.JS
 it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.js
 */
-"use strict";
+import * as THREE from 'three';
+
+
+// import main library:
+import JEELIZFACEEXPRESSIONS from './jeelizFaceTransfer.module.js';
+
+// import helpers:
+import ThreeMorphAnimGeomBuilder from './ThreeMorphAnimGeomBuilder.module.js';
+import ThreeMorphFlexibleMaterialBuilder from './ThreeMorphFlexibleMaterialBuilder.module.js';
+
 
 /*
   spec of JeelizWebojiThreeHelper.init:
-    - <string> canvasThreeId: id of the canvas with the THREE.js 3D Weboji rendering
-    - <string> canvasId: id of the JEEFACETRANSFER canvas
+    - <HTMLCanvasElement> canvasThree: id of the canvas with the THREE.js 3D Weboji rendering
+    - <HTMLCanvasElement> canvas: id of the JEEFACETRANSFER canvas
 
     - <function> successCallback: launched when all is ready
     - <function> errorCallback: launched if an error happens
 
     - <string> assetsParentPath: string, path where assets are
-    - <string> NNCPath: string, where to find the dist/jeelizFaceTransferNNC.json
+    - <object> NN: neural network, typically jeelizFaceTransferNNC.json
 
     - <string> meshURL: url of the mesh
     - <dict> matParams: parameters of the material
@@ -22,7 +33,7 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
     - <float> scale: scale of the mesh (default: 1)
 */
 
-var JeelizWebojiThreeHelper = (function(){
+const JeelizWebojiThreeHelper = (function(){
   // INTERNAL SETTINGS:  
   const _settings = {
     // THREE LIGHTS:
@@ -121,9 +132,9 @@ var JeelizWebojiThreeHelper = (function(){
   }
 
   // init the THREE.JS scene:
-  function init_three(canvasThreeId) {
+  function init_three(canvasThree) {
      
-    _DOMcanvas = document.getElementById(canvasThreeId);
+    _DOMcanvas = canvasThree;
     _three.renderer = new THREE.WebGLRenderer({
       'antialias': true,
       'canvas': _DOMcanvas,
@@ -266,9 +277,9 @@ var JeelizWebojiThreeHelper = (function(){
       
       // init JEELIZFACEEXPRESSIONS:
       JEELIZFACEEXPRESSIONS.init({
-        canvasId: spec.canvasId,
-        NNCPath: (spec.NNCPath) ? spec.NNCPath : './',
-        videoSettings: (spec.videoSettings) ? spec.videoSettings : null,
+        canvas: spec.canvas,
+        NNC: spec.NN,
+        videoSettings: spec.videoSettings,
         callbackReady: function(errCode){
           if (errCode){
             console.log('ERROR: cannot init JEELIZFACEEXPRESSIONS. errCode =', errCode);
@@ -280,7 +291,7 @@ var JeelizWebojiThreeHelper = (function(){
           console.log('INFO: JEELIZFACEEXPRESSIONS is ready!');
             
           _state = _states.jeefacetransferInitialized;
-          init_three(spec.canvasThreeId);
+          init_three(spec.canvasThree);
           _state = _states.threeInitialized;
           _state = _states.idle;
           that.ready = true;
@@ -288,7 +299,8 @@ var JeelizWebojiThreeHelper = (function(){
           const start = function(){
             that.set_positionScale((spec.position) ? spec.position : [0,0,0], (spec.scale) ? spec.scale : 1);
             if (spec.successCallback){
-              spec.successCallback();
+              const videoElement = JEELIZFACEEXPRESSIONS.get_video();
+              spec.successCallback(videoElement);
             }
             that.animate();
           }
@@ -407,3 +419,5 @@ var JeelizWebojiThreeHelper = (function(){
   } //end that
   return that;
 })();
+
+export default JeelizWebojiThreeHelper;

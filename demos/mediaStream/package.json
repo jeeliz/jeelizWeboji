@@ -1,0 +1,45 @@
+{
+  "name": "weboji-webrtc-video-room",
+  "version": "2.0.3",
+  "description": "Video Room is a Single-Page App in React using React Router that provides peer-to-peer video and audio communication in a web browser with minimum dependencies required. Each video is replaced by a talking raccoon.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dondido/webrtc-video-room.git"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "postinstall": "webpack --mode production"
+  },
+  "author": "Xavier Bourry and Dian Dimitrov",
+  "keywords": [
+    "WebRTC Video Chat",
+    "RTCPeerConnection",
+    "React"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-dom": ">=16.7.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.1.1",
+    "three": "^0.126.1"
+  }
+}

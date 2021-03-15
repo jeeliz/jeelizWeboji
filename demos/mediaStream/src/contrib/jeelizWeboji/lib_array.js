@@ -1,6 +1,4 @@
-"use strict";
-
-var lib_array = {
+const lib_array = {
   create: function(a, n){
     const r = new Array(n);
     for (let i=0; i<n; ++i) {
@@ -37,3 +35,4 @@ var lib_array = {
     }
   }
 };
+export default lib_array;

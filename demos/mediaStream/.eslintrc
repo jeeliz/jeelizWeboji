@@ -1,0 +1,17 @@
+{
+  //"extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+  	"linebreak-style": 0,
+  	"no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+  	"comma-dangle": ["error", "never"]
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "localStorage": true
+  }
+}

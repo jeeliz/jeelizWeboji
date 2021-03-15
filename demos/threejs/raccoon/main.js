@@ -9,7 +9,7 @@ function main(){
     assetsParentPath: '../../../assets/3D/',
     NNCPath: '../../../dist/',
 
-    //FOX :
+    // RACCOON:
     meshURL: 'meshes/fox11_v0.json',
     matParameters: {
       diffuseMapURL: 'textures/Fox_albedo.png',
@@ -17,7 +17,7 @@ function main(){
       flexMapURL: 'textures/Fox_flex.png'
     }, //*/
 
-    //HUMAN CREEPY FACE :
+    // HUMAN CREEPY FACE:
     /*meshURL: 'meshes/faceCustom11_v0.json',
     matParameters: {
       diffuseMapURL: 'textures/skin.jpg'

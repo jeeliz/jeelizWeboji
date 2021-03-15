@@ -47,7 +47,7 @@ The computing power of your GPU is important. If your GPU is powerful, many dete
 ## Architecture
 
 * `/assets/`: assets, both for 3D and 2D demonstrations (3D meshes, images),
-* `/demos/`: the most interesting: the demos !,
+* `/demos/`: the most interesting: the demos!,
 * `/dist/`: heart of the library:
   * `jeelizFaceTransfer.js`: main minified script. It gets the camera video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
   * `jeelizFaceTransferNNC.json`: neural network model loaded by the main script,
@@ -76,6 +76,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * **Cute raccoon**: [source code and instruction to build and run it](/demos/cordova/raccoon) This demo works as a native application using Apache Cordova. It has been tested successfully on iOS. The base code is the same than the THREE.js raccoon demo.
 
+* In [/demos/mediaStream](/demos/mediaStream), you can run a demo built in a modern JavaScript environment (React, Webpack, NPM) where multiple animated 3D raccoons can communicate together.
+
 
 * Third party demos:
 
@@ -90,7 +92,7 @@ All the following demos are included in this repository, in the `/demos` path. Y
   * **Expressions reader**, by [Abhilash26](https://github.com/abhilash26) aka [Dinodroid](https://ko-fi.com/dinodroid): detects 5 high level expressions (happiness, fear, anger, surprise, sadness) from the morph coefficients given by this lib, and display them as smileys. You can try it here: [emotion-reader.glitch.me](https://emotion-reader.glitch.me/) or [browse the source code](https://github.com/abhilash26/emotion-reader)
 
 
-If you have made an application or a fun demonstration using this library, we would love to check it out and add a link here ! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
+If you have made an application or a fun demonstration using this library, we would love to check it out and add a link here! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
 
 
 #### Run locally
@@ -116,6 +118,7 @@ If you have not bought a camera yet, a screenshot video of the Cartman Demo is a
 
 
 #### Using module
+
 `/dist/jeelizFaceTransfer.module.js` is exactly the same as `/dist/jeelizFaceTransfer.js` except that it works as JavaScript module, so you can import it directly using:
 
 ```javascript
@@ -136,6 +139,7 @@ There is no demo using the module version yet.
 ## Integration
 
 ### With a bundler
+
 If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [module version](#using-module).
 
 Then, with the standard library, we load the neural network model (specified by `NNCPath` provided as initialization parameter) using AJAX for the following reasons:
@@ -155,6 +159,7 @@ faceTransferAPI.init({
 ```
 
 ### With JavaScript frontend frameworks
+
 We don't cover here the integration with mainstream JavaScript frontend frameworks (*React*, *Vue*, *Angular*).
 If you submit Pull Request adding the boilerplate or a demo integrated with specific frameworks, you are welcome and they will be accepted of course.
 We can provide this kind of integration as a specific development service ( please contact us [here](https://jeeliz.com/contact-us/) ). But it is not so hard to do it by yourself. Here is a bunch of submitted issues dealing with *React* integration. Most of them are for [Jeeliz FaceFilter](https://github.com/jeeliz/jeelizFaceFilter), but the problem is similar:
@@ -197,10 +202,12 @@ The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the 
 
 
 ## About the tech
-### Under the hood
-The heart of the lib is `JEEFACETRANSFERAPI`. It is implemented by `/dist/jeelizFaceTransfer.js` script. It relies on Jeeliz WebGL Deep Learning technology to detect and track the user's face using a deep learning network, and to simultaneously evaluate the expression factors. The accuracy is adaptative: the best is the hardware, the more detections are processed per second. All is done client-side.
 
-The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PDF file, [/doc/jeefacetransferAPI.pdf](/doc/jeefacetransferAPI.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API:
+### Under the hood
+
+The heart of the lib is `JEELIZFACEEXPRESSIONS`. It is implemented by `/dist/jeelizFaceTransfer.js` script. It relies on Jeeliz WebGL Deep Learning technology to detect and track the user's face using a deep learning network, and to simultaneously evaluate the expression factors. The accuracy is adaptative: the best is the hardware, the more detections are processed per second. All is done client-side.
+
+The documentation of `JEELIZFACEEXPRESSIONS` is included in this repository as a PDF file, [/doc/jeelizFaceExpressions.pdf](/doc/jeelizFaceExpressions.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API:
 
 * 0:  smileRight &rarr; closed mouth smile right
 * 1:  smileLeft  &rarr; closed mouth smile left
@@ -217,6 +224,7 @@ The documentation of `JEEFACETRANSFERAPI` is included in this repository as a PD
 
 
 ### Compatibility
+
 * If `WebGL2` is available, it uses `WebGL2` and no specific extension is required,
 * If `WebGL2` is not available but `WebGL1`, we require either `OES_TEXTURE_FLOAT` extension or `OES_TEXTURE_HALF_FLOAT` extension,
 * If `WebGL2` is not available, and if `WebGL1` is not available or neither `OES_TEXTURE_FLOAT` or `OES_HALF_TEXTURE_FLOAT` are implemented, the user is not compatible.
@@ -233,26 +241,22 @@ This library works quite everywhere, and it works very well with a high end devi
 
 
 ## Documentation
- ### Documentation
 
- * `JEEFACETRANSFERAPI`: All the helpers rely on this API to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeefacetransferAPI.pdf),
- * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Raccoon demo
-
-
- ### Articles and tutorials
- We list articles and tutorials about using this library:
-
- * [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
- * [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
+* `JEELIZFACEEXPRESSIONS`: All the helpers rely on this API to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeelizFaceExpressions.pdf),
+* [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Raccoon demo
+* [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
+* [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
 
 
 ## License
+
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
 We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
 
 
 ## References
+
 * [Jeeliz official website](https://jeeliz.com)
 * [Three.JS official website with documentation, demos, examples...](https://threejs.org/)
 * [Webgl Academy: tutorials about WebGL and THREE.JS](http://www.webglacademy.com)
