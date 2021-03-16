@@ -129,7 +129,9 @@ input[type=text] {
     transition: all .3s;
 }
 .established .local-video {
-	margin: 10px;
+    /* JEELIZ: hide user own weboji since we already display video feedback*/
+    display: none;
+    margin: 10px;
     max-height: 17%;
     max-width: 17%;
     height: auto;
