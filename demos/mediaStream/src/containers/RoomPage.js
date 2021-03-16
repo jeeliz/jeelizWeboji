@@ -17,9 +17,13 @@ class RoomPage extends Component {
     // We now use it to also initialize WEBOJI and construct a new video stream
     // using user audio and the video from the canvas
     
+    // compute the canvas resolution:
+    let cvResolution = Math.min(window.innerWidth, window.innerHeight);
+    cvResolution *= (window.devicePixelRatio || 1);
+
     // create the new canvas:          
     const cv = document.createElement('canvas');
-    cv.width = cv.height = 512
+    cv.width = cv.height = cvResolution
 
     this.getUserMedia = new Promise((accept, reject) => {
       const cvCompute = document.createElement('canvas');
@@ -47,6 +51,15 @@ class RoomPage extends Component {
           // for debug: append user camera video in the DOM:
           //document.body.appendChild(videoElement);
           
+          // append the feedback video canvas to the DOM:
+          
+          document.body.appendChild(cvCompute);
+          cvCompute.style.position = 'fixed';
+          cvCompute.style.top = '0';
+          cvCompute.style.right = '0';
+          cvCompute.style.maxWidth = '33vmin';
+          cvCompute.style.borderRadius = '0px 0px 0px 20px';
+
           // extract mediaStream:
           const originalUserMedia = videoElement.srcObject;
 
@@ -62,10 +75,13 @@ class RoomPage extends Component {
           const stream = new MediaStream([canvasVideoTrack, audioTrack]);
           accept(stream);
         },
-        errorCallback: reject,
+        errorCallback: (err) => {
+          alert('CANNOT INIT WEBOJI: ' + err);
+          reject(err);
+        },
 
-        position: [0, -80, 0],
-        scale: 1.2
+        position: [0, -60, 0],
+        scale: 1.1
       })
     })
 

@@ -11,7 +11,8 @@
     "start": "node server.js",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "postinstall": "webpack --mode production"
+    "postinstall": "webpack --mode production",
+    "startProd": "NODE_ENV=production node server.js"
   },
   "author": "Xavier Bourry and Dian Dimitrov",
   "keywords": [
