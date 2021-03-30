@@ -20,13 +20,13 @@ function main(){
   JeelizWebojiSVGHelper.init({
     canvasId: 'jeefacetransferCanvas',
     NNCPath: '../../dist/',
-    hysteresis: 0.1, //bonus score for already selected expression. Against flickering
+    hysteresis: 0.1, // bonus score for already selected expression. Against flickering
     isMirror: true,
 
-    expressions: [ //list of uncorrelated expressions (for example the mouth is uncorrelated with the right eye)
-      { //mouth. Inside a group each expression is an exclusive choice
-        //the key of an expression is its CSS class. the value is the score class
-        //the chosen expression is the one which has the higher score
+    expressions: [ // list of uncorrelated expressions (for example the mouth is uncorrelated with the right eye)
+      { // mouth. Inside a group each expression is an exclusive choice
+        // the key of an expression is its CSS class. the value is the score class
+        // the chosen expression is the one which has the higher score
         /*
         All factors are between 0 and 1. names:
           smileRight -> closed mouth smile right
@@ -42,7 +42,7 @@ function main(){
           mouthNasty   -> mouth nasty (upper lip raised)
         */
         svgMouthRound: function(ks){
-           return 0.8 * ks.mouthRound - 0.1 * ks.mouthOpen;
+           return 0.7 * ks.mouthRound - 0.1 * ks.mouthOpen - 0.1;
         },
 
         svgMouthOpen: function(ks){
