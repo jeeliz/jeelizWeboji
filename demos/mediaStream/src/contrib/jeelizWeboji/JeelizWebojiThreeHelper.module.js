@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 
 // import main library:
-import JEELIZFACEEXPRESSIONS from './jeelizFaceTransfer.module.js';
+import JEELIZFACEEXPRESSIONS from './jeelizFaceExpressions.module.js';
 
 // import helpers:
 import ThreeMorphAnimGeomBuilder from './ThreeMorphAnimGeomBuilder.module.js';
@@ -18,7 +18,7 @@ import ThreeMorphFlexibleMaterialBuilder from './ThreeMorphFlexibleMaterialBuild
 /*
   spec of JeelizWebojiThreeHelper.init:
     - <HTMLCanvasElement> canvasThree: id of the canvas with the THREE.js 3D Weboji rendering
-    - <HTMLCanvasElement> canvas: id of the JEEFACETRANSFER canvas
+    - <HTMLCanvasElement> canvas: id of the Jeeliz Face expressions canvas
 
     - <function> successCallback: launched when all is ready
     - <function> errorCallback: launched if an error happens

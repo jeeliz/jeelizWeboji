@@ -7,30 +7,30 @@
 
     <title>WEBOJI THREEJS TUTORIAL</title>
     
-    <!-- FACETRANSFER LIB : DETECT FACIAL EXPRESSIONS : -->
-    <script src="../../../dist/jeelizFaceTransfer.js"></script>
+    <!-- FACEEXPRESSIONS LIB: DETECT FACIAL EXPRESSIONS: -->
+    <script src="../../../dist/jeelizFaceExpressions.js"></script>
     
-    <!-- THREE.JS : -->
+    <!-- THREE.JS: -->
     <script src="../../../libs/threejs/v93/three.min.js"></script>
 
-    <!-- CUSTOM SMALL LIBS : -->
+    <!-- CUSTOM SMALL LIBS: -->
     <script src="../../../libs/custom/lib_ajax.js"></script>
     <script src="../../../libs/custom/lib_array.js"></script>
     
-    <!-- THREE.JS WEBOJI HELPER : -->
-    <!-- main helper : -->
+    <!-- THREE.JS WEBOJI HELPER: -->
+    <!-- main helper: -->
     <script src="../../../helpers/threejs/JeelizWebojiThreeHelper.js"></script> 
-    <!-- required to import the 3D model : -->
+    <!-- required to import the 3D model: -->
     <script src="../../../helpers/threejs/ThreeMorphAnimGeomBuilder.js"></script>
-    <!-- required to add a material both flexible and with many morphs : -->
+    <!-- required to add a material both flexible and with many morphs: -->
     <script src="../../../helpers/threejs/ThreeMorphFlexibleMaterialBuilder.js"></script>
     
-    <!-- MAIN DEMO SCRIPT WITH main() FUNC : -->
+    <!-- MAIN DEMO SCRIPT WITH main() FUNC: -->
     <script src="main.js"></script>
 
     <style type='text/css'>
       body {background-color: white; margin: 0}
-      .jeefacetransferCanvas {
+      #jeelizFaceExpressionsCanvas {
         z-index: 20;
         position: absolute; 
         bottom: 0px; left: 0px;
@@ -48,9 +48,9 @@
     </style>
   </head>
   <body onload="main()">
-    <!-- CANVAS WITH THE USER FACE : -->
-    <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
-    <!-- CANVAS WITH THE WEBOJI : -->
+    <!-- CANVAS WITH THE USER FACE: -->
+    <canvas id='jeelizFaceExpressionsCanvas'></canvas>
+    <!-- CANVAS WITH THE WEBOJI: -->
     <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
   </body>
 </html>

@@ -8,7 +8,7 @@
     <title>WEBOJI SVG DEMO</title>
     
     <!-- FACETRASFER LIB : DETECT FACIAL EXPRESSIONS : -->
-    <script src="../../dist/jeelizFaceTransfer.js"></script>
+    <script src="../../dist/jeelizFaceExpressions.js"></script>
     
     <!-- SVG WEBOJI HELPER : -->
     <!-- main helper : -->
@@ -23,7 +23,7 @@
 
     <style type='text/css'>
       body {background-color: white; margin: 0;}
-      .jeefacetransferCanvas {
+      #jeelizFaceExpressionsCanvas {
         z-index: 20;
         position: fixed; 
         bottom: 0px; left: 0px;
@@ -92,7 +92,7 @@
   </head>
   <body onload="main()">
     <!-- CANVAS WITH THE USER FACE : -->
-    <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
+    <canvas id='jeelizFaceExpressionsCanvas'></canvas>
 
     <!-- SVG IMAGE : -->
     <!-- this tool is handy to design SVG online : http://editor.method.ac/ -->

@@ -7,13 +7,13 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
 /*
   spec of JeelizWebojiThreeHelper.init:
     - <string> canvasThreeId: id of the canvas with the THREE.js 3D Weboji rendering
-    - <string> canvasId: id of the JEEFACETRANSFER canvas
+    - <string> canvasId: id of the Jeeliz Face Expressions canvas
 
     - <function> successCallback: launched when all is ready
     - <function> errorCallback: launched if an error happens
 
     - <string> assetsParentPath: string, path where assets are
-    - <string> NNCPath: string, where to find the dist/jeelizFaceTransferNNC.json
+    - <string> NNCPath: string, where to find the dist/jeelizFaceExpressionsNNC.json
 
     - <string> meshURL: url of the mesh
     - <dict> matParams: parameters of the material
@@ -53,7 +53,7 @@ var JeelizWebojiThreeHelper = (function(){
 
   const _states = { // all possibles states (ENUM like)
     notLoaded:-10,
-    jeefacetransferInitialized: -9,
+    jeelizFaceExpressionsInitialized: -9,
     threeInitialized: -8,
     loading: -1,
     idle: 0,
@@ -279,7 +279,7 @@ var JeelizWebojiThreeHelper = (function(){
           }
           console.log('INFO: JEELIZFACEEXPRESSIONS is ready!');
             
-          _state = _states.jeefacetransferInitialized;
+          _state = _states.jeelizFaceExpressionsInitialized;
           init_three(spec.canvasThreeId);
           _state = _states.threeInitialized;
           _state = _states.idle;

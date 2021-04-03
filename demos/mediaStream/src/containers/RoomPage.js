@@ -6,7 +6,7 @@ import store from '../store'
 import io from 'socket.io-client'
 
 import webojiThreeHelper from '../contrib/jeelizWeboji/JeelizWebojiThreeHelper.module.js'
-import NN from '../contrib/jeelizWeboji/jeelizFaceTransferNNC.json'
+import NN from '../contrib/jeelizWeboji/jeelizFaceExpressionsNNC.json'
 
 
 class RoomPage extends Component {

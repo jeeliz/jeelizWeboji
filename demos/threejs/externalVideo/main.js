@@ -15,7 +15,7 @@ function main(){
 function start(videoElement){
   JeelizWebojiThreeHelper.init({
     canvasThreeId: 'webojiCanvas',
-    canvasId: 'jeefacetransferCanvas',
+    canvasId: 'jeelizFaceExpressionsCanvas',
 
     assetsParentPath: '../../../assets/3D/',
     NNCPath: '../../../dist/',

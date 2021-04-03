@@ -49,8 +49,8 @@ The computing power of your GPU is important. If your GPU is powerful, many dete
 * `/assets/`: assets, both for 3D and 2D demonstrations (3D meshes, images),
 * `/demos/`: the most interesting: the demos!,
 * `/dist/`: heart of the library:
-  * `jeelizFaceTransfer.js`: main minified script. It gets the camera video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
-  * `jeelizFaceTransferNNC.json`: neural network model loaded by the main script,
+  * `jeelizFaceExpressions.js`: main minified script. It gets the camera video feed, exploit the neural network to detect the face and the expressions and stabilize the result,
+  * `jeelizFaceExpressionsNNC.json`: neural network model loaded by the main script,
 * `/doc/`: some additionnal documentation,
 * `/helpers/`: The outputs of the main script are very raw. It is convenient to use these helpers to animate a 3D model with the THREE.js helper or a SVG file with the SVG helper. All demos use these helpers,
 * `/libs/`: some javascript libs,
@@ -119,16 +119,16 @@ If you have not bought a camera yet, a screenshot video of the Cartman Demo is a
 
 #### Using module
 
-`/dist/jeelizFaceTransfer.module.js` is exactly the same as `/dist/jeelizFaceTransfer.js` except that it works as JavaScript module, so you can import it directly using:
+`/dist/jeelizFaceExpressions.module.js` is exactly the same as `/dist/jeelizFaceExpressions.js` except that it works as JavaScript module, so you can import it directly using:
 
 ```javascript
-import 'dist/jeelizFaceTransfer.module.js'
+import 'dist/jeelizFaceExpressions.module.js'
 ```
 
 or using `require`:
 
 ```javascript
-const faceTransfer = require('./lib/jeelizFaceTransfer.module.js')
+const faceExpressions = require('./lib/jeelizFaceExpressions.module.js')
 //...
 ```
 
@@ -143,16 +143,17 @@ There is no demo using the module version yet.
 If you use this library with a bundler (typically *Webpack* or *Parcel*), first you should use the [module version](#using-module).
 
 Then, with the standard library, we load the neural network model (specified by `NNCPath` provided as initialization parameter) using AJAX for the following reasons:
+
 * If the user does not accept to share its camera, or if WebGL is not enabled, we don't have to load the neural network model,
 * We suppose that the library is deployed using a static HTTPS server.
 
 With a bundler, it is a bit more complicated. It is easier to load the neural network model using a classical `import` or `require` call and to provide it using the `NNC` init parameter:
 
 ```javascript
-const faceTransferAPI = require('./lib/jeelizFaceTransfer.module.js')
-const neuralNetworkModel = require('./dist/jeelizFaceTransferNNC.json')
+const faceExpressions = require('./lib/jeelizFaceExpressions.module.js')
+const neuralNetworkModel = require('./dist/jeelizFaceExpressionsNNC.json')
 
-faceTransferAPI.init({
+faceExpressions.init({
   NNC: neuralNetworkModel, //instead of NNCPath
   //... other init parameters
 });
@@ -205,9 +206,9 @@ The neuron network JSON file is loaded using an ajax `XMLHttpRequest` after the 
 
 ### Under the hood
 
-The heart of the lib is `JEELIZFACEEXPRESSIONS`. It is implemented by `/dist/jeelizFaceTransfer.js` script. It relies on Jeeliz WebGL Deep Learning technology to detect and track the user's face using a deep learning network, and to simultaneously evaluate the expression factors. The accuracy is adaptative: the best is the hardware, the more detections are processed per second. All is done client-side.
+The heart of the lib is `JEELIZFACEEXPRESSIONS`. It is implemented by `/dist/jeelizFaceExpressions.js` script. It relies on Jeeliz WebGL Deep Learning technology to detect and track the user's face using a deep learning network, and to simultaneously evaluate the expression factors. The accuracy is adaptative: the best is the hardware, the more detections are processed per second. All is done client-side.
 
-The documentation of `JEELIZFACEEXPRESSIONS` is included in this repository as a PDF file, [/doc/jeelizFaceExpressions.pdf](/doc/jeelizFaceExpressions.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this API:
+The documentation of `JEELIZFACEEXPRESSIONS` is included in this repository as a PDF file, [/doc/jeelizFaceExpressions.pdf](/doc/jeelizFaceExpressions.pdf). In the main scripts of the demonstration, we never call these methods directly, but always through the helpers. Here is the indices of the morphs returned by this library:
 
 * 0:  smileRight &rarr; closed mouth smile right
 * 1:  smileLeft  &rarr; closed mouth smile left
@@ -242,7 +243,7 @@ This library works quite everywhere, and it works very well with a high end devi
 
 ## Documentation
 
-* `JEELIZFACEEXPRESSIONS`: All the helpers rely on this API to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeelizFaceExpressions.pdf),
+* `JEELIZFACEEXPRESSIONS`: All the helpers rely on this library to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeelizFaceExpressions.pdf),
 * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Raccoon demo
 * [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
 * [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)

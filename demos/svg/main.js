@@ -18,7 +18,7 @@ function main(){
   _SVGhead = document.getElementById('svgHead');
 
   JeelizWebojiSVGHelper.init({
-    canvasId: 'jeefacetransferCanvas',
+    canvasId: 'jeelizFaceExpressionsCanvas',
     NNCPath: '../../dist/',
     hysteresis: 0.1, // bonus score for already selected expression. Against flickering
     isMirror: true,

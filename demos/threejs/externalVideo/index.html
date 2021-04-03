@@ -8,7 +8,7 @@
         <title>WEBOJI THREE.JS RACCOON FROM EXT VIDEO DEMO</title>
         
         <!-- FACETRASFER LIB : DETECT FACIAL EXPRESSIONS : -->
-        <script src="../../../dist/jeelizFaceTransfer.js"></script>
+        <script src="../../../dist/jeelizFaceExpressions.js"></script>
         
         <!-- THREE.JS : -->
         <script src="../../../libs/threejs/v119/three.min.js"></script>
@@ -35,7 +35,7 @@
         <style type='text/css'>
             body {background-color: white; margin: 0;}
 
-            .jeefacetransferCanvas {
+            #jeelizFaceExpressionsCanvas {
               z-index: 20;
               position: fixed; 
               bottom: 0px; left: 0px;
@@ -56,7 +56,7 @@
         <video id='myVideo' style='display: none' src='video.mp4' playsinline preload autoplay loop></video>
 
         <!-- CANVAS WITH THE USER FACE : -->
-        <canvas class='jeefacetransferCanvas' id='jeefacetransferCanvas'></canvas>
+        <canvas id='jeelizFaceExpressionsCanvas'></canvas>
         <!-- CANVAS WITH THE WEBOJI : -->
         <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
     </body>

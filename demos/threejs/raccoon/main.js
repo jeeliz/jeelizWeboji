@@ -4,7 +4,7 @@
 function main(){
   JeelizWebojiThreeHelper.init({
     canvasThreeId: 'webojiCanvas',
-    canvasId: 'jeefacetransferCanvas',
+    canvasId: 'jeelizFaceExpressionsCanvas',
 
     assetsParentPath: '../../../assets/3D/',
     NNCPath: '../../../dist/',
