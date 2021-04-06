@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-EN" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TALKING BUDDY DEMO</title>
+    
+    <!-- FACETRASFER LIB : DETECT FACIAL EXPRESSIONS : -->
+    <script src="../../../dist/jeelizFaceExpressions.js"></script>
+    
+    <!-- THREE.JS : -->
+    <script src="../../../libs/three/v119/three.min.js"></script>
+
+    <!-- CUSTOM SMALL LIBS : -->
+    <script src="../../../libs/custom/lib_ajax.js"></script>
+    <script src="../../../libs/custom/lib_array.js"></script>
+    
+    <!-- THREE.JS WEBOJI HELPER : -->
+    <!-- main helper : -->
+    <script src="../../../helpers/three/JeelizWebojiThreeHelper.js"></script> 
+    <!-- required to import the 3D model : -->
+    <script src="../../../helpers/three/ThreeMorphAnimGeomBuilder.js"></script>
+    <!-- required to add a material both flexible and with many morphs : -->
+    <script src="../../../helpers/three/ThreeMorphFlexibleMaterialBuilder.js"></script>
+    
+    <!-- MAIN DEMO SCRIPT WITH main() FUNC : -->
+    <script src="main.js"></script>
+    
+    <style type='text/css'>
+    
+      body {background-color: white;
+        overflow: hidden;
+        background-image: url('background.jpg');
+        background-attachment: fixed;
+        background-position: 0;
+        background-size: cover;
+        margin: 0;}
+
+      #jeelizFaceExpressionsCanvas {
+        z-index: 20;
+        position: fixed; 
+        bottom: 0; left: 0;
+        max-height: 25vh;
+      }
+
+      .webojiCanvas {
+        z-index: 10;
+        position: fixed; 
+        max-height: 100%; max-width: 100%; left: 50%; top: 50%;
+        width: 100vmin;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body onload="main()">
+    <!-- CANVAS WITH THE USER FACE : -->
+    <canvas id='jeelizFaceExpressionsCanvas'></canvas>
+    <!-- CANVAS WITH THE WEBOJI : -->
+    <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
+  </body>
+</html>
+

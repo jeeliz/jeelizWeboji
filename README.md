@@ -8,11 +8,17 @@
 # JavaScript/WebGL library to detect and reproduce facial expressions
 
 
-With this library, you can build your own animated emoticon embedded in your web applications. The video is processed on client-side only.
+You can build your own animated emoticon embedded in your web application thanks to this library. The video is processed exclusively on the client-side.
 
-By default the current camera video feed is overlaid by the face detection frame. The face detection will adapt to all lighting conditions, but the evaluation of expressions can be noisy if the lighting is too high, too weak, or if there is backlighting. The camera feedback image is useful to see the quality of the input video feed.
+The computing power of your GPU is important. If your GPU is powerful, many detections per second will be processed and the result will be smooth and accurate.
 
-The computing power of your GPU is important. If your GPU is powerful, many detections per second will be processed and the result will be smooth and accurate. An old or low quality mobile device it may be slower.
+The face detection should work even if the lighting is not great. However, the better is the input image, the better is the face expressions detection. Here are some tips to get a good experience:
+
+* The face should be well enlighted: the nose, the eyes should be distinguishable,
+* Avoid backlighting: The background should be a wall, not a window,
+* The face should not be too far, neither too close to the camera: the face should ideally cover 1/3 of the camera height. It should be fully visible,
+* The camera should be placed in front of the user. A side view is not recommended,
+* Beards and mustaches can make mouth movement detection harder, and glasses can disturb eyes detection.
 
 
 ## Table of contents
@@ -65,8 +71,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
 * THREE.JS based demos:
 
-  * **Cute raccoon**: [source code](/demos/threejs/raccoon/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/raccoon/)
-  * **Cute raccoon from a MP4 video**: [source code](/demos/threejs/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/threejs/externalVideo/)
+  * **Cute raccoon**: [source code](/demos/three/raccoon/), [live demo](https://jeeliz.com/demos/weboji/demos/three/raccoon/)
+  * **Cute raccoon from a MP4 video**: [source code](/demos/three/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/three/externalVideo/)
 
 * SVG based demos:
 
@@ -168,7 +174,7 @@ We can provide this kind of integration as a specific development service ( plea
 * Angular integration: [Jeff Winder](https://www.linkedin.com/in/jeffwinder/) has integrated this library with Angular / Electron. His amazing work is published on Github here: [JeffWinder/jeelizWeboji-angular-electron-example](https://github.com/JeffWinder/jeelizWeboji-angular-electron-example),
 * React integration: [#74](https://github.com/jeeliz/jeelizFaceFilter/issues/74#issuecomment-455624092) and [#122](https://github.com/jeeliz/jeelizFaceFilter/issues/122#issuecomment-533185928)
 * [is it possible to use this library in react native project](https://github.com/jeeliz/jeelizFaceFilter/issues/21)
-* [Having difficulty using JeelizThreejsHelper in ReactApp](https://github.com/jeeliz/jeelizFaceFilter/issues/137)
+* [Having difficulty using JeelizThreeHelper in ReactApp](https://github.com/jeeliz/jeelizFaceFilter/issues/137)
 
 You can also take a look at these Github code repositories:
 * [ikebastuz/jeelizTest](https://github.com/ikebastuz/jeelizTest): React demo of a CSS3D FaceFilter. It is based on [Create React App](https://github.com/facebook/create-react-app)

@@ -141,8 +141,8 @@ var JeelizWebojiThreeHelper = (function(){
     _three.scene = new THREE.Scene();
     
     // debug: add a cube into the scene
-    /* const debugCube = new THREE.Mesh(new THREE.BoxGeometry(150,150,150), new THREE.MeshNormalMaterial({side: THREE.DoubleSide}));
-    _three.scene.add(debugCube); */
+    /*const debugCube = new THREE.Mesh(new THREE.BoxGeometry(150,150,150), new THREE.MeshNormalMaterial({side: THREE.DoubleSide}));
+    _three.scene.add(debugCube); //*/
 
     // add some lights:
     _three.ambientLight = new THREE.AmbientLight(0xffffff);
@@ -180,7 +180,7 @@ var JeelizWebojiThreeHelper = (function(){
 
   // load a weboji mesh:
   function load_model(url, mat, callback){
-    if (url===_loading.modelURL && mat===_loading.threeMat){ // called 2 times with same args
+    if (url === _loading.modelURL && mat === _loading.threeMat){ // called 2 times with same args
       return true;
     }
     
@@ -243,7 +243,12 @@ var JeelizWebojiThreeHelper = (function(){
         // The canvas is not visible because of a Safari DOM update problem.
         // So we append a random <div> to the DOM to force DOM refresh
         const uselessDiv = document.createElement('div');
+        uselessDiv.style.width = '10px';
+        uselessDiv.style.height = '10px';
+        uselessDiv.style.position='fixed';
+        uselessDiv.style.zIndex='100';
         document.body.appendChild(uselessDiv);
+        //uselessDiv.style.backgroundColor = 'lime';
         
       } //end successCallback
     }); //end ThreeMorphAnimGeomBuilder call
@@ -288,7 +293,7 @@ var JeelizWebojiThreeHelper = (function(){
           const start = function(){
             that.set_positionScale((spec.position) ? spec.position : [0,0,0], (spec.scale) ? spec.scale : 1);
             if (spec.successCallback){
-              spec.successCallback();
+              spec.successCallback(_three);
             }
             that.animate();
           }

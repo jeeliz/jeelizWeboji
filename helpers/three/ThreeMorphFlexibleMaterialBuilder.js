@@ -8,7 +8,21 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   let _nMorphs = matParameters.nMorphs;
   if (_nMorphs%2 !== 0) ++_nMorphs;
 
-  const threeMat = THREE.ShaderLib.phong; // also works with a standard material
+  let threeMat = null, isLights = true;
+  switch(matParameters.render){
+    case 'BASIC':
+      threeMat = THREE.ShaderLib.basic;
+      isLights = false;
+      break;
+    case 'STANDARD':
+      threeMat = THREE.ShaderLib.standard;
+      break;
+    case 'PHONG':
+    default:
+      threeMat = THREE.ShaderLib.phong; // also works with a standard material
+      break;
+  }
+  
   let vertexShaderSource = threeMat.vertexShader;
   let fragmentShaderSource = threeMat.fragmentShader;
 
@@ -101,7 +115,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     'fragmentShader': fragmentShaderSource,
     'uniforms': uniforms,
     'morphTargets': false,
-    'lights': true,
+    'lights': isLights,
     'side': THREE['DoubleSide'],
     'precision': 'highp'
   });
