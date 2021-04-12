@@ -98,7 +98,7 @@ All the following demos are included in this repository, in the `/demos` path. Y
   * **Expressions reader**, by [Abhilash26](https://github.com/abhilash26) aka [Dinodroid](https://ko-fi.com/dinodroid): detects 5 high level expressions (happiness, fear, anger, surprise, sadness) from the morph coefficients given by this lib, and display them as smileys. You can try it here: [emotion-reader.glitch.me](https://emotion-reader.glitch.me/) or [browse the source code](https://github.com/abhilash26/emotion-reader)
 
 
-If you have made an application or a fun demonstration using this library, we would love to check it out and add a link here! Just contact us on [Twitter @StartupJeeliz](https://twitter.com/StartupJeeliz) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
+If you have made an application or a fun demonstration using this library, we would love to check it out and add a link here! Just contact us on [Twitter @Jeeliz_AR](https://twitter.com/Jeeliz_AR) or [LinkedIn](https://www.linkedin.com/company/jeeliz).
 
 
 #### Run locally
