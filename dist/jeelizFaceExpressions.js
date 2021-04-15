@@ -1,7 +1,7 @@
  /**
  * Jeeliz Weboji - https://github.com/jeeliz/jeelizWeboji
  *
- * Copyright 2018 Jeeliz ( https://jeeliz.com )
+ * Copyright 2020 WebAR.rocks ( https://webar.rocks )
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
