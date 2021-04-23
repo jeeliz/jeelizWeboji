@@ -26,12 +26,12 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
   let vertexShaderSource = threeMat.vertexShader;
   let fragmentShaderSource = threeMat.fragmentShader;
 
-  const _rotMatrixDelayed = new THREE.Matrix4();
+  const _modelMatrixDelayed = new THREE.Matrix4();
   const _eulerDelayed = new THREE.Euler(0, 0, 0, rotationOrder);
 
   const uniforms = Object.assign({
     'modelMatrixDelayed': {
-      'value': _rotMatrixDelayed
+      'value': _modelMatrixDelayed
     },
     'morphJeelizPrecision': {
       'value': matParameters.morphPrecision
@@ -40,7 +40,7 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
       'value': matParameters.morphRadius
     },
     'morphJeelizInfluences': {
-      'value': lib_array.create(0,_nMorphs)
+      'value': new Float32Array(_nMorphs)
     }
   }, threeMat.uniforms);
 
@@ -125,11 +125,12 @@ function ThreeMorphFlexibleMaterialBuilder(matParameters, rotationOrder){
     mat[key] = matParameters[key];
   }
   
-  mat.set_rotationAmortized = function(position, scale, rotationAmortized){
+  mat.update_flex = function(parentWorldMatrix, position, scale, rotationAmortized){
     _eulerDelayed.fromArray(rotationAmortized);
-    _rotMatrixDelayed.makeRotationFromEuler(_eulerDelayed);
-    _rotMatrixDelayed.setPosition(position);
-    _rotMatrixDelayed.scale(scale);
+    _modelMatrixDelayed.makeRotationFromEuler(_eulerDelayed);
+    _modelMatrixDelayed.setPosition(position);
+    _modelMatrixDelayed.scale(scale);
+    _modelMatrixDelayed.premultiply(parentWorldMatrix);
   }
 
   return mat;

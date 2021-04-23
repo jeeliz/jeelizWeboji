@@ -8,15 +8,36 @@
 
 */
 "use strict";
-function ThreeMorphAnimGeomBuilder(spec){
+function ThreeMorphAnimGeomBuilder(specArg){
+  const spec = Object.assign({
+    morphPrecision: 2048,
+    nMorphs: 11,
+    mat: null,
+    successCallback: null,
+    url: null,
+    isUVFlipŶ: false,
+    basePositions: null
+  }, specArg);
+
   const _nMorphs = (spec.nMorphs%2===0) ? spec.nMorphs : spec.nMorphs + 1;
 
   lib_ajax.get(spec.url, function(data){
     const dataObj = JSON.parse(data);
     
-    const geom = new THREE.BufferGeometry();
-    const vertices = dataObj.base.vertices;
+    
+    const scaleEncoding = dataObj['scaleEncoding'] || 1;
+    let vertices = null, scaleEncodingBase = 1.0;
+    if (spec.basePositions){
+      vertices =  spec.basePositions;
+      scaleEncodingBase = 1.0;
+    } else {
+      vertices = dataObj['base']['vertices'];
+      scaleEncodingBase = scaleEncoding;
+    }
     const nVertices0 = vertices.length;
+
+    // construct geom:
+    const geom = new THREE.BufferGeometry();
 
     // Construct faces:
     const facesIndices = [],
@@ -38,7 +59,7 @@ function ThreeMorphAnimGeomBuilder(spec){
       }
     } //end duplicate_ifNecessary()
 
-    dataObj.base.faces.forEach(function(f){
+    dataObj['base']['faces'].forEach(function(f){
       let via = f[0][0];
       let vib = f[1][0];
       let vic = f[2][0];
@@ -67,9 +88,9 @@ function ThreeMorphAnimGeomBuilder(spec){
     // Construct base vertices:
     const vertices32 = new Float32Array(vertices.length*3);
     vertices.forEach(function(v, vi){
-      vertices32[3*vi] = v[0];
-      vertices32[3*vi+1] = v[1];
-      vertices32[3*vi+2] = v[2];
+      vertices32[3*vi] = v[0] / scaleEncodingBase;
+      vertices32[3*vi+1] = v[1] / scaleEncodingBase;
+      vertices32[3*vi+2] = v[2] / scaleEncodingBase;
     });
     geom.setAttribute('position', new THREE.BufferAttribute(vertices32, 3, false));
 
@@ -77,31 +98,34 @@ function ThreeMorphAnimGeomBuilder(spec){
     // Construct uvs:
     const uv32 = new Float32Array(vertices.length*2);
     uviByVertexIndex.forEach(function(uvi, vi){
-      let uv = dataObj.base.vts[uvi];
+      let uv = dataObj['base']['vts'][uvi];
       if (typeof(uv)==='undefined') {
         uv = [0,0];
       }
       uv32[2*vi] = uv[0];
-      uv32[2*vi+1] = uv[1];
+      uv32[2*vi+1] = (spec.isUVFlipŶ) ? 1.0 - uv[1] : uv[1];
     });
     geom.setAttribute('uv', new THREE.BufferAttribute(uv32, 2, false));
 
 
     // Construct morphs:
-    console.log('INFO in ThreeMorphAnimMeshBuilder: ', dataObj.morphs.length, 'morphs found');
+    console.log('INFO in ThreeMorphAnimMeshBuilder: ', dataObj['morphs'].length, 'morphs found');
 
     const morphs = [];
     const nVertices = nVertices0 + verticesDuplicatedIndices.length;
-    dataObj.morphs.forEach(function(morph, morphIndex){
+    dataObj['morphs'].forEach(function(morph, morphIndex){
       const morphPositions = new Float32Array(nVertices*3);
       morph.forEach(function(v, vi){
+        v[0] /= scaleEncoding;
+        v[1] /= scaleEncoding;
+        v[2] /= scaleEncoding;
         morphPositions[3*vi] = v[0];
         morphPositions[3*vi+1] = v[1];
         morphPositions[3*vi+2] = v[2];
       });
 
       verticesDuplicatedIndices.forEach(function(vi, i){
-        const j = 3*(nVertices0+i);
+        const j = 3 * (nVertices0+i);
         const vMorph = morph[vi];
         morphPositions[j] = vMorph[0];
         morphPositions[j+1] = vMorph[1];
@@ -134,7 +158,7 @@ function ThreeMorphAnimGeomBuilder(spec){
 
     geom.computeVertexNormals();
 
-    geom.morphRadius = morphRadius;
+    geom.userData.morphRadius = morphRadius;
     spec.successCallback(geom);
   }); //end ajax callback
 };

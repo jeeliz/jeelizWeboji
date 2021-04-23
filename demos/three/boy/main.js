@@ -23,6 +23,7 @@ function main(){
     },
 
     position: [0, -100, 0],
+    rotation: [-10, 0, 0],
     scale: 1.2
   });
 }

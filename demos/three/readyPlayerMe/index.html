@@ -5,46 +5,46 @@
     <meta http-equiv="content-language" content="en-EN" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>TALKING BUDDY DEMO</title>
+    <title>READYPLAYERME AVATAR</title>
     
-    <!-- FACETRASFER LIB : DETECT FACIAL EXPRESSIONS : -->
+    <!-- FACETRASFER LIB: DETECT FACIAL EXPRESSIONS: -->
     <script src="../../../dist/jeelizFaceExpressions.js"></script>
     
-    <!-- THREE.JS : -->
+    <!-- THREE.JS: -->
     <script src="../../../libs/three/v119/three.min.js"></script>
+    <script src="../../../libs/three/v119/GLTFLoader.js"></script>
 
-    <!-- CUSTOM SMALL LIBS : -->
+    <!-- CUSTOM SMALL LIBS: -->
     <script src="../../../libs/custom/lib_ajax.js"></script>
     <script src="../../../libs/custom/lib_array.js"></script>
     
-    <!-- THREE.JS WEBOJI HELPER : -->
-    <!-- main helper : -->
-    <script src="../../../helpers/three/JeelizWebojiThreeHelper.js"></script> 
-    <!-- required to import the 3D model : -->
+    <!-- THREE.JS WEBOJI HELPER: -->
+    <!-- required to import the morphs: -->
     <script src="../../../helpers/three/ThreeMorphAnimGeomBuilder.js"></script>
-    <!-- required to add a material both flexible and with many morphs : -->
-    <script src="../../../helpers/three/ThreeMorphFlexibleMaterialBuilder.js"></script>
     
-    <!-- MAIN DEMO SCRIPT WITH main() FUNC : -->
+    <!-- MAIN DEMO SCRIPT WITH main() FUNC: -->
     <script src="main.js"></script>
     
+     <!-- INCLUDE FORK ME ON GITHUB BANNER -->
+    <script src="../../appearance/widget.js"></script>
+    <link rel="stylesheet" href="../../appearance/style.css" type="text/css" />
+
     <style type='text/css'>
     
-      body {background-color: white;
-        overflow: hidden;
-        background-image: url('background.jpg');
-        background-attachment: fixed;
-        background-position: 0;
-        background-size: cover;
-        margin: 0;}
+      body {
+        background-color: white;
+        margin: 0;
+      }
+
+      a {
+        color: blue;
+      }
 
       #jeelizFaceExpressionsCanvas {
         z-index: 20;
         position: fixed; 
         bottom: 0; left: 0;
-        max-height: 50vh;
-        max-width: 50vw;
-        border-radius: 0px 50px 0px 0px;
+        max-height: 25vh;
       }
 
       .webojiCanvas {
@@ -54,6 +54,16 @@
         width: 100vmin;
         transform: translate(-50%, -50%);
       }
+
+      .notice {
+        position: fixed;
+        z-index: 30;
+        top: 0;
+        width: 100vw;
+        margin-top: 1em;
+        text-align: center;
+        font-size: 14pt;
+      }
     </style>
   </head>
   <body onload="main()">
@@ -61,6 +71,10 @@
     <canvas id='jeelizFaceExpressionsCanvas'></canvas>
     <!-- CANVAS WITH THE WEBOJI : -->
     <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
+
+    <div class='notice'>
+      You can generate your own GLB avatar on <a href='https://vr.readyplayer.me/' target='_blank'>vr.readyplayer.me</a>
+    </div>
   </body>
 </html>
 
