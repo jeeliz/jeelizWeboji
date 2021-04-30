@@ -20,7 +20,7 @@ function main(){
   JeelizWebojiSVGHelper.init({
     canvasId: 'jeelizFaceExpressionsCanvas',
     NNCPath: '../../dist/',
-    hysteresis: 0.1, // bonus score for already selected expression. Against flickering
+    hysteresis: 0.02, // bonus score for already selected expression. Against flickering
     isMirror: true,
 
     expressions: [ // list of uncorrelated expressions (for example the mouth is uncorrelated with the right eye)
@@ -42,7 +42,7 @@ function main(){
           mouthNasty   -> mouth nasty (upper lip raised)
         */
         svgMouthRound: function(ks){
-           return 0.7 * ks.mouthRound - 0.1 * ks.mouthOpen - 0.1;
+           return 0.7 * ks.mouthRound - 0.1 * ks.mouthOpen - 0.2;
         },
 
         svgMouthOpen: function(ks){
@@ -50,7 +50,7 @@ function main(){
         },
 
         svgMouthRest:function(ks){
-           return 0.4;
+           return 0.45;
         },
 
         svgMouthNasty: function(ks){
@@ -96,7 +96,7 @@ function main(){
           return ks.eyeBrowLeftUp;
         },
          eyeBrowLeftDown: function(ks){
-          return 1.5 * ks.eyeBrowLeftDown;
+          return 1.0 * ks.eyeBrowLeftDown;
         }
       },
 
@@ -108,7 +108,7 @@ function main(){
           return ks.eyeBrowRightUp;
         },
          eyeBrowRightDown: function(ks){
-          return 1.5 * ks.eyeBrowRightDown;
+          return 1.0 * ks.eyeBrowRightDown;
         }
       }
     ], //end expressions[]

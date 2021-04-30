@@ -27,19 +27,19 @@ function main(){
     _morphAnimMeshParentPivot.add(model);
 
     // get teeth:
-    _teethMesh = extract_avatarSubMesh(model, 'Wolf3D_Teeth');
+    _teethMesh = extract_threeNodeByName(model, 'Wolf3D_Teeth');
     _teethMesh.material = cast_materialToBasic(_teethMesh.material);
     _teethMesh.position.set(0, 0, -_webojiSettings.moveTeethBackward);
 
     // transform some other mats to basic:
     ['eyeLeft', 'eyeRight', 'Wolf3D_Shirt'].forEach(function(partName){
-      const partMesh = extract_avatarSubMesh(model, partName);
+      const partMesh = extract_threeNodeByName(model, partName);
       if (partMesh){
         partMesh.material = cast_materialToBasic(partMesh.material);
       }
     });
 
-    const avatarFace = extract_avatarSubMesh(model, 'Wolf3D_Head');
+    const avatarFace = extract_threeNodeByName(model, 'Wolf3D_Head');
     const avatarFaceParent = avatarFace.parent;
     avatarFaceParent.remove(avatarFace);
     const avatarMat = create_avatarMorphMat(avatarFace.material);
@@ -75,7 +75,7 @@ function cast_materialToBasic(mat){
 function open_teeth(k){
   if (!_teethMesh) return;
   const morphIndex = _teethMesh.morphTargetDictionary.mouthOpen;
-  _teethMesh.morphTargetInfluences[morphIndex] = _webojiSettings.teethOpenFactor*k;
+  _teethMesh.morphTargetInfluences[morphIndex] = _webojiSettings.teethOpenFactor * k;
 }
 
 
@@ -167,14 +167,14 @@ function create_avatarMorphMat(oldMat){
 }
 
 
-function extract_avatarSubMesh(model, name){
-  let threeAvatarFace = null;
+function extract_threeNodeByName(model, name){
+  let threeNodeFound = null;
   model.traverse(function(threeNode){
     if (threeNode.name === name){
-      threeAvatarFace = threeNode;
+      threeNodeFound = threeNode;
     }
   });
-  return threeAvatarFace;
+  return threeNodeFound;
 }
 
 
