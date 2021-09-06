@@ -154,7 +154,7 @@ var JeelizWebojiSVGHelper = (function(){
       const CSStransform = path.style.transform;
       const xPx = Math.round(x).toString() + 'px';
       const yPx = Math.round(y).toString() + 'px';
-      if (CSStransform.indexOf('translate')===-1){
+      if (CSStransform.indexOf('translate') === -1){
         path.style.transform = 'translate(' + xPx + ',' + yPx + ') ' + CSStransform;
       } else {
         path.style.transform = CSStransform.replace(/translate\(\s*[0-9\.\-px]+\s*,\s*[0-9\.\-px]+\s*/, 'translate(' + xPx + ',' + yPx);
@@ -164,11 +164,11 @@ var JeelizWebojiSVGHelper = (function(){
 
     rot_SVGpath: function(path, angleDeg){
       const CSStransform = path.style.transform;
-      const angleStr = angleDeg.toFixed(2)+'deg';
-      if (CSStransform.indexOf('rotate')===-1){
-        path.style.transform = 'rotate('+angleStr+') '+CSStransform;
+      const angleStr = angleDeg.toFixed(2) + 'deg';
+      if (CSStransform.indexOf('rotate') === -1){
+        path.style.transform = 'rotate(' + angleStr + ') ' + CSStransform;
       } else {
-        path.style.transform = CSStransform.replace(/rotate\(\s*[0-9\.\-deg]+/, 'rotate('+angleStr);
+        path.style.transform = CSStransform.replace(/rotate\(\s*[0-9\.\-deg]+/, 'rotate(' + angleStr);
       }
     }
   };//end that
