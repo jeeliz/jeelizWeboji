@@ -1,5 +1,3 @@
-"use strict";
-
 let _SVGpupilLeft = null, _SVGpupilRight = null, _SVGhead = null;
 
 
@@ -7,9 +5,11 @@ function move_pupil(SVGpupil, dx, dy){
   JeelizWebojiSVGHelper.pos_SVGpath(SVGpupil, dx, dy);
 }
 
+
 function rotate_headZ(rz){
   JeelizWebojiSVGHelper.rot_SVGpath(_SVGhead, rz);
 }
+
 
 // entry point:
 function main(){
@@ -127,3 +127,6 @@ function main(){
 
   });
 } //end main()
+
+
+window.addEventListener('load', main);

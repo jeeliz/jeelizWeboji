@@ -22,7 +22,7 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
     - <float> scale: scale of the mesh (default: 1)
 */
 
-var JeelizWebojiThreeHelper = (function(){
+const JeelizWebojiThreeHelper = (function(){
   // INTERNAL SETTINGS:  
   const _settings = {
     // THREE LIGHTS:
@@ -38,9 +38,32 @@ var JeelizWebojiThreeHelper = (function(){
     morphPrecision: 2048
   }; //end _settings
 
+  const _defaultSpec = {
+    isMirror: false,
+    videoSettings: null,
+
+    errorCallback: null,
+    successCallback: null,
+    
+    canvasThreeId: null,
+    canvasId: null,
+
+    assetsParentPath: './',
+    NNCPath: './',
+
+    model: null,
+    meshURL: null,
+    matParams: null,
+
+    position: [0.0, 0.0, 0.0],
+    rotation: [0.0, 0.0, 0.0],
+    scale: 1.0
+  }
+  let _spec = null;
+
   // PRIVATE VARS:
   const _nMorphs = JEELIZFACEEXPRESSIONS.get_nMorphs();
-  let _DOMcanvas = null, _assetsParentPath = '', _isFaceDetected = false;
+  let _DOMcanvas = null, _isFaceDetected = false;
 
   const _three = { // gather THREE.js instances
     renderer: null,
@@ -80,6 +103,10 @@ var JeelizWebojiThreeHelper = (function(){
     }
     const dt = Math.min(Math.max(t-_prevT, 5), 30); // in ms
     const rotation = JEELIZFACEEXPRESSIONS.get_rotationStabilized();
+    if (_spec.isMirror){ // mirror around X axis:
+      rotation[1] *= -1.0;
+      rotation[2] *= -1.0;
+    }
     _three.morphAnimMesh.rotation.fromArray(rotation);
 
     // apply these kinematic formulas:
@@ -109,6 +136,7 @@ var JeelizWebojiThreeHelper = (function(){
     _animationHandler = requestAnimationFrame( animate );
   }; //end animate()
 
+
   function start_animate(){
     if (_state !== _states.animate){
       return false;
@@ -120,6 +148,7 @@ var JeelizWebojiThreeHelper = (function(){
     animate(0);
     return true;
   }
+
 
   // init the THREE.JS scene:
   function init_three(canvasThreeId) {
@@ -163,6 +192,7 @@ var JeelizWebojiThreeHelper = (function(){
     _three.camera.lookAt(new THREE.Vector3());
   } //end init_three()
 
+
   // change the material of the weboji:
   function change_material(mat){
     if (!_three.morphAnimMesh){
@@ -180,6 +210,7 @@ var JeelizWebojiThreeHelper = (function(){
       _three.morphAnimMesh.material = mat;
     }
   }
+
 
   // load a weboji mesh:
   function load_model(url, mat, callback){
@@ -220,7 +251,7 @@ var JeelizWebojiThreeHelper = (function(){
     }
 
     ThreeMorphAnimGeomBuilder({
-      url: _assetsParentPath + url,
+      url: _spec.assetsParentPath + url,
       morphPrecision: _settings.morphPrecision,
       nMorphs: _nMorphs,
       successCallback: function(geom){
@@ -259,8 +290,9 @@ var JeelizWebojiThreeHelper = (function(){
     return true;
   } //end load_model()
 
+
   function load_texture(imageURL){
-    return new THREE.TextureLoader().load(_assetsParentPath + imageURL);
+    return new THREE.TextureLoader().load(_spec.assetsParentPath + imageURL);
   }  
 
 
@@ -268,57 +300,57 @@ var JeelizWebojiThreeHelper = (function(){
   const that = {
     'ready': false,
 
-    'init': function(spec){
-      if (!spec) var spec = {};
-      _assetsParentPath = (spec.assetsParentPath) ? spec.assetsParentPath : './';
+    'init': function(specArg){
+      _spec = Object.assign({}, _defaultSpec, specArg);
       
       // init JEELIZFACEEXPRESSIONS:
       JEELIZFACEEXPRESSIONS.init({
-        canvasId: spec.canvasId,
-        NNCPath: (spec.NNCPath) ? spec.NNCPath : './',
-        videoSettings: (spec.videoSettings) ? spec.videoSettings : null,
+        canvasId: _spec.canvasId,
+        NNCPath: _spec.NNCPath,
+        videoSettings: _spec.videoSettings,
         callbackReady: function(errCode){
           if (errCode){
             console.log('ERROR: cannot init JEELIZFACEEXPRESSIONS. errCode =', errCode);
-            if (spec.errorCallback){
-              spec.errorCallback(errCode);
+            if (_spec.errorCallback){
+              _spec.errorCallback(errCode);
             }
             return;
           }
           console.log('INFO: JEELIZFACEEXPRESSIONS is ready!');
             
           _state = _states.jeelizFaceExpressionsInitialized;
-          init_three(spec.canvasThreeId);
+          init_three(_spec.canvasThreeId);
           _state = _states.threeInitialized;
           _state = _states.idle;
           that.ready = true;
 
           const start = function(){
-            that.set_pose(spec.position || [0,0,0], spec.rotation || [0,0,0], spec.scale || 1);
-            if (spec.successCallback){
-              spec.successCallback(_three);
+            that.set_pose(_spec.position, _spec.rotation, _spec.scale);
+            if (_spec.successCallback){
+              _spec.successCallback(_three);
             }
             that.animate();
           }
 
-          if (typeof(spec.model) === 'undefined'){
-            load_model(spec.meshURL, false,
+          if (_spec.model === null){
+            load_model(_spec.meshURL, false,
               function(){ // load_model success callback
-                that.set_materialParameters(spec.matParameters);
+                that.set_materialParameters(_spec.matParameters);
                 start();
               }
             ); //end load_model() cb
-          } else if (spec.model && spec.mat){
-            load_model(spec.model, spec.mat, start);
-          } else if (spec.model && spec.matParams){
-            load_model(spec.model, false, function(){
-              that.set_materialParameters(spec.matParams);
+          } else if (_spec.model && _spec.mat){
+            load_model(_spec.model, _spec.mat, start);
+          } else if (_spec.model && _spec.matParams){
+            load_model(_spec.model, false, function(){
+              that.set_materialParameters(_spec.matParams);
               start();
             });
           }
         } //end callbackReady()
       });
     }, //end helper init()
+
 
     'get_three': function(){ // get three object in order to be able to change them into the final app
       return {
@@ -331,9 +363,11 @@ var JeelizWebojiThreeHelper = (function(){
       }
     },
 
+
     'get_threeEmoji': function(){
       return _three.morphAnimMesh;
     },
+
 
     'load_weboji': function(modelURL, matParams, callback){
       return load_model(modelURL, false, function(){
@@ -342,9 +376,11 @@ var JeelizWebojiThreeHelper = (function(){
       });
     },
 
+
     'change_material': function(threeMaterial){
       change_material(threeMaterial);
     },
+
 
     'set_pose': function(positionArray, rotationArray, scale){
       if (positionArray){
@@ -358,6 +394,7 @@ var JeelizWebojiThreeHelper = (function(){
         _three.morphAnimMeshParent.scale.set(-scale, scale, scale);
       }
     },
+
 
     'set_materialParameters': function(params){
       // change_material(new THREE.MeshBasicMaterial({map: load_texture(params.diffuseMapURL)})); return;
@@ -385,7 +422,8 @@ var JeelizWebojiThreeHelper = (function(){
       }
       const mat = ThreeMorphFlexibleMaterialBuilder(matParameters, _settings.rotationOrder);
       change_material(mat);
-    }, //end set_materialParameters()
+    },
+
 
     'animate': function(){
       if (  _state===_states.idle
@@ -395,6 +433,7 @@ var JeelizWebojiThreeHelper = (function(){
         start_animate();
       }
     },
+
 
     'stop': function(){
       JEELIZFACEEXPRESSIONS.switch_sleep(true);
@@ -408,6 +447,7 @@ var JeelizWebojiThreeHelper = (function(){
         _state = _states.idle;
       }
     },
+
 
     'resize': function(w, h){ // call this method if canvas resize
       _three.renderer.setSize(w, h);

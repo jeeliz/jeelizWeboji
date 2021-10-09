@@ -3,6 +3,8 @@
 // entry point:
 function main(){
   JeelizWebojiThreeHelper.init({
+    isMirror: true,
+    
     canvasThreeId: 'webojiCanvas',
     canvasId: 'jeelizFaceExpressionsCanvas',
 
@@ -27,3 +29,5 @@ function main(){
     scale: 1.2
   });
 }
+
+window.addEventListener('load', main);

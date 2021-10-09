@@ -1,5 +1,3 @@
-"use strict";
-
 const _three = { // gather THREE.js instances
   renderer: null,
   scene: null,
@@ -283,3 +281,6 @@ function init_three(){
   dirLight.intensity = 0.5;
   _three.scene.add(dirLight);
 }
+
+
+window.addEventListener('load', main);

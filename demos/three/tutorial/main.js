@@ -1,5 +1,3 @@
-"use strict";
-
 // entry point:
 function main(){
   JeelizWebojiThreeHelper.init({
@@ -21,3 +19,6 @@ function main(){
     scale: 1.2
   });
 }
+
+
+window.addEventListener('load', main);

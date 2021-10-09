@@ -7,11 +7,11 @@
 
     <title>WEBOJI THREEJS TUTORIAL</title>
     
-    <!-- FACEEXPRESSIONS LIB: DETECT FACIAL EXPRESSIONS: -->
+    <!-- JEELIZFACEEXPRESSIONS LIB: DETECT FACIAL EXPRESSIONS: -->
     <script src="../../../dist/jeelizFaceExpressions.js"></script>
     
     <!-- THREE.JS: -->
-    <script src="../../../libs/three/v93/three.min.js"></script>
+    <script src="../../../libs/three/v119/three.min.js"></script>
 
     <!-- CUSTOM SMALL LIBS: -->
     <script src="../../../libs/custom/lib_ajax.js"></script>
@@ -35,6 +35,7 @@
         position: absolute; 
         bottom: 0px; left: 0px;
         max-height: 25vh;
+        transform: rotateY(180deg); /* mirror video */
       }
 
       .webojiCanvas {
@@ -47,10 +48,10 @@
 
     </style>
   </head>
-  <body onload="main()">
-    <!-- CANVAS WITH THE USER FACE: -->
+  <body>
+    <!-- VIDEO FEEDBACK: -->
     <canvas id='jeelizFaceExpressionsCanvas'></canvas>
-    <!-- CANVAS WITH THE WEBOJI: -->
+    <!-- WEBOJI: -->
     <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
   </body>
 </html>

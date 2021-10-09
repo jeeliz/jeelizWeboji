@@ -7,25 +7,25 @@
 
     <title>WEBOJI THREE.JS RACCOON DEMO</title>
     
-    <!-- FACETRASFER LIB : DETECT FACIAL EXPRESSIONS : -->
+    <!-- JEELIZFACEEXPRESSIONS LIB: DETECT FACIAL EXPRESSIONS: -->
     <script src="../../../dist/jeelizFaceExpressions.js"></script>
     
-    <!-- THREE.JS : -->
+    <!-- THREE.JS: -->
     <script src="../../../libs/three/v119/three.min.js"></script>
 
-    <!-- CUSTOM SMALL LIBS : -->
+    <!-- CUSTOM SMALL LIBS: -->
     <script src="../../../libs/custom/lib_ajax.js"></script>
     <script src="../../../libs/custom/lib_array.js"></script>
     
-    <!-- THREE.JS WEBOJI HELPER : -->
-    <!-- main helper : -->
+    <!-- THREE.JS WEBOJI HELPER: -->
+    <!-- main helper: -->
     <script src="../../../helpers/three/JeelizWebojiThreeHelper.js"></script> 
-    <!-- required to import the 3D model : -->
+    <!-- required to import the 3D model: -->
     <script src="../../../helpers/three/ThreeMorphAnimGeomBuilder.js"></script>
-    <!-- required to add a material both flexible and with many morphs : -->
+    <!-- required to add a material both flexible and with many morphs: -->
     <script src="../../../helpers/three/ThreeMorphFlexibleMaterialBuilder.js"></script>
     
-    <!-- MAIN DEMO SCRIPT WITH main() FUNC : -->
+    <!-- MAIN DEMO SCRIPT WITH main() FUNC: -->
     <script src="main.js"></script>
     
      <!-- INCLUDE FORK ME ON GITHUB BANNER -->
@@ -41,6 +41,7 @@
         position: fixed; 
         bottom: 0; left: 0;
         max-height: 25vh;
+        transform: rotateY(180deg); /* mirror video */
       }
 
       .webojiCanvas {
@@ -52,10 +53,10 @@
       }
     </style>
   </head>
-  <body onload="main()">
-    <!-- CANVAS WITH THE USER FACE : -->
+  <body>
+    <!-- VIDEO FEEDBACK: -->
     <canvas id='jeelizFaceExpressionsCanvas'></canvas>
-    <!-- CANVAS WITH THE WEBOJI : -->
+    <!-- WEBOJI: -->
     <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
   </body>
 </html>

@@ -1,8 +1,9 @@
-"use strict";
-
 // entry point:
-function main(){
+function main(e){
+  document.getElementById('notice').style.display = 'none';
+
   const videoElement = document.getElementById('myVideo');
+  videoElement['play']();
 
   if (videoElement['currentTime'] && videoElement['videoWidth'] && videoElement['videoHeight']){
     start(videoElement);
@@ -35,3 +36,5 @@ function start(videoElement){
     }
   });
 }
+
+window.addEventListener('click', main);

@@ -7,7 +7,7 @@
 
     <title>READYPLAYERME AVATAR</title>
     
-    <!-- FACETRASFER LIB: DETECT FACIAL EXPRESSIONS: -->
+    <!-- JEELIZFACEEXPRESSIONS LIB: DETECT FACIAL EXPRESSIONS: -->
     <script src="../../../dist/jeelizFaceExpressions.js"></script>
     
     <!-- THREE.JS: -->
@@ -45,6 +45,7 @@
         position: fixed; 
         bottom: 0; left: 0;
         max-height: 25vh;
+        transform: rotateY(180deg); /* mirror video */
       }
 
       .webojiCanvas {
@@ -66,10 +67,10 @@
       }
     </style>
   </head>
-  <body onload="main()">
-    <!-- CANVAS WITH THE USER FACE : -->
+  <body onload>
+    <!-- VIDEO FEEDBACK: -->
     <canvas id='jeelizFaceExpressionsCanvas'></canvas>
-    <!-- CANVAS WITH THE WEBOJI : -->
+    <!-- WEBOJI: -->
     <canvas class='webojiCanvas' id='webojiCanvas' width='600' height='600'></canvas>
 
     <div class='notice'>
