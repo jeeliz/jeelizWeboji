@@ -229,8 +229,8 @@ function update_avatarTeeth(){
 function update_avatarFaceRotation(){
   const rotation = JEELIZFACEEXPRESSIONS.get_rotationStabilized();
   const rx = rotation[0] + _webojiSettings.rotationXOffset;
-  const ry = rotation[1];
-  const rz = rotation[2];
+  const ry = -rotation[1];
+  const rz = -rotation[2];
   _morphAnimMeshParent.rotation.set(rx, ry, rz, 'ZYX');
 }
 

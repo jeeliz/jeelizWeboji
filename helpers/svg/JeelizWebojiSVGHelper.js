@@ -40,7 +40,7 @@ var JeelizWebojiSVGHelper = (function(){
     console.log('INFO: JEELIZFACEEXPRESSIONS is ready!');
     _morphFactorsArr = JEELIZFACEEXPRESSIONS.get_morphTargetInfluencesStabilized();
     if (_rotationCallback){
-      _rotation = JEELIZFACEEXPRESSIONS.get_rotation();
+      _rotation = JEELIZFACEEXPRESSIONS.get_rotationStabilized();
     }
     JEELIZFACEEXPRESSIONS.set_morphUpdateCallback(onMorphUpdate);
   }
@@ -122,7 +122,10 @@ var JeelizWebojiSVGHelper = (function(){
        JEELIZFACEEXPRESSIONS.init({
         canvasId: spec.canvasId,
         NNCPath: (spec.NNCPath) ? spec.NNCPath : './',
-        callbackReady: callbackReady
+        callbackReady: callbackReady,
+        videoSettings: {
+          isAudio: false
+        }
       });
     },
 

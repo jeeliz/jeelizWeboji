@@ -1,6 +1,8 @@
 // entry point:
 function main(){
   JeelizWebojiThreeHelper.init({
+    isMirror: true,
+    
     canvasThreeId: 'webojiCanvas',
     canvasId: 'jeelizFaceExpressionsCanvas',
 
@@ -15,7 +17,7 @@ function main(){
       flexMapURL: 'textures/Fox_flex.png'
     },
     
-    position: [0,-80,0],
+    position: [0, -80, 0],
     scale: 1.2
   });
 }

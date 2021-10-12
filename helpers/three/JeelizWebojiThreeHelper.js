@@ -23,24 +23,13 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
 */
 
 const JeelizWebojiThreeHelper = (function(){
-  // INTERNAL SETTINGS:  
-  const _settings = {
-    // THREE LIGHTS:
-    ambientLightIntensity: 0.5,
-    dirLightIntensity: 0.5,
-    dirLightDirection: [0, 0.5, 1],
-
-    // ROTATION:
-    rotationOrder: 'ZYX', //'XZY',
-    rotationSpringCoeff: 0.0002,
-    rotationAmortizationCoeff: 0.9, // 1 -> no amortization, 0 -> big amortization
-    
-    morphPrecision: 2048
-  }; //end _settings
-
   const _defaultSpec = {
     isMirror: false,
-    videoSettings: null,
+    isToneMapping: true,
+    isSrgbOutputEncoding: true,
+    videoSettings: {
+      isAudio: false
+    },
 
     errorCallback: null,
     successCallback: null,
@@ -48,6 +37,7 @@ const JeelizWebojiThreeHelper = (function(){
     canvasThreeId: null,
     canvasId: null,
 
+    // paths:
     assetsParentPath: './',
     NNCPath: './',
 
@@ -55,6 +45,25 @@ const JeelizWebojiThreeHelper = (function(){
     meshURL: null,
     matParams: null,
 
+    // misc:
+    morphPrecision: 2048,
+
+    // lighting:
+    isLights: true,
+    ambientLightIntensity: 0.5,
+    dirLightIntensity: 0.5,
+    dirLightDirection: [0, 0.5, 1],
+    
+    // camera parameters:
+    cameraVerticalFoV: 35,
+    cameraPosition: [0.0, 0.0, 500.0],
+
+    // rotation:
+    rotationOrder: 'ZYX', //'XZY',
+    rotationSpringCoeff: 0.0002, // only for flex texture application
+    rotationAmortizationCoeff: 0.9, // only for flex texture application - 1 -> no amortization, 0 -> big amortization
+
+    // weboji mesh initial position:
     position: [0.0, 0.0, 0.0],
     rotation: [0.0, 0.0, 0.0],
     scale: 1.0
@@ -114,14 +123,14 @@ const JeelizWebojiThreeHelper = (function(){
     // dv = dt * (rotAmortized - rot)
     // dp = dt * v
 
-    const amortizationCoeff = Math.pow(_settings.rotationAmortizationCoeff, dt/16);
+    const amortizationCoeff = Math.pow(_spec.rotationAmortizationCoeff, dt/16);
     _rotationSpeed[0] *= amortizationCoeff;
     _rotationSpeed[1] *= amortizationCoeff;
     _rotationSpeed[2] *= amortizationCoeff;
     
-    _rotationSpeed[0] += _settings.rotationSpringCoeff * dt * (rotation[0]-_rotationAmortized[0]);
-    _rotationSpeed[1] += _settings.rotationSpringCoeff * dt * (rotation[1]-_rotationAmortized[1]);
-    _rotationSpeed[2] += _settings.rotationSpringCoeff * dt * (rotation[2]-_rotationAmortized[2]);
+    _rotationSpeed[0] += _spec.rotationSpringCoeff * dt * (rotation[0]-_rotationAmortized[0]);
+    _rotationSpeed[1] += _spec.rotationSpringCoeff * dt * (rotation[1]-_rotationAmortized[1]);
+    _rotationSpeed[2] += _spec.rotationSpringCoeff * dt * (rotation[2]-_rotationAmortized[2]);
 
     _rotationAmortized[0] += dt * _rotationSpeed[0];
     _rotationAmortized[1] += dt * _rotationSpeed[1];
@@ -162,8 +171,12 @@ const JeelizWebojiThreeHelper = (function(){
     });
 
     // improve WebGLRenderer settings:
-    _three.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    _three.renderer.outputEncoding = THREE.sRGBEncoding;
+    if (_spec.isToneMapping){
+      _three.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    }
+    if (_spec.isSrgbOutputEncoding){
+      _three.renderer.outputEncoding = THREE.sRGBEncoding;
+    }
 
     _three.renderer.setClearAlpha(0);
 
@@ -177,18 +190,20 @@ const JeelizWebojiThreeHelper = (function(){
     _three.scene.add(debugCube); //*/
 
     // add some lights:
-    _three.ambientLight = new THREE.AmbientLight(0xffffff);
-    _three.ambientLight.intensity = _settings.ambientLightIntensity;
-    _three.scene.add(_three.ambientLight);
+    if (_spec.isLights){
+      _three.ambientLight = new THREE.AmbientLight(0xffffff);
+      _three.ambientLight.intensity = _spec.ambientLightIntensity;
+      _three.scene.add(_three.ambientLight);
 
-    _three.dirLight = new THREE.DirectionalLight(0xffffff);
-    _three.dirLight.position.fromArray(_settings.dirLightDirection);
-    _three.dirLight.intensity = _settings.dirLightIntensity;
-    _three.scene.add(_three.dirLight);
+      _three.dirLight = new THREE.DirectionalLight(0xffffff);
+      _three.dirLight.position.fromArray(_spec.dirLightDirection);
+      _three.dirLight.intensity = _spec.dirLightIntensity;
+      _three.scene.add(_three.dirLight);
+    }
 
     // create the camera:
-    _three.camera = new THREE.PerspectiveCamera(35, _DOMcanvas.width / _DOMcanvas.height, 10, 10000 );
-    _three.camera.position.set(0, 0, 500);
+    _three.camera = new THREE.PerspectiveCamera(_spec.cameraVerticalFoV, _DOMcanvas.width / _DOMcanvas.height, 10, 10000 );
+    _three.camera.position.fromArray(_spec.cameraPosition);
     _three.camera.lookAt(new THREE.Vector3());
   } //end init_three()
 
@@ -252,12 +267,12 @@ const JeelizWebojiThreeHelper = (function(){
 
     ThreeMorphAnimGeomBuilder({
       url: _spec.assetsParentPath + url,
-      morphPrecision: _settings.morphPrecision,
+      morphPrecision: _spec.morphPrecision,
       nMorphs: _nMorphs,
       successCallback: function(geom){
         const mesh = new THREE.Mesh(geom, mat);
        
-        mesh.rotation.order = _settings.rotationOrder; // default: XYZ
+        mesh.rotation.order = _spec.rotationOrder; // default: XYZ
         _three.morphAnimMesh = mesh;
         const morphTargetInfluences = JEELIZFACEEXPRESSIONS.get_morphTargetInfluencesStabilized();
           
@@ -407,7 +422,7 @@ const JeelizWebojiThreeHelper = (function(){
 
         // morphing:
         'morphTargets': false, // disable default THREE.JS morphing
-        morphPrecision: _settings.morphPrecision,
+        morphPrecision: _spec.morphPrecision,
         morphRadius: _three.morphAnimMesh.geometry.userData.morphRadius,
         nMorphs: _nMorphs,
         'morphJeelizInfluences': _three.morphAnimMesh.userData.morphJeelizInfluences
@@ -420,7 +435,7 @@ const JeelizWebojiThreeHelper = (function(){
       if (params.diffuseMapURL){
         matParameters.map = load_texture(params.diffuseMapURL);
       }
-      const mat = ThreeMorphFlexibleMaterialBuilder(matParameters, _settings.rotationOrder);
+      const mat = ThreeMorphFlexibleMaterialBuilder(matParameters, _spec.rotationOrder);
       change_material(mat);
     },
 
