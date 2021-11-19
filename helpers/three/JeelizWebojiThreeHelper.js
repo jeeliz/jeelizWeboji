@@ -24,6 +24,8 @@ it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.j
 
 const JeelizWebojiThreeHelper = (function(){
   const _defaultSpec = {
+    threshold: 0, // detection threshold, between 0 (easy) and 1 (hard). 0 -> keep lib internal default value
+
     isMirror: false,
     isToneMapping: true,
     isSrgbOutputEncoding: true,
@@ -323,6 +325,7 @@ const JeelizWebojiThreeHelper = (function(){
         canvasId: _spec.canvasId,
         NNCPath: _spec.NNCPath,
         videoSettings: _spec.videoSettings,
+        threshold: _spec.threshold,
         callbackReady: function(errCode){
           if (errCode){
             console.log('ERROR: cannot init JEELIZFACEEXPRESSIONS. errCode =', errCode);
