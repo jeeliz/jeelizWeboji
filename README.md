@@ -1,5 +1,5 @@
 
-**NOTICE: Apple<sup>&copy;</sup>'s lawyers threatened us to file a complain on the 21th of August 2019 for infringing their intellectual property. So we have removed our main demo [webojis.com](http://webojis.com) and we have replaced the 3D animated fox by a raccoon.**
+**NOTICE: Apple<sup>&copy;</sup>'s lawyers threatened us to file a complain on the 21th of August 2019 for infringing their intellectual property. So we have replaced the 3D animated fox by a raccoon.**
 
 **Indeed, Apple<sup>&copy;</sup> owns the intellectual property of 3D animated foxes (but not on raccoons yet). Thank you for your understanding.**
 
@@ -64,8 +64,6 @@ The face detection should work even if the lighting is not great. However, the b
 
 
 ## Demonstrations
-
-We have built a demo application based on this library, available on [webojis.com](http://webojis.com). We have add recording capabilities using [RecordRTC](https://recordrtc.org) JavaScript library to save separately video from the `<canvas>` and audio from the microphone. Then we send them to the server and we encode the video using [FFMPEG](https://www.ffmpeg.org).
 
 All the following demos are included in this repository, in the `/demos` path. You can try them:
 
