@@ -71,6 +71,8 @@ All the following demos are included in this repository, in the `/demos` path. Y
 
   * **Cute raccoon**: [source code](/demos/three/raccoon/), [live demo](https://jeeliz.com/demos/weboji/demos/three/raccoon/)
   * **Cute raccoon from a MP4 video**: [source code](/demos/three/externalVideo/), [live demo](https://jeeliz.com/demos/weboji/demos/three/externalVideo/)
+  * **Ready Player Me**! [source code](/demos/three/readyPlayerMe/), [live demo](https://jeeliz.com/demos/weboji/demos/three/readyPlayerMe/)
+ 
 
 * SVG based demos:
 
