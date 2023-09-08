@@ -7,7 +7,7 @@
     - nMorphs: number of morphs
 
 */
-"use strict";
+
 function ThreeMorphAnimGeomBuilder(specArg){
   const spec = Object.assign({
     morphPrecision: 2048,

@@ -2,7 +2,6 @@
 Helper for THREE.JS
 it requires ThreeMorphAnimGeomBuilder.js and ThreeMorphFlexibleMaterialBuilder.js
 */
-"use strict";
 
 /*
   spec of JeelizWebojiThreeHelper.init:
