@@ -253,15 +253,15 @@ This library works quite everywhere, and it works very well with a high end devi
 
 * `JEELIZFACEEXPRESSIONS`: All the helpers rely on this library to get the facial morph coefficients. With this documentation you can interface this library with your own 3D or 2D engine. [Click here to read the PDF of the specs](/doc/jeelizFaceExpressions.pdf),
 * [README.md about using the meshConverter](/meshConverter): Used in the THREE.JS Raccoon demo
-* [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
-* [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/)
+<!-- * [Create your own animated emoticon for the web](https://jeeliz.com/blog/create-animojis-for-the-web/)
+* [Integrate the animated emoticon on your website](https://jeeliz.com/blog/add-a-weboji-on-website/) -->
 
 
 ## License
 
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
-We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
+<!-- We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great. -->
 
 
 ## References
